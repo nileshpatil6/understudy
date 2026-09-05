@@ -7,3 +7,4 @@ results/*.jsonl
 results/private/
 results/leaky-v0/
 results/overfit-v1/
+dashboard/*.private.html

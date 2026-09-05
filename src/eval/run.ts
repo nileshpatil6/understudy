@@ -20,12 +20,14 @@ export async function runEval(opts: {
   ids?: Set<string>;
   /** evaluate with this memory instead of the files on disk (gating candidate rules) */
   memory?: { judgment: string; tools: string };
+  /** write under results/.../<tag>/ instead of the split dir, for one-off baselines */
+  tag?: string;
 }): Promise<RunResult> {
   const split = opts.split ?? "train";
   const all = await loadItems(opts.source, { private: opts.privateData, limit: opts.limit, split: split === "validate" ? "train" : split });
   const items = opts.ids ? all.filter((it) => opts.ids!.has(it.id)) : all;
   const ctx = opts.memory ?? (await loadContext(opts.source));
-  const outDir = resultsDir(opts.source, opts.privateData, split);
+  const outDir = opts.tag ? path.join(path.dirname(resultsDir(opts.source, opts.privateData, split)), opts.tag) : resultsDir(opts.source, opts.privateData, split);
   await mkdir(outDir, { recursive: true });
   const run = (await readdir(outDir)).filter((f) => /^run-\d+\.json$/.test(f)).length + 1;
 
@@ -119,7 +121,7 @@ if (isMain) {
   const split = (process.env.SPLIT ?? "train") as Split;
   // NO_MEMORY=1 scores the bare model, the baseline every learned run is compared against
   const memory = process.env.NO_MEMORY === "1" ? { judgment: "", tools: "" } : undefined;
-  runEval({ source, limit, privateData: process.env.PRIVATE === "1", split, memory })
+  runEval({ source, limit, privateData: process.env.PRIVATE === "1", split, memory, tag: process.env.RESULTS_TAG })
     .then((r) => console.log(summarize(r)))
     .finally(shutdownTracing);
 }

@@ -30,8 +30,9 @@ const ungated: RunResult[] = existsSync(ungatedDir)
   : [];
 if (runs.length === 0) throw new Error(`no runs under ${base}/train`);
 
-const judgmentPath = path.resolve("memory", `judgment.${source}.md`);
-const toolsPath = path.resolve("memory", `tools.${source}.md`);
+const memDir = path.resolve(process.env.MEMORY_DIR ?? "memory");
+const judgmentPath = path.join(memDir, `judgment.${source}.md`);
+const toolsPath = path.join(memDir, `tools.${source}.md`);
 const judgment = existsSync(judgmentPath) ? await readFile(judgmentPath, "utf8") : "";
 const tools = existsSync(toolsPath) ? await readFile(toolsPath, "utf8") : "";
 

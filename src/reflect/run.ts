@@ -48,7 +48,7 @@ export async function reflect(opts: { source: Item["source"]; privateData?: bool
   const r = await span({ kind: "AGENT", name: `reflect:${opts.source}:run-${latest.run}` }, () => completeJson({
     model: REFLECT_MODEL,
     effort: "high",
-    maxTokens: 6000,
+    maxTokens: 24000,
     system: `You are the reflection step of a learning agent. The agent predicts what a specific person does with items from their ${opts.source}. You see its misses from the latest run and its current memory. Write NEW rules that would have prevented these misses and that generalize to unseen items.
 
 Rules must be:

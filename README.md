@@ -42,14 +42,14 @@ results/      one JSON per run
 
 ```
 npm i
-cp .env.example .env    # add ANTHROPIC_API_KEY
+cp .env.example .env    # add OPENAI_API_KEY
 npx tsx scripts/gen-sample.ts
 npm run eval            # one run
 npm run reflect         # learn from it
 npm run loop            # eval -> reflect x5, produces the chart
 ```
 
-Env: `SOURCE=gmail|slack|github`, `LIMIT=50`, `PRIVATE=1` (use data/private), `ROUNDS=5`, `UNDERSTUDY_MODEL`.
+Env: `SOURCE=gmail|slack|github`, `LIMIT=50`, `PRIVATE=1` (use data/private), `ROUNDS=5`, `UNDERSTUDY_MODEL` (default gpt-5-mini), `UNDERSTUDY_REFLECT_MODEL` (default gpt-5).
 
 ## Built with AO
 

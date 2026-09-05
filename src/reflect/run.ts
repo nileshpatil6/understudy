@@ -1,7 +1,7 @@
 import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { z } from "zod";
-import { client, REFLECT_MODEL, textOf, extractJson } from "../agent/llm.js";
+import { REFLECT_MODEL, completeJson } from "../agent/llm.js";
 import { loadItems } from "../tools/dataset.js";
 import { appendRules, readMemory } from "../memory/store.js";
 import type { Item, RunResult } from "../types.js";
@@ -43,11 +43,10 @@ export async function reflect(opts: { source: Item["source"]; privateData?: bool
   const judgment = await readMemory("judgment", opts.source);
   const tools = await readMemory("tools", opts.source);
 
-  const res = await client.messages.create({
+  const r = await completeJson({
     model: REFLECT_MODEL,
-    max_tokens: 4000,
-    thinking: { type: "adaptive" },
-    output_config: { effort: "high" },
+    effort: "high",
+    maxTokens: 6000,
     system: `You are the reflection step of a learning agent. The agent predicts what a specific person does with items from their ${opts.source}. You see its misses from the latest run and its current memory. Write NEW rules that would have prevented these misses and that generalize to unseen items.
 
 Rules must be:
@@ -59,17 +58,12 @@ Rules must be:
 Tool rules are about how to read this source better (which fields matter, what patterns in metadata are informative, what to ignore). Add tool rules only when a miss was caused by misreading the source.
 
 Respond with only JSON: {"judgmentRules": [...], "toolRules": [...], "notes": "one paragraph on what pattern you found"}`,
-    messages: [
-      {
-        role: "user",
-        content: `Run ${latest.run}: ${hits}/${latest.items} correct.\n\n## Current judgment memory\n${judgment}\n\n## Current tool memory\n${tools}\n\n## Misses (predicted vs actual)\n${JSON.stringify(misses, null, 1)}`,
-      },
-    ],
+    user: `Run ${latest.run}: ${hits}/${latest.items} correct.\n\n## Current judgment memory\n${judgment}\n\n## Current tool memory\n${tools}\n\n## Misses (predicted vs actual)\n${JSON.stringify(misses, null, 1)}`,
   });
-  const out = Out.parse(extractJson(textOf(res)));
+  const out = Out.parse(r.json);
   await appendRules("judgment", out.judgmentRules, opts.source);
   await appendRules("tools", out.toolRules, opts.source);
-  return { misses: misses.length, added: out.judgmentRules.length + out.toolRules.length, notes: out.notes, out };
+  return { misses: misses.length, added: out.judgmentRules.length + out.toolRules.length, notes: out.notes, out, costUsd: r.costUsd };
 }
 
 function num(f: string): number {
@@ -80,7 +74,7 @@ const isMain = process.argv[1]?.replace(/\\/g, "/").endsWith("src/reflect/run.ts
 if (isMain) {
   const source = (process.env.SOURCE ?? "gmail") as Item["source"];
   reflect({ source, privateData: process.env.PRIVATE === "1" }).then((r) => {
-    console.log(`reflected on ${r.misses} misses, added ${r.added} rules`);
+    console.log(`reflected on ${r.misses} misses, added ${r.added} rules ($${r.costUsd.toFixed(4)})`);
     if (r.notes) console.log(r.notes);
   });
 }

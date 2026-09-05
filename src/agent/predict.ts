@@ -36,10 +36,26 @@ export function memoryRuleCount(ctx: PredictContext): number {
   return listRules(ctx.judgment).length + listRules(ctx.tools).length;
 }
 
+/**
+ * Fields the agent is never shown. Ground truth is derived from these, so exposing them
+ * would let the reflector learn the labeling function instead of the user's judgment.
+ */
+const HIDDEN_META = new Set(["labels", "labelIds", "reactions", "readAt", "done", "unsubscribed"]);
+
+export function visibleMeta(meta: Record<string, unknown>): Record<string, unknown> {
+  return Object.fromEntries(Object.entries(meta).filter(([k]) => !HIDDEN_META.has(k)));
+}
+
+export function renderItem(item: Item): string {
+  const meta = visibleMeta(item.meta);
+  const metaLine = Object.keys(meta).length ? `\nMeta: ${JSON.stringify(meta)}` : "";
+  return `Source: ${item.source}\nFrom: ${item.from}\nSubject: ${item.subject}\nReceived: ${item.receivedAt}${metaLine}\n\n${item.body ?? item.snippet}`;
+}
+
 export async function predict(item: Item, ctx: PredictContext): Promise<Prediction> {
   // memory is identical across every item in a run, so it lives in the cacheable system prefix
   const system = `${SYSTEM_BASE}\n\n## Memory\n\n${ctx.judgment}\n\n${ctx.tools}`;
-  const user = `Source: ${item.source}\nFrom: ${item.from}\nSubject: ${item.subject}\nReceived: ${item.receivedAt}\nMeta: ${JSON.stringify(item.meta)}\n\n${item.body ?? item.snippet}`;
+  const user = renderItem(item);
 
   let out: z.infer<typeof Out>;
   let usage = { inputTokens: 0, cachedTokens: 0, outputTokens: 0 };

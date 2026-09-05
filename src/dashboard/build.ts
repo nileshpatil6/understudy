@@ -10,12 +10,20 @@ import { listRules } from "../memory/store.js";
  */
 const source = process.env.SOURCE ?? "gmail";
 const privateData = process.env.PRIVATE === "1";
-const dir = path.resolve("results", ...(privateData ? ["private", source] : [source]));
+const base = path.resolve("results", ...(privateData ? ["private"] : []), source);
 const outDir = path.resolve("dashboard");
 
-const files = (await readdir(dir)).filter((f) => /^run-\d+\.json$/.test(f)).sort((a, b) => num(a) - num(b));
-const runs: RunResult[] = [];
-for (const f of files) runs.push(JSON.parse(await readFile(path.join(dir, f), "utf8")));
+async function loadRuns(split: string): Promise<RunResult[]> {
+  const dir = path.join(base, split);
+  if (!existsSync(dir)) return [];
+  const files = (await readdir(dir)).filter((f) => /^run-\d+\.json$/.test(f)).sort((a, b) => num(a) - num(b));
+  const out: RunResult[] = [];
+  for (const f of files) out.push(JSON.parse(await readFile(path.join(dir, f), "utf8")));
+  return out;
+}
+const runs = await loadRuns("train");
+const testRuns = await loadRuns("test");
+if (runs.length === 0) throw new Error(`no runs under ${base}/train`);
 
 const judgmentPath = path.resolve("memory", `judgment.${source}.md`);
 const toolsPath = path.resolve("memory", `tools.${source}.md`);
@@ -53,23 +61,25 @@ const html = `<!doctype html>
   .cols { display:grid; grid-template-columns:1fr 1fr; gap:16px } @media (max-width:800px){ .cols{grid-template-columns:1fr} }
 </style></head><body><main>
 <h1>Understudy <span style="color:var(--muted);font-weight:400">· ${source}${privateData ? " · real inbox" : " · sample"}</span></h1>
-<p class="sub">${last.items} items, ground truth derived from the app itself. ${runs.length} runs. Each run: predict → score → reflect → write rules → next run reads them.</p>
+<p class="sub">${last.items} train items${testRuns.length ? ` + ${testRuns[0].items} held-out items the reflector never sees` : ""}, ground truth derived from the app itself. ${runs.length} runs. Each run: predict → score → reflect → write rules → next run reads them. The agent never sees read/starred/label state, only what exists when the mail arrives.</p>
 
 <div class="tiles">
-  ${tile("Accuracy", pct(last.accuracy), delta(first.accuracy, last.accuracy, true, pct))}
+  ${tile("Train accuracy", pct(last.accuracy), delta(first.accuracy, last.accuracy, true, pct))}
+  ${testRuns.length ? tile("Held-out accuracy", pct(testRuns.at(-1)!.accuracy), delta(testRuns[0].accuracy, testRuns.at(-1)!.accuracy, true, pct)) : ""}
   ${tile("Cost / run", `$${last.costUsd.toFixed(3)}`, delta(first.costUsd, last.costUsd, false, (n) => `$${n.toFixed(3)}`))}
   ${tile("Avg latency", `${(last.avgLatencyMs / 1000).toFixed(1)}s`, delta(first.avgLatencyMs, last.avgLatencyMs, false, (n) => `${(n / 1000).toFixed(1)}s`))}
   ${tile("Rules in memory", String(last.memoryRules), `<span class="up">from ${first.memoryRules}</span>`)}
 </div>
 
-<div class="panel"><h2>Accuracy, cost and latency per run</h2>${chart(runs)}</div>
+<div class="panel"><h2>Accuracy, cost and latency per run</h2>${chart(runs, testRuns)}</div>
 
 <div class="panel"><h2>Per-action accuracy</h2>
 <table><thead><tr><th>run</th>${Object.keys(last.perAction).map((a) => `<th>${a}</th>`).join("")}<th>total</th><th>cost</th><th>rules</th></tr></thead>
-<tbody>${runs
+<tbody>${[...runs, ...testRuns]
+  .sort((a, b) => a.run - b.run || (a.split === "train" ? -1 : 1))
   .map(
     (r) =>
-      `<tr><td>run ${r.run}</td>${Object.values(r.perAction)
+      `<tr><td>run ${r.run} ${r.split === "test" ? "<span style=\"color:var(--up)\">held-out</span>" : ""}</td>${Object.values(r.perAction)
         .map((v) => `<td>${v.correct}/${v.total}</td>`)
         .join("")}<td><b>${pct(r.accuracy)}</b></td><td>$${r.costUsd.toFixed(3)}</td><td>${r.memoryRules}</td></tr>`,
   )
@@ -106,7 +116,7 @@ function memoryHtml(md: string, baselineCount: number) {
 function esc(s: string) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
-function chart(rs: RunResult[]) {
+function chart(rs: RunResult[], ts: RunResult[]) {
   const W = 1000, H = 260, L = 48, R = 48, T = 16, B = 32;
   const n = rs.length;
   const x = (i: number) => (n === 1 ? W / 2 : L + (i * (W - L - R)) / (n - 1));
@@ -123,6 +133,10 @@ function chart(rs: RunResult[]) {
     .join("");
   const xs = rs.map((r, i) => `<text x="${x(i)}" y="${H - 8}" text-anchor="middle">run ${r.run}</text>`).join("");
   const labels = rs.map((r, i) => `<text x="${x(i)}" y="${yA(r.accuracy) - 10}" text-anchor="middle" style="fill:var(--acc);font-weight:600">${(r.accuracy * 100).toFixed(0)}%</text>`).join("");
-  const legend = `<g transform="translate(${L},${T - 2})"><rect width="10" height="3" y="4" fill="var(--acc)"/><text x="14" y="9">accuracy</text><rect x="90" width="10" height="3" y="4" fill="var(--cost)"/><text x="104" y="9">cost / run</text><rect x="180" width="10" height="3" y="4" fill="var(--lat)"/><text x="194" y="9">avg latency</text></g>`;
-  return `<svg viewBox="0 0 ${W} ${H}" width="100%" height="${H}">${grid}${line((r) => yC(r.costUsd), "var(--cost)", 1.5)}${line((r) => yL(r.avgLatencyMs), "var(--lat)", 1.5)}${line((r) => yA(r.accuracy), "var(--acc)")}${labels}${xs}${legend}</svg>`;
+  const test = ts.length
+    ? `<polyline fill="none" stroke="var(--up)" stroke-width="2.5" stroke-dasharray="6 4" stroke-linejoin="round" points="${ts.map((r, i) => `${x(i)},${yA(r.accuracy)}`).join(" ")}"/>` +
+      ts.map((r, i) => `<circle cx="${x(i)}" cy="${yA(r.accuracy)}" r="4" fill="var(--up)"/><text x="${x(i)}" y="${yA(r.accuracy) + 18}" text-anchor="middle" style="fill:var(--up);font-weight:600">${(r.accuracy * 100).toFixed(0)}%</text>`).join("")
+    : "";
+  const legend = `<g transform="translate(${L},${T - 2})"><rect width="10" height="3" y="4" fill="var(--acc)"/><text x="14" y="9">train accuracy</text><rect x="270" width="10" height="3" y="4" fill="var(--up)"/><text x="284" y="9">held-out accuracy</text><rect x="90" width="10" height="3" y="4" fill="var(--cost)"/><text x="104" y="9">cost / run</text><rect x="180" width="10" height="3" y="4" fill="var(--lat)"/><text x="194" y="9">avg latency</text></g>`;
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%" height="${H}">${grid}${line((r) => yC(r.costUsd), "var(--cost)", 1.5)}${line((r) => yL(r.avgLatencyMs), "var(--lat)", 1.5)}${line((r) => yA(r.accuracy), "var(--acc)")}${test}${labels}${xs}${legend}</svg>`;
 }

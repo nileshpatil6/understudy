@@ -18,7 +18,7 @@ export async function runEval(opts: {
 }): Promise<RunResult> {
   const items = await loadItems(opts.source, { private: opts.privateData, limit: opts.limit });
   const ctx = await loadContext(opts.source);
-  const outDir = path.resolve("results", opts.source);
+  const outDir = resultsDir(opts.source, opts.privateData);
   await mkdir(outDir, { recursive: true });
   const run = (await readdir(outDir)).filter((f) => /^run-\d+\.json$/.test(f)).length + 1;
 
@@ -51,6 +51,11 @@ export async function runEval(opts: {
   };
   await writeFile(path.join(outDir, `run-${run}.json`), JSON.stringify(result, null, 2));
   return result;
+}
+
+/** results/<source> for the committed sample set, results/private/<source> for real data (gitignored). */
+export function resultsDir(source: Item["source"], privateData?: boolean): string {
+  return path.resolve("results", ...(privateData ? ["private", source] : [source]));
 }
 
 async function mapLimit<T, R>(xs: T[], limit: number, fn: (x: T) => Promise<R>): Promise<R[]> {

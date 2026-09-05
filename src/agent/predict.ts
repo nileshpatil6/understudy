@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { client, MODEL, costUsd, textOf, extractJson } from "./llm.js";
+import { MODEL, completeJson } from "./llm.js";
 import { readMemory, listRules } from "../memory/store.js";
 import { Action, type Item, type Prediction } from "../types.js";
 
@@ -37,36 +37,27 @@ export function memoryRuleCount(ctx: PredictContext): number {
 }
 
 export async function predict(item: Item, ctx: PredictContext): Promise<Prediction> {
-  const t0 = Date.now();
-  const res = await client.messages.create({
-    model: MODEL,
-    max_tokens: 400,
-    output_config: { effort: "low" },
-    // memory is identical across every item in a run, so it lives in the cached system prefix
-    system: [
-      { type: "text", text: SYSTEM_BASE },
-      { type: "text", text: `## Memory\n\n${ctx.judgment}\n\n${ctx.tools}`, cache_control: { type: "ephemeral" } },
-    ],
-    messages: [
-      {
-        role: "user",
-        content: `Source: ${item.source}\nFrom: ${item.from}\nSubject: ${item.subject}\nReceived: ${item.receivedAt}\nMeta: ${JSON.stringify(item.meta)}\n\n${item.body ?? item.snippet}`,
-      },
-    ],
-  });
-  const latencyMs = Date.now() - t0;
+  // memory is identical across every item in a run, so it lives in the cacheable system prefix
+  const system = `${SYSTEM_BASE}\n\n## Memory\n\n${ctx.judgment}\n\n${ctx.tools}`;
+  const user = `Source: ${item.source}\nFrom: ${item.from}\nSubject: ${item.subject}\nReceived: ${item.receivedAt}\nMeta: ${JSON.stringify(item.meta)}\n\n${item.body ?? item.snippet}`;
+
   let out: z.infer<typeof Out>;
+  let usage = { inputTokens: 0, cachedTokens: 0, outputTokens: 0 };
+  let costUsd = 0;
+  let latencyMs = 0;
   try {
-    out = Out.parse(extractJson(textOf(res)));
-  } catch {
-    out = { action: "ignore", confidence: 0, reasoning: `unparseable: ${textOf(res).slice(0, 120)}`, rulesUsed: [] };
+    const r = await completeJson({ model: MODEL, system, user, effort: "low", maxTokens: 600 });
+    ({ usage, costUsd, latencyMs } = r);
+    out = Out.parse(r.json);
+  } catch (e) {
+    out = { action: "ignore", confidence: 0, reasoning: `error: ${(e as Error).message.slice(0, 120)}`, rulesUsed: [] };
   }
   return {
     itemId: item.id,
     ...out,
-    costUsd: costUsd(MODEL, res.usage),
+    costUsd,
     latencyMs,
-    inputTokens: res.usage.input_tokens + (res.usage.cache_read_input_tokens ?? 0) + (res.usage.cache_creation_input_tokens ?? 0),
-    outputTokens: res.usage.output_tokens,
+    inputTokens: usage.inputTokens,
+    outputTokens: usage.outputTokens,
   };
 }

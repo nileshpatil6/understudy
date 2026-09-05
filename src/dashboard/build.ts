@@ -23,6 +23,11 @@ async function loadRuns(split: string): Promise<RunResult[]> {
 }
 const runs = await loadRuns("train");
 const testRuns = await loadRuns("test");
+// optional: the earlier ungated loop, kept as a cautionary comparison
+const ungatedDir = path.resolve("results", "overfit-v1", source, "test");
+const ungated: RunResult[] = existsSync(ungatedDir)
+  ? await Promise.all((await readdir(ungatedDir)).filter((f) => /^run-\d+\.json$/.test(f)).sort((a, b) => num(a) - num(b)).map(async (f) => JSON.parse(await readFile(path.join(ungatedDir, f), "utf8"))))
+  : [];
 if (runs.length === 0) throw new Error(`no runs under ${base}/train`);
 
 const judgmentPath = path.resolve("memory", `judgment.${source}.md`);
@@ -72,7 +77,8 @@ const html = `<!doctype html>
   ${tile("Rules in memory", String(last.memoryRules), `<span class="up">from ${first.memoryRules}</span>`)}
 </div>
 
-<div class="panel"><h2>Accuracy, cost and latency per run</h2>${chart(runs, testRuns)}</div>
+<div class="panel"><h2>Accuracy per run</h2>${chart(runs, testRuns, ungated)}</div>
+<div class="panel"><h2>Cost and latency per run (148 items)</h2>${costChart(runs)}</div>
 
 <div class="panel"><h2>Per-action accuracy</h2>
 <table><thead><tr><th>run</th>${Object.keys(last.perAction).map((a) => `<th>${a}</th>`).join("")}<th>total</th><th>cost</th><th>rules</th></tr></thead>
@@ -117,27 +123,52 @@ function memoryHtml(md: string, baselineCount: number) {
 function esc(s: string) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
-function chart(rs: RunResult[], ts: RunResult[]) {
-  const W = 1000, H = 260, L = 48, R = 48, T = 16, B = 32;
-  const n = rs.length;
+function chart(rs: RunResult[], ts: RunResult[], ug: RunResult[]) {
+  const W = 1000, H = 280, L = 48, R = 24, T = 28, B = 32;
+  const n = Math.max(rs.length, ts.length, ug.length);
   const x = (i: number) => (n === 1 ? W / 2 : L + (i * (W - L - R)) / (n - 1));
-  const maxCost = Math.max(...rs.map((r) => r.costUsd)) || 1;
-  const maxLat = Math.max(...rs.map((r) => r.avgLatencyMs)) || 1;
   const yA = (v: number) => T + (1 - v) * (H - T - B);
-  const yC = (v: number) => T + (1 - v / maxCost) * (H - T - B);
-  const yL = (v: number) => T + (1 - v / maxLat) * (H - T - B);
-  const line = (f: (r: RunResult) => number, color: string, w = 2.5) =>
-    `<polyline fill="none" stroke="${color}" stroke-width="${w}" stroke-linejoin="round" points="${rs.map((r, i) => `${x(i)},${f(r)}`).join(" ")}"/>` +
-    rs.map((r, i) => `<circle cx="${x(i)}" cy="${f(r)}" r="4" fill="${color}"/>`).join("");
+  const series = (data: RunResult[], f: (r: RunResult) => number, color: string, dash = "", labelBelow = false) => {
+    if (!data.length) return "";
+    const pts = data.map((r, i) => `${x(i)},${yA(f(r))}`).join(" ");
+    return (
+      `<polyline fill="none" stroke="${color}" stroke-width="2.5" stroke-linejoin="round" ${dash ? `stroke-dasharray="${dash}"` : ""} points="${pts}"/>` +
+      data.map((r, i) => `<circle cx="${x(i)}" cy="${yA(f(r))}" r="4" fill="${color}"/><text x="${x(i)}" y="${yA(f(r)) + (labelBelow ? 16 : -9)}" text-anchor="middle" style="fill:${color};font-weight:600">${(f(r) * 100).toFixed(0)}%</text>`).join("")
+    );
+  };
   const grid = [0, 0.25, 0.5, 0.75, 1]
     .map((g) => `<line x1="${L}" x2="${W - R}" y1="${yA(g)}" y2="${yA(g)}" stroke="var(--line)"/><text x="${L - 8}" y="${yA(g) + 4}" text-anchor="end">${g * 100}%</text>`)
     .join("");
-  const xs = rs.map((r, i) => `<text x="${x(i)}" y="${H - 8}" text-anchor="middle">run ${r.run}</text>`).join("");
-  const labels = rs.map((r, i) => `<text x="${x(i)}" y="${yA(r.accuracy) - 10}" text-anchor="middle" style="fill:var(--acc);font-weight:600">${(r.accuracy * 100).toFixed(0)}%</text>`).join("");
-  const test = ts.length
-    ? `<polyline fill="none" stroke="var(--up)" stroke-width="2.5" stroke-dasharray="6 4" stroke-linejoin="round" points="${ts.map((r, i) => `${x(i)},${yA(r.accuracy)}`).join(" ")}"/>` +
-      ts.map((r, i) => `<circle cx="${x(i)}" cy="${yA(r.accuracy)}" r="4" fill="var(--up)"/><text x="${x(i)}" y="${yA(r.accuracy) + 18}" text-anchor="middle" style="fill:var(--up);font-weight:600">${(r.accuracy * 100).toFixed(0)}%</text>`).join("")
-    : "";
-  const legend = `<g transform="translate(${L},${T - 2})"><rect width="10" height="3" y="4" fill="var(--acc)"/><text x="14" y="9">train accuracy</text><rect x="270" width="10" height="3" y="4" fill="var(--up)"/><text x="284" y="9">held-out accuracy</text><rect x="90" width="10" height="3" y="4" fill="var(--cost)"/><text x="104" y="9">cost / run</text><rect x="180" width="10" height="3" y="4" fill="var(--lat)"/><text x="194" y="9">avg latency</text></g>`;
-  return `<svg viewBox="0 0 ${W} ${H}" width="100%" height="${H}">${grid}${line((r) => yC(r.costUsd), "var(--cost)", 1.5)}${line((r) => yL(r.avgLatencyMs), "var(--lat)", 1.5)}${line((r) => yA(r.accuracy), "var(--acc)")}${test}${labels}${xs}${legend}</svg>`;
+  const xs = Array.from({ length: n }, (_, i) => `<text x="${x(i)}" y="${H - 8}" text-anchor="middle">run ${i + 1}</text>`).join("");
+  const leg = [
+    ["var(--up)", "held-out attend / skip", ""],
+    ["var(--acc)", "held-out 4-class", ""],
+    ["var(--muted)", "train 4-class", "4 3"],
+    ["var(--down)", "held-out, ungated reflector (v1)", "2 4"],
+  ]
+    .filter((_, i) => i !== 3 || ug.length)
+    .map(([c, t, d], i) => `<g transform="translate(${L + i * 220},4)"><line x1="0" x2="18" y1="6" y2="6" stroke="${c}" stroke-width="3" ${d ? `stroke-dasharray="${d}"` : ""}/><text x="24" y="10">${t}</text></g>`)
+    .join("");
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%" height="${H}">${grid}${series(rs, (r) => r.accuracy, "var(--muted)", "4 3", true)}${series(ug, (r) => r.accuracy, "var(--down)", "2 4", true)}${series(ts, (r) => r.accuracy, "var(--acc)")}${series(ts, (r) => r.attendAccuracy ?? 0, "var(--up)")}${xs}${leg}</svg>`;
+}
+
+function costChart(rs: RunResult[]) {
+  const W = 1000, H = 160, L = 48, R = 48, T = 20, B = 28;
+  const n = rs.length;
+  const slot = (W - L - R) / Math.max(1, n);
+  const maxCost = Math.max(...rs.map((r) => r.costUsd)) * 1.2 || 1;
+  const maxLat = Math.max(...rs.map((r) => r.avgLatencyMs)) * 1.2 || 1;
+  const bars = rs
+    .map((r, i) => {
+      const x0 = L + i * slot + slot * 0.15;
+      const w = slot * 0.3;
+      const hc = (r.costUsd / maxCost) * (H - T - B);
+      const hl = (r.avgLatencyMs / maxLat) * (H - T - B);
+      return `<rect x="${x0}" y="${H - B - hc}" width="${w}" height="${hc}" fill="var(--cost)" rx="2"/><text x="${x0 + w / 2}" y="${H - B - hc - 4}" text-anchor="middle" style="fill:var(--cost)">$${r.costUsd.toFixed(3)}</text>` +
+        `<rect x="${x0 + w + 4}" y="${H - B - hl}" width="${w}" height="${hl}" fill="var(--lat)" rx="2"/><text x="${x0 + w + 4 + w / 2}" y="${H - B - hl - 4}" text-anchor="middle" style="fill:var(--lat)">${(r.avgLatencyMs / 1000).toFixed(1)}s</text>` +
+        `<text x="${L + i * slot + slot / 2}" y="${H - 8}" text-anchor="middle">run ${r.run}</text>`;
+    })
+    .join("");
+  const leg = `<g transform="translate(${L},2)"><rect width="10" height="10" fill="var(--cost)" rx="2"/><text x="14" y="9">cost per run</text><rect x="110" width="10" height="10" fill="var(--lat)" rx="2"/><text x="124" y="9">avg latency per item</text></g>`;
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%" height="${H}">${bars}${leg}</svg>`;
 }

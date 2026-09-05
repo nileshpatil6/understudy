@@ -1,5 +1,6 @@
 import { runEval, summarize } from "../src/eval/run.js";
 import { reflect } from "../src/reflect/run.js";
+import { shutdownTracing } from "../src/agent/llm.js";
 import type { Item } from "../src/types.js";
 
 /** eval -> reflect -> eval ... N times. This produces the chart. */
@@ -16,3 +17,4 @@ for (let i = 0; i < rounds; i++) {
     console.log(`  reflect: ${ref.misses} misses -> +${ref.added} rules`);
   }
 }
+await shutdownTracing();

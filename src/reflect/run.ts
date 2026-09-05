@@ -6,6 +6,7 @@ import { span } from "neatlogs";
 import { loadItems } from "../tools/dataset.js";
 import { resultsDir } from "../eval/run.js";
 import { appendRules, readMemory } from "../memory/store.js";
+import { visibleMeta } from "../agent/predict.js";
 import type { Item, RunResult } from "../types.js";
 
 /**
@@ -19,7 +20,7 @@ const Out = z.object({
 });
 
 export async function reflect(opts: { source: Item["source"]; privateData?: boolean; maxMisses?: number }) {
-  const dir = resultsDir(opts.source, opts.privateData);
+  const dir = resultsDir(opts.source, opts.privateData, "train");
   const files = (await readdir(dir)).filter((f) => /^run-\d+\.json$/.test(f)).sort((a, b) => num(a) - num(b));
   if (files.length === 0) throw new Error("no runs yet, run the eval first");
   const latest: RunResult = JSON.parse(await readFile(path.join(dir, files.at(-1)!), "utf8"));
@@ -34,7 +35,7 @@ export async function reflect(opts: { source: Item["source"]; privateData?: bool
         from: it.from,
         subject: it.subject,
         snippet: it.snippet.slice(0, 200),
-        meta: it.meta,
+        meta: visibleMeta(it.meta),
         predicted: p.action,
         actual: it.truth,
         agentReasoning: p.reasoning,

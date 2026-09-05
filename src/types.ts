@@ -32,9 +32,13 @@ export const Prediction = z.object({
 });
 export type Prediction = z.infer<typeof Prediction>;
 
+export type Split = "train" | "test";
+
 export interface RunResult {
   run: number;
   source: Item["source"];
+  /** train = the set the reflector learns from; test = held out, never reflected on */
+  split: Split;
   startedAt: string;
   items: number;
   correct: number;
@@ -43,5 +47,7 @@ export interface RunResult {
   costUsd: number;
   avgLatencyMs: number;
   memoryRules: number;
+  /** exact memory the agent read for this run, so any run is reproducible from its file */
+  memory: { judgment: string; tools: string };
   predictions: Prediction[];
 }

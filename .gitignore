@@ -5,3 +5,4 @@ results/*.jsonl
 *.log
 .ao/
 results/private/
+results/leaky-v0/

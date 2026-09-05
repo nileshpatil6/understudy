@@ -32,7 +32,8 @@ export const Prediction = z.object({
 });
 export type Prediction = z.infer<typeof Prediction>;
 
-export type Split = "train" | "test";
+/** train = reflector learns from its learn-half, gates on its validate-half; test = never touched */
+export type Split = "train" | "validate" | "test";
 
 export interface RunResult {
   run: number;
@@ -43,6 +44,8 @@ export interface RunResult {
   items: number;
   correct: number;
   accuracy: number;
+  /** collapsed to attend (reply|act) vs skip (archive|ignore): the distinction a user actually feels */
+  attendAccuracy: number;
   perAction: Record<Action, { total: number; correct: number }>;
   costUsd: number;
   avgLatencyMs: number;

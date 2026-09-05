@@ -1,5 +1,5 @@
 import { runEval, summarize } from "../src/eval/run.js";
-import { reflect } from "../src/reflect/run.js";
+import { reflect, describe } from "../src/reflect/run.js";
 import { shutdownTracing } from "../src/agent/llm.js";
 import type { Item } from "../src/types.js";
 
@@ -24,7 +24,7 @@ for (let i = 0; i < rounds; i++) {
   }
   if (i < rounds - 1) {
     const ref = await reflect({ source, privateData });
-    console.log(`  reflect: ${ref.misses} misses -> +${ref.added} rules`);
+    console.log(describe(ref));
   }
 }
 await shutdownTracing();

@@ -16,10 +16,15 @@ export async function runEval(opts: {
   privateData?: boolean;
   concurrency?: number;
   split?: Split;
+  /** restrict to these ids (validate runs use the validate half of train) */
+  ids?: Set<string>;
+  /** evaluate with this memory instead of the files on disk (gating candidate rules) */
+  memory?: { judgment: string; tools: string };
 }): Promise<RunResult> {
   const split = opts.split ?? "train";
-  const items = await loadItems(opts.source, { private: opts.privateData, limit: opts.limit, split });
-  const ctx = await loadContext(opts.source);
+  const all = await loadItems(opts.source, { private: opts.privateData, limit: opts.limit, split: split === "validate" ? "train" : split });
+  const items = opts.ids ? all.filter((it) => opts.ids!.has(it.id)) : all;
+  const ctx = opts.memory ?? (await loadContext(opts.source));
   const outDir = resultsDir(opts.source, opts.privateData, split);
   await mkdir(outDir, { recursive: true });
   const run = (await readdir(outDir)).filter((f) => /^run-\d+\.json$/.test(f)).length + 1;
@@ -31,12 +36,14 @@ export async function runEval(opts: {
 
   const perAction = Object.fromEntries(Action.options.map((a) => [a, { total: 0, correct: 0 }])) as RunResult["perAction"];
   let correct = 0;
+  let attendCorrect = 0;
   items.forEach((it, i) => {
     perAction[it.truth].total++;
     if (predictions[i].action === it.truth) {
       correct++;
       perAction[it.truth].correct++;
     }
+    if (attends(predictions[i].action) === attends(it.truth)) attendCorrect++;
   });
   const result: RunResult = {
     run,
@@ -46,6 +53,7 @@ export async function runEval(opts: {
     items: items.length,
     correct,
     accuracy: items.length ? correct / items.length : 0,
+    attendAccuracy: items.length ? attendCorrect / items.length : 0,
     perAction,
     costUsd: predictions.reduce((s, p) => s + p.costUsd, 0),
     avgLatencyMs: predictions.reduce((s, p) => s + p.latencyMs, 0) / Math.max(1, predictions.length),
@@ -63,6 +71,24 @@ export async function runEval(opts: {
  */
 export function resultsDir(source: Item["source"], privateData?: boolean, split: Split = "train"): string {
   return path.resolve("results", ...(privateData ? ["private"] : []), source, split);
+}
+
+export function attends(a: Action): boolean {
+  return a === "reply" || a === "act";
+}
+
+/** deterministic 70/30 split of the train set by id hash; the reflector learns from one half and is gated on the other */
+export function partition(items: Item[]): { learn: Item[]; validate: Item[] } {
+  const learn: Item[] = [];
+  const validate: Item[] = [];
+  for (const it of items) (hash(it.id) % 10 < 7 ? learn : validate).push(it);
+  return { learn, validate };
+}
+
+function hash(s: string): number {
+  let h = 2166136261;
+  for (let i = 0; i < s.length; i++) h = Math.imul(h ^ s.charCodeAt(i), 16777619) >>> 0;
+  return h;
 }
 
 async function mapLimit<T, R>(xs: T[], limit: number, fn: (x: T) => Promise<R>): Promise<R[]> {
@@ -83,7 +109,7 @@ export function summarize(r: RunResult): string {
   const pa = Object.entries(r.perAction)
     .map(([a, v]) => `${a} ${v.correct}/${v.total}`)
     .join("  ");
-  return `run ${r.run} [${r.source}/${r.split}]  acc ${(r.accuracy * 100).toFixed(1)}%  cost $${r.costUsd.toFixed(4)}  avg ${r.avgLatencyMs.toFixed(0)}ms  rules ${r.memoryRules}\n  ${pa}`;
+  return `run ${r.run} [${r.source}/${r.split}]  acc ${(r.accuracy * 100).toFixed(1)}%  attend/skip ${(r.attendAccuracy * 100).toFixed(1)}%  cost $${r.costUsd.toFixed(4)}  avg ${r.avgLatencyMs.toFixed(0)}ms  rules ${r.memoryRules}\n  ${pa}`;
 }
 
 const isMain = process.argv[1]?.replace(/\\/g, "/").endsWith("src/eval/run.ts");

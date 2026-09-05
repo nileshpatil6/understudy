@@ -66,6 +66,7 @@ const html = `<!doctype html>
 <div class="tiles">
   ${tile("Train accuracy", pct(last.accuracy), delta(first.accuracy, last.accuracy, true, pct))}
   ${testRuns.length ? tile("Held-out accuracy", pct(testRuns.at(-1)!.accuracy), delta(testRuns[0].accuracy, testRuns.at(-1)!.accuracy, true, pct)) : ""}
+  ${testRuns.length ? tile("Held-out attend / skip", pct(testRuns.at(-1)!.attendAccuracy ?? 0), delta(testRuns[0].attendAccuracy ?? 0, testRuns.at(-1)!.attendAccuracy ?? 0, true, pct)) : ""}
   ${tile("Cost / run", `$${last.costUsd.toFixed(3)}`, delta(first.costUsd, last.costUsd, false, (n) => `$${n.toFixed(3)}`))}
   ${tile("Avg latency", `${(last.avgLatencyMs / 1000).toFixed(1)}s`, delta(first.avgLatencyMs, last.avgLatencyMs, false, (n) => `${(n / 1000).toFixed(1)}s`))}
   ${tile("Rules in memory", String(last.memoryRules), `<span class="up">from ${first.memoryRules}</span>`)}

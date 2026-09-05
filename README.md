@@ -49,7 +49,7 @@ npm run reflect         # learn from it
 npm run loop            # eval -> reflect x5, produces the chart
 ```
 
-Env: `SOURCE=gmail|slack|github`, `LIMIT=50`, `PRIVATE=1` (use data/private), `ROUNDS=5`, `UNDERSTUDY_MODEL` (default gpt-5-mini), `UNDERSTUDY_REFLECT_MODEL` (default gpt-5).
+Env: `SOURCE=gmail|slack|github`, `LIMIT=50`, `PRIVATE=1` (use data/private), `ROUNDS=5`, `UNDERSTUDY_MODEL` (default gpt-5.6-luna), `UNDERSTUDY_REFLECT_MODEL` (default gpt-6-astra).
 
 ## Built with AO
 

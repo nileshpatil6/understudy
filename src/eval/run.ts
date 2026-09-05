@@ -117,7 +117,9 @@ if (isMain) {
   const source = (process.env.SOURCE ?? "gmail") as Item["source"];
   const limit = process.env.LIMIT ? Number(process.env.LIMIT) : undefined;
   const split = (process.env.SPLIT ?? "train") as Split;
-  runEval({ source, limit, privateData: process.env.PRIVATE === "1", split })
+  // NO_MEMORY=1 scores the bare model, the baseline every learned run is compared against
+  const memory = process.env.NO_MEMORY === "1" ? { judgment: "", tools: "" } : undefined;
+  runEval({ source, limit, privateData: process.env.PRIVATE === "1", split, memory })
     .then((r) => console.log(summarize(r)))
     .finally(shutdownTracing);
 }

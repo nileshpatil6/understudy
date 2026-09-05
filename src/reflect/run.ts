@@ -4,6 +4,7 @@ import { z } from "zod";
 import { REFLECT_MODEL, completeJson, shutdownTracing } from "../agent/llm.js";
 import { span } from "neatlogs";
 import { loadItems } from "../tools/dataset.js";
+import { resultsDir } from "../eval/run.js";
 import { appendRules, readMemory } from "../memory/store.js";
 import type { Item, RunResult } from "../types.js";
 
@@ -18,7 +19,7 @@ const Out = z.object({
 });
 
 export async function reflect(opts: { source: Item["source"]; privateData?: boolean; maxMisses?: number }) {
-  const dir = path.resolve("results", opts.source);
+  const dir = resultsDir(opts.source, opts.privateData);
   const files = (await readdir(dir)).filter((f) => /^run-\d+\.json$/.test(f)).sort((a, b) => num(a) - num(b));
   if (files.length === 0) throw new Error("no runs yet, run the eval first");
   const latest: RunResult = JSON.parse(await readFile(path.join(dir, files.at(-1)!), "utf8"));

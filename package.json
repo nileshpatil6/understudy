@@ -11,7 +11,7 @@
     "eval": "tsx src/eval/run.ts",
     "reflect": "tsx src/reflect/run.ts",
     "loop": "tsx scripts/loop.ts",
-    "dashboard": "tsx src/dashboard/serve.ts"
+    "dashboard": "tsx src/dashboard/build.ts"
   },
   "dependencies": {
     "neatlogs": "^1.1.19",

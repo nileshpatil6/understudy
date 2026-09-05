@@ -1,56 +1,72 @@
 # Understudy
 
-An agent that learns *your* judgment by watching what you actually did in your own apps, then does the work for you, and gets measurably better every run.
+An agent that learns *your* judgment by watching what you actually did in your own apps, then does the work for you, and gets measurably better on items it has never seen.
 
-Built for Syndicate by Maximor, Track 1: Automated Agent Engineering.
+Built for Syndicate by Maximor, Track 1: Automated Agent Engineering. Built end to end in Agent Orchestrator.
 
 ## The trick
 
-Every "self-improving agent" needs ground truth. Most teams hand-label it. We don't.
+Every "self-improving agent" needs ground truth. Most teams hand-label it. We label nothing.
 
-Your inbox already recorded the right answer for every email: you replied, you starred it, you archived it, you never touched it. Thousands of free labels. Same for Slack, GitHub, anything with an activity log.
-
-So the loop is:
+Your inbox already recorded the right answer for every email: you replied, you starred it, you opened and left it, you never touched it. Thousands of free labels. Same for Slack, GitHub, anything with an activity log.
 
 ```
-read item (Gmail / Slack / GitHub via tools)
-  -> predict what you would do        reply | act | archive | ignore
+read item (Gmail / Slack / GitHub)          the agent sees only what exists at arrival:
+  -> predict what you would do              sender, subject, snippet, time, cc.
+       reply | act | archive | ignore       never the read / starred / label state.
   -> compare with what you really did
-  -> reflect on every miss
-  -> write a rule into memory         memory/judgment.gmail.md, memory/tools.gmail.md
-  -> next run reads the new memory
+  -> reflect on the misses                  learns from 70% of train,
+  -> keep a rule only if it holds           must hold on the other 30%,
+     on data it did not learn from          consolidates when memory bloats.
+  -> next run reads the new memory          memory/judgment.gmail.md, plain markdown
 ```
 
-Memory is plain markdown. You can read it, judges can read it, git history shows it growing.
+## Numbers, real inbox, held-out set the reflector never sees
+
+| | run 1 | run 6 |
+|---|---|---|
+| held-out 4-class accuracy | 23.7% | **67.7%** |
+| held-out attend vs skip | 66.7% | **86.0%** |
+| rules in memory | 0 | 11 |
+| cost per run of 148 emails | $0.026 | $0.039 |
+| latency per email | 2.4s | 2.1s |
+
+Same held-out set, no learning: `gpt-6-astra` 43.0% at $0.48. With the 11 learned rules, `gpt-5.6-luna` matches `gpt-6-astra`+memory (67.7%) at 1/40 the cost.
+
+Our first reflector hit 91% on train and 57% on held-out. We caught it, built the validation gate, and kept the bad run in `results/README.md`. Full tables and the ungated comparison there.
 
 ## Layout
 
 ```
-src/eval      harness: run agent over dataset, score, write results/<source>/run-N.json
-src/agent     predict(item, memory) -> action + confidence + reasoning + cost + latency
-src/memory    two markdown files per source: judgment rules, tool rules
-src/reflect   after a run: misses -> new rules
+src/eval      harness: predict, score, write results/<split>/run-N.json (predictions, cost, latency, memory used)
+src/agent     predict(item, memory); renderItem strips label-derived fields (unit tested)
+src/reflect   validation-gated reflection: learn half -> propose -> gate on validate half -> accept / consolidate / reject
+src/memory    two markdown memories per source; consolidate.ts rewrites bloated memory into fewer general rules
 src/tools     source adapters + ground-truth derivation (gmail-labels.ts)
-src/dashboard chart of accuracy / cost / latency per run, memory diff
-data/sample   synthetic inbox, committed, safe for CI and demos
+src/dashboard self-contained HTML: accuracy curves, cost, per-action table, the memory with new rules highlighted
+data/sample   synthetic inbox, committed, for CI and public demos
 data/private  your real export, gitignored
-memory/       the agent's learned rules
-results/      one JSON per run
+memory/       the learned rules, git tracked: `git log -p memory/` is the learning curve
+results/      one JSON per run, plus README.md with the headline tables
+docs/         architecture.md, ao-workers.md, demo-script.md
 ```
 
-## Run
+## Run it
 
 ```
 npm i
-cp .env.example .env    # add OPENAI_API_KEY
-npx tsx scripts/gen-sample.ts
-npm run eval            # one run
-npm run reflect         # learn from it
-npm run loop            # eval -> reflect x5, produces the chart
+cp .env.example .env            # OPENAI_API_KEY, optional NEATLOGS_API_KEY
+npx tsx scripts/gen-sample.ts   # 144-item synthetic inbox
+MEMORY_DIR=memory/sample npm run loop   # 5 rounds: eval -> gated reflect -> eval
+npm run dashboard               # dashboard/gmail.html
 ```
 
-Env: `SOURCE=gmail|slack|github`, `LIMIT=50`, `PRIVATE=1` (use data/private), `ROUNDS=5`, `UNDERSTUDY_MODEL` (default gpt-5.6-luna), `UNDERSTUDY_REFLECT_MODEL` (default gpt-6-astra).
+On your own inbox: export to `data/private/gmail.jsonl` (+ `gmail.test.jsonl` for a held-out range) using the rules in `data/README.md`, then `PRIVATE=1 npm run loop` and `PRIVATE=1 npm run dashboard`.
+
+Env: `SOURCE=gmail|slack|github`, `ROUNDS=5`, `LIMIT=50`, `PRIVATE=1`, `TEST=0` (skip held-out), `MEMORY_DIR`, `UNDERSTUDY_MODEL` (gpt-5.6-luna), `UNDERSTUDY_REFLECT_MODEL` (gpt-6-astra), `NO_MEMORY=1` (bare-model baseline), `RESULTS_TAG` (file a one-off run separately).
+
+`npm test`, `npm run typecheck`, `npm run lint` run in CI on every PR.
 
 ## Built with AO
 
-Every commit in this repo came out of an Agent Orchestrator session. See the demo video for the session board.
+Every commit came out of an Agent Orchestrator session. Worker prompts used are in `docs/ao-workers.md`; the demo video shows the board.

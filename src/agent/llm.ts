@@ -15,8 +15,15 @@ const ready: Promise<void> = tracing
   ? init({ apiKey: process.env.NEATLOGS_API_KEY, workflowName: "understudy", registerShutdownHandlers: false })
   : Promise.resolve();
 
-const raw = new OpenAI();
-export const client = tracing ? wrapOpenAI(raw) : raw;
+/** Created on first use so importing this module (e.g. in unit tests) needs no API key. */
+let _client: OpenAI | undefined;
+export function client(): OpenAI {
+  if (!_client) {
+    const raw = new OpenAI();
+    _client = tracing ? wrapOpenAI(raw) : raw;
+  }
+  return _client;
+}
 
 /** Flush traces. Call once at the end of any script that made LLM calls. */
 export async function shutdownTracing(): Promise<void> {
@@ -68,7 +75,7 @@ export async function completeJson(opts: {
   await ready;
   const t0 = Date.now();
   const isReasoning = /^(gpt-[5-9]|o\d)/.test(opts.model);
-  const res = await client.chat.completions.create({
+  const res = await client().chat.completions.create({
     model: opts.model,
     messages: [
       { role: "system", content: opts.system },

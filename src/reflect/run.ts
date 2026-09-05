@@ -1,7 +1,8 @@
 import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { z } from "zod";
-import { REFLECT_MODEL, completeJson } from "../agent/llm.js";
+import { REFLECT_MODEL, completeJson, shutdownTracing } from "../agent/llm.js";
+import { span } from "neatlogs";
 import { loadItems } from "../tools/dataset.js";
 import { appendRules, readMemory } from "../memory/store.js";
 import type { Item, RunResult } from "../types.js";
@@ -43,7 +44,7 @@ export async function reflect(opts: { source: Item["source"]; privateData?: bool
   const judgment = await readMemory("judgment", opts.source);
   const tools = await readMemory("tools", opts.source);
 
-  const r = await completeJson({
+  const r = await span({ kind: "AGENT", name: `reflect:${opts.source}:run-${latest.run}` }, () => completeJson({
     model: REFLECT_MODEL,
     effort: "high",
     maxTokens: 6000,
@@ -59,7 +60,7 @@ Tool rules are about how to read this source better (which fields matter, what p
 
 Respond with only JSON: {"judgmentRules": [...], "toolRules": [...], "notes": "one paragraph on what pattern you found"}`,
     user: `Run ${latest.run}: ${hits}/${latest.items} correct.\n\n## Current judgment memory\n${judgment}\n\n## Current tool memory\n${tools}\n\n## Misses (predicted vs actual)\n${JSON.stringify(misses, null, 1)}`,
-  });
+  }))();
   const out = Out.parse(r.json);
   await appendRules("judgment", out.judgmentRules, opts.source);
   await appendRules("tools", out.toolRules, opts.source);
@@ -73,8 +74,10 @@ function num(f: string): number {
 const isMain = process.argv[1]?.replace(/\\/g, "/").endsWith("src/reflect/run.ts");
 if (isMain) {
   const source = (process.env.SOURCE ?? "gmail") as Item["source"];
-  reflect({ source, privateData: process.env.PRIVATE === "1" }).then((r) => {
-    console.log(`reflected on ${r.misses} misses, added ${r.added} rules ($${r.costUsd.toFixed(4)})`);
-    if (r.notes) console.log(r.notes);
-  });
+  reflect({ source, privateData: process.env.PRIVATE === "1" })
+    .then((r) => {
+      console.log(`reflected on ${r.misses} misses, added ${r.added} rules ($${r.costUsd.toFixed(4)})`);
+      if (r.notes) console.log(r.notes);
+    })
+    .finally(shutdownTracing);
 }

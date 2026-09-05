@@ -1,11 +1,27 @@
 import "../env.js";
 import OpenAI from "openai";
-
-export const client = new OpenAI();
+import { init, wrapOpenAI, shutdown } from "neatlogs";
 
 /** Models are env-driven so the eval can sweep cost/quality. */
 export const MODEL = process.env.UNDERSTUDY_MODEL ?? "gpt-5-mini";
 export const REFLECT_MODEL = process.env.UNDERSTUDY_REFLECT_MODEL ?? "gpt-5";
+
+/**
+ * Neatlogs tracing is on whenever NEATLOGS_API_KEY is set. Every predict / reflect call
+ * lands as an LLM span so a bad prediction can be inspected next to the reflection that fixed it.
+ */
+const tracing = Boolean(process.env.NEATLOGS_API_KEY);
+const ready: Promise<void> = tracing
+  ? init({ apiKey: process.env.NEATLOGS_API_KEY, workflowName: "understudy", registerShutdownHandlers: false })
+  : Promise.resolve();
+
+const raw = new OpenAI();
+export const client = tracing ? wrapOpenAI(raw) : raw;
+
+/** Flush traces. Call once at the end of any script that made LLM calls. */
+export async function shutdownTracing(): Promise<void> {
+  if (tracing) await shutdown();
+}
 
 /** USD per 1M tokens. Cached input is billed at the cached rate. */
 const PRICES: Record<string, { in: number; cached: number; out: number }> = {
@@ -42,6 +58,7 @@ export async function completeJson(opts: {
   effort?: Effort;
   maxTokens?: number;
 }): Promise<{ json: unknown; text: string; usage: Usage; costUsd: number; latencyMs: number }> {
+  await ready;
   const t0 = Date.now();
   const isReasoning = /^(gpt-5|o\d)/.test(opts.model);
   const res = await client.chat.completions.create({

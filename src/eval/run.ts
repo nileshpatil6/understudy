@@ -2,6 +2,8 @@ import { mkdir, writeFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import { loadItems } from "../tools/dataset.js";
 import { predict, loadContext, memoryRuleCount } from "../agent/predict.js";
+import { shutdownTracing } from "../agent/llm.js";
+import { span } from "neatlogs";
 import { Action, type Item, type RunResult } from "../types.js";
 
 /**
@@ -20,7 +22,10 @@ export async function runEval(opts: {
   await mkdir(outDir, { recursive: true });
   const run = (await readdir(outDir)).filter((f) => /^run-\d+\.json$/.test(f)).length + 1;
 
-  const predictions = await mapLimit(items, opts.concurrency ?? 6, (it) => predict(it, ctx));
+  const predictions = await span(
+    { kind: "WORKFLOW", name: `eval:${opts.source}:run-${run}` },
+    () => mapLimit(items, opts.concurrency ?? 6, (it) => predict(it, ctx)),
+  )();
 
   const perAction = Object.fromEntries(Action.options.map((a) => [a, { total: 0, correct: 0 }])) as RunResult["perAction"];
   let correct = 0;
@@ -73,5 +78,7 @@ const isMain = process.argv[1]?.replace(/\\/g, "/").endsWith("src/eval/run.ts");
 if (isMain) {
   const source = (process.env.SOURCE ?? "gmail") as Item["source"];
   const limit = process.env.LIMIT ? Number(process.env.LIMIT) : undefined;
-  runEval({ source, limit, privateData: process.env.PRIVATE === "1" }).then((r) => console.log(summarize(r)));
+  runEval({ source, limit, privateData: process.env.PRIVATE === "1" })
+    .then((r) => console.log(summarize(r)))
+    .finally(shutdownTracing);
 }

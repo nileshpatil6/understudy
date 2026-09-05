@@ -1,0 +1,1949 @@
+{
+  "run": 1,
+  "source": "gmail",
+  "startedAt": "2026-09-05T19:43:37.711Z",
+  "items": 148,
+  "correct": 51,
+  "accuracy": 0.34459459459459457,
+  "perAction": {
+    "reply": {
+      "total": 5,
+      "correct": 4
+    },
+    "act": {
+      "total": 35,
+      "correct": 27
+    },
+    "archive": {
+      "total": 44,
+      "correct": 20
+    },
+    "ignore": {
+      "total": 64,
+      "correct": 0
+    }
+  },
+  "costUsd": 0.08130775000000003,
+  "avgLatencyMs": 3705.7905405405404,
+  "memoryRules": 0,
+  "predictions": [
+    {
+      "itemId": "1a0683ee45653a73",
+      "action": "archive",
+      "confidence": 0.6,
+      "reasoning": "This is a promotional/no-reply Dribbble newsletter about studio workflows—no direct request or personal relevance indicated, so they'd likely dismiss/archive it rather than reply or act on it now.",
+      "rulesUsed": [
+        "no matching specific rule; fall back on general judgment: promotional/no-reply newsletters are typically archived/dismissed"
+      ],
+      "costUsd": 0.00050575,
+      "latencyMs": 5295,
+      "inputTokens": 295,
+      "outputTokens": 216
+    },
+    {
+      "itemId": "1a06823aeb9edbb4",
+      "action": "archive",
+      "confidence": 0.8,
+      "reasoning": "This is a generic LinkedIn 'people you may know' notification; the user typically dismisses such unsolicited networking emails rather than reply or act on them.",
+      "rulesUsed": [
+        "no matching rule; fall back on general judgment that generic social network connection suggestions are usually dismissed"
+      ],
+      "costUsd": 0.0004825,
+      "latencyMs": 5098,
+      "inputTokens": 290,
+      "outputTokens": 205
+    },
+    {
+      "itemId": "1a06822fff772745",
+      "action": "archive",
+      "confidence": 0.9,
+      "reasoning": "This is an automatic away-response with no new actionable content; after reading, the user would dismiss/archive it rather than reply or act on it.",
+      "rulesUsed": [
+        "No specific rule applies; fallback to general judgment: auto-reply/away messages are read and then archived since they contain no new action for the user."
+      ],
+      "costUsd": 0.0007725,
+      "latencyMs": 6384,
+      "inputTokens": 338,
+      "outputTokens": 344
+    },
+    {
+      "itemId": "1a06abc5c1b1c5c2",
+      "action": "reply",
+      "confidence": 0.88,
+      "reasoning": "The professor redirected the conversation to their PhD student and explicitly asked the sender to follow up; as a prospective intern the user is likely to write to the cc-ed student to continue the discussion and provide required details (CV, availability).",
+      "rulesUsed": [
+        "fallback: when an authority asks to follow up with a specific contact about an opportunity, the user replies to that contact to continue the process"
+      ],
+      "costUsd": 0.000808,
+      "latencyMs": 6467,
+      "inputTokens": 360,
+      "outputTokens": 359
+    },
+    {
+      "itemId": "1a06c63270b93b6e",
+      "action": "reply",
+      "confidence": 0.6,
+      "reasoning": "This is a direct response from a potential supervisor clarifying terms; the user will likely reply (to thank, confirm whether remote/unpaid is acceptable, or to decline politely).",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.00074475,
+      "latencyMs": 6366,
+      "inputTokens": 331,
+      "outputTokens": 331
+    },
+    {
+      "itemId": "1a06aaec1d0cc504",
+      "action": "act",
+      "confidence": 0.62,
+      "reasoning": "This is a direct, positive reply from a professor about an internship and asks the student to apply; the user will likely follow up soon by opening the IRCC application and preparing for the interview rather than just archiving or ignoring it.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.000642,
+      "latencyMs": 6043,
+      "inputTokens": 344,
+      "outputTokens": 278
+    },
+    {
+      "itemId": "1a06801f42078280",
+      "action": "act",
+      "confidence": 0.85,
+      "reasoning": "The message is marked IMPORTANT and requests a mandatory action (join Discord for the hackathon), so they will likely act on it soon (open the message and click the join link) rather than reply or archive.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.0003675,
+      "latencyMs": 2753,
+      "inputTokens": 310,
+      "outputTokens": 145
+    },
+    {
+      "itemId": "1a067ae69cd9a2da",
+      "action": "act",
+      "confidence": 0.8,
+      "reasoning": "This is a one-time sign-in (2FA) code from Luma; the user typically uses such codes immediately (clicks/enters it on the site) rather than replying or archiving.",
+      "rulesUsed": [
+        "no learned rules matched; fallback judgement: one-time authentication/2FA emails are acted on (used) promptly rather than replied to or archived"
+      ],
+      "costUsd": 0.00055025,
+      "latencyMs": 3403,
+      "inputTokens": 305,
+      "outputTokens": 237
+    },
+    {
+      "itemId": "1a0679f06549789e",
+      "action": "act",
+      "confidence": 0.9,
+      "reasoning": "This is a one-time Telegram verification code the user will use immediately to sign in, so they will act on it (open/use) rather than reply or archive.",
+      "rulesUsed": [],
+      "costUsd": 0.00032225,
+      "latencyMs": 2755,
+      "inputTokens": 297,
+      "outputTokens": 124
+    },
+    {
+      "itemId": "1a0679bc32ccfce9",
+      "action": "act",
+      "confidence": 0.85,
+      "reasoning": "This is a confirmation/registration approval for an event marked IMPORTANT — the user typically doesn't need to reply to approvals but will act (add to calendar/star/open details) so they can follow up or attend. No response required, so they'll process it soon rather than archiving or ignoring.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.0005305,
+      "latencyMs": 3453,
+      "inputTokens": 330,
+      "outputTokens": 224
+    },
+    {
+      "itemId": "1a0673d2bc965fea",
+      "action": "act",
+      "confidence": 0.75,
+      "reasoning": "This is a follow-up to a student verification the user already started; people who begin verification flows usually complete them soon, so they will likely click through or finish the process rather than reply or archive.",
+      "rulesUsed": [
+        "No matching learned rules; applied general judgment that users typically complete started account/verification flows soon."
+      ],
+      "costUsd": 0.000504,
+      "latencyMs": 4067,
+      "inputTokens": 296,
+      "outputTokens": 215
+    },
+    {
+      "itemId": "1a06724ff79adf4e",
+      "action": "archive",
+      "confidence": 0.7,
+      "reasoning": "This is a promotional newsletter from UpGrad about a new course—no personalization or immediate call-to-action—so the user would most likely dismiss/archive it rather than reply or act on it.",
+      "rulesUsed": [
+        "No matching rule applied; fallback: treat unsolicited promotional/marketing emails about course launches as archive/dismiss."
+      ],
+      "costUsd": 0.00050575,
+      "latencyMs": 3904,
+      "inputTokens": 303,
+      "outputTokens": 215
+    },
+    {
+      "itemId": "1a06696368986be8",
+      "action": "act",
+      "confidence": 0.78,
+      "reasoning": "This is an automated GitHub CI failure for a subscribed SciPy workflow; the user is likely a contributor or watcher and will click through to view the workflow run and investigate rather than reply or archive immediately.",
+      "rulesUsed": [
+        "When no specific rule applies, follow general judgment: for automated CI failure notifications on subscribed repos the user typically opens the workflow run to investigate soon."
+      ],
+      "costUsd": 0.00053675,
+      "latencyMs": 3665,
+      "inputTokens": 339,
+      "outputTokens": 226
+    },
+    {
+      "itemId": "1a0669634f233df5",
+      "action": "act",
+      "confidence": 0.7,
+      "reasoning": "This is a CI lint failure from a repository the user subscribes to; they typically investigate repository CI failures soon rather than replying or archiving, so they'll open the run to check details.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.0006235,
+      "latencyMs": 4711,
+      "inputTokens": 342,
+      "outputTokens": 269
+    },
+    {
+      "itemId": "1a0669634db31fc9",
+      "action": "act",
+      "confidence": 0.8,
+      "reasoning": "This is a CI failure notification for the SciPy repo (important/unread); the user is likely a maintainer and would click through to inspect the failed workflow soon rather than reply or immediately archive.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.000625,
+      "latencyMs": 3759,
+      "inputTokens": 332,
+      "outputTokens": 271
+    },
+    {
+      "itemId": "1a066963404b8275",
+      "action": "act",
+      "confidence": 0.6,
+      "reasoning": "This is a CI failure notification for the scipy/scipy repository — the recipient is likely a contributor or watcher and will open the workflow to inspect and possibly triage the failure rather than reply or immediately archive it.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.00050225,
+      "latencyMs": 3590,
+      "inputTokens": 337,
+      "outputTokens": 209
+    },
+    {
+      "itemId": "1a0669633a3f8c55",
+      "action": "act",
+      "confidence": 0.8,
+      "reasoning": "This is a CI notification about macOS tests failing (no jobs run) for a repository they contribute to; they’ll likely open the workflow run link and investigate or triage rather than reply or archive immediately.",
+      "rulesUsed": [
+        "When no matching rule applies, follow general judgment: developers typically open CI failure/notification emails to inspect and triage rather than reply or archive."
+      ],
+      "costUsd": 0.0006645,
+      "latencyMs": 4105,
+      "inputTokens": 330,
+      "outputTokens": 291
+    },
+    {
+      "itemId": "1a066963267b8f65",
+      "action": "act",
+      "confidence": 0.72,
+      "reasoning": "This is a CI failure notification for a repo they likely maintain; they would click through and investigate the failing workflow soon rather than reply or immediately archive.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.00047725,
+      "latencyMs": 3066,
+      "inputTokens": 333,
+      "outputTokens": 197
+    },
+    {
+      "itemId": "1a06685c239413b0",
+      "action": "act",
+      "confidence": 0.85,
+      "reasoning": "This is a CI failure notification for their repository (important, inbox); the user is likely to open the workflow run and inspect logs or fix it soon rather than reply or archive.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.00049575,
+      "latencyMs": 3162,
+      "inputTokens": 359,
+      "outputTokens": 203
+    },
+    {
+      "itemId": "1a06627d35079a4c",
+      "action": "act",
+      "confidence": 0.6,
+      "reasoning": "This is a non-urgent automated evaluation update about UniHack; the user is likely to open or click through to check results/details soon but not reply. It reads like a status/next-steps notification that warrants following up rather than immediate archive or ignoring.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.0006445,
+      "latencyMs": 3588,
+      "inputTokens": 314,
+      "outputTokens": 283
+    },
+    {
+      "itemId": "1a065f67018840d2",
+      "action": "act",
+      "confidence": 0.6,
+      "reasoning": "This is a registration/opening announcement from an organization the user previously engaged with; they are likely to open or click through to check details and possibly register soon rather than reply or immediately archive.",
+      "rulesUsed": [
+        "No matching specific learned rule — fall back on general judgment: user opens/acts on relevant event/registration notices from past contacts."
+      ],
+      "costUsd": 0.00052575,
+      "latencyMs": 3579,
+      "inputTokens": 343,
+      "outputTokens": 220
+    },
+    {
+      "itemId": "1a065f424c311367",
+      "action": "act",
+      "confidence": 0.8,
+      "reasoning": "This is a final-deadline notification for an application the user saved; they are likely to open the link and complete/submit it soon rather than reply or archive.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.00048425,
+      "latencyMs": 2942,
+      "inputTokens": 329,
+      "outputTokens": 201
+    },
+    {
+      "itemId": "1a065de901e5d15b",
+      "action": "archive",
+      "confidence": 0.6,
+      "reasoning": "This is an informational announcement about a vendor app being registered in NETIS with no request for action or reply; it's not time-sensitive, so they would archive it.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.00061125,
+      "latencyMs": 3388,
+      "inputTokens": 333,
+      "outputTokens": 264
+    },
+    {
+      "itemId": "1a05e647d8f12528",
+      "action": "act",
+      "confidence": 0.82,
+      "reasoning": "This is a CI failure notification for the user's repo; they are likely to open the workflow run to inspect logs or restart the job rather than reply or archive it immediately.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.000743,
+      "latencyMs": 4115,
+      "inputTokens": 340,
+      "outputTokens": 329
+    },
+    {
+      "itemId": "1a05e62382baab20",
+      "action": "act",
+      "confidence": 0.75,
+      "reasoning": "This is an automated CI failure notice for their repository; they will likely open the workflow on GitHub and inspect logs or fix the failing test rather than reply or archive immediately.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.000489,
+      "latencyMs": 2837,
+      "inputTokens": 340,
+      "outputTokens": 202
+    },
+    {
+      "itemId": "1a05e389fce9d7dd",
+      "action": "archive",
+      "confidence": 0.6,
+      "reasoning": "This is a generic promotional invite from Medium; with no rule matching and typical behavior to dismiss such marketing emails, they would likely archive it rather than reply or act on it.",
+      "rulesUsed": [],
+      "costUsd": 0.000457,
+      "latencyMs": 2971,
+      "inputTokens": 308,
+      "outputTokens": 190
+    },
+    {
+      "itemId": "1a05e23dba5d890c",
+      "action": "archive",
+      "confidence": 0.75,
+      "reasoning": "This is a standard promotional wishlist reminder from a retailer; the user typically doesn't reply to marketing emails and would dismiss/archive it rather than engage.",
+      "rulesUsed": [
+        "No specific learned rule applied — default judgment: promotional/marketing emails are archived/dismissed rather than replied to or acted on."
+      ],
+      "costUsd": 0.000497,
+      "latencyMs": 2866,
+      "inputTokens": 308,
+      "outputTokens": 210
+    },
+    {
+      "itemId": "1a05e011842b35b2",
+      "action": "archive",
+      "confidence": 0.66,
+      "reasoning": "This is an automatic out-of-office style reply confirming working hours and promising a reply next business day; no immediate action or reply needed, so archive to clear the inbox.",
+      "rulesUsed": [
+        "- When no rule applies, use general judgment to archive automated or autoreply messages that require no immediate action."
+      ],
+      "costUsd": 0.000638,
+      "latencyMs": 3904,
+      "inputTokens": 344,
+      "outputTokens": 276
+    },
+    {
+      "itemId": "1a060749f7ebce36",
+      "action": "reply",
+      "confidence": 0.85,
+      "reasoning": "This is a short, positive, encouraging reply from a professor in response to the user's inquiry; the user is likely to send a polite thank-you and possibly ask a follow-up about application steps.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment: politely reply to positive, actionable responses from potential supervisors or professors."
+      ],
+      "costUsd": 0.000653,
+      "latencyMs": 3843,
+      "inputTokens": 348,
+      "outputTokens": 283
+    },
+    {
+      "itemId": "1a05fa764a37276f",
+      "action": "reply",
+      "confidence": 0.8,
+      "reasoning": "This is a direct reply from a professor about internship timing and your graduation — likely worth a brief response (thank you, clarify exact graduation date or ask about exceptions/future opportunities).",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.0006205,
+      "latencyMs": 3403,
+      "inputTokens": 338,
+      "outputTokens": 268
+    },
+    {
+      "itemId": "1a060e6040b2d551",
+      "action": "reply",
+      "confidence": 0.8,
+      "reasoning": "Message is an important, in-reply-to the user's inquiry from a professor about internship arrangements; user is likely to confirm interest and ask next steps.",
+      "rulesUsed": [
+        "When a message is an important reply from a professor about an internship and it is inReplyToMine, the user will write back to confirm interest and next steps."
+      ],
+      "costUsd": 0.000651,
+      "latencyMs": 3577,
+      "inputTokens": 340,
+      "outputTokens": 283
+    },
+    {
+      "itemId": "1a05dd27faeec96c",
+      "action": "archive",
+      "confidence": 0.6,
+      "reasoning": "This is a routine monthly newsletter/promo with a PDF; not time-sensitive. The user typically doesn't keep marketing emails in the inbox and would dismiss/archive it rather than reply or act immediately.",
+      "rulesUsed": [
+        "no matching rule; fallback to general judgment"
+      ],
+      "costUsd": 0.000479,
+      "latencyMs": 2967,
+      "inputTokens": 300,
+      "outputTokens": 202
+    },
+    {
+      "itemId": "1a05dafd7f43a4e7",
+      "action": "archive",
+      "confidence": 0.7,
+      "reasoning": "This is a promotional newsletter about Medium events; lacking specific personal relevance or an invitation requiring action, they'd likely dismiss/archive it rather than reply or engage.",
+      "rulesUsed": [],
+      "costUsd": 0.00031875,
+      "latencyMs": 2217,
+      "inputTokens": 307,
+      "outputTokens": 121
+    },
+    {
+      "itemId": "1a05da02bc7f6edd",
+      "action": "archive",
+      "confidence": 0.6,
+      "reasoning": "This is a non-urgent product/marketing update about plan changes; unless the user is actively managing OneSignal billing they'd likely dismiss it rather than reply or act on it now.",
+      "rulesUsed": [
+        "no applicable learned rule — applied general judgment about promotional/product-update emails"
+      ],
+      "costUsd": 0.000486,
+      "latencyMs": 2869,
+      "inputTokens": 304,
+      "outputTokens": 205
+    },
+    {
+      "itemId": "1a05d9c90fc6984c",
+      "action": "act",
+      "confidence": 0.82,
+      "reasoning": "This is an important, inboxed GitHub PR comment pointing out a missed case that likely requires inspecting the code/PR and fixing or replying; the user (a repo maintainer) is likely to open the PR and follow up soon rather than ignore or archive it.",
+      "rulesUsed": [
+        "When no specific rule applies, fall back on general judgment about repo-maintainer behavior: important PR comments are opened and acted on soon."
+      ],
+      "costUsd": 0.00068925,
+      "latencyMs": 3668,
+      "inputTokens": 349,
+      "outputTokens": 301
+    },
+    {
+      "itemId": "1a05d952783d7166",
+      "action": "act",
+      "confidence": 0.72,
+      "reasoning": "This is an automated GitHub review notification (no direct question) and marked IMPORTANT; the user is likely to open the PR or the notification soon to inspect the automated review rather than reply or immediately archive it.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.00063225,
+      "latencyMs": 3582,
+      "inputTokens": 345,
+      "outputTokens": 273
+    },
+    {
+      "itemId": "1a05d9a0ceb77433",
+      "action": "act",
+      "confidence": 0.6,
+      "reasoning": "This is a GitHub PR approval notification; the user is likely to open the PR or take follow-up action (merge or confirm) shortly rather than reply or immediately archive it.",
+      "rulesUsed": [
+        "When no specific rule applies, follow general judgment: treat GitHub approval notifications as items the user will act on (open/click through/follow up) rather than reply to or immediately dismiss."
+      ],
+      "costUsd": 0.00054275,
+      "latencyMs": 3164,
+      "inputTokens": 323,
+      "outputTokens": 231
+    },
+    {
+      "itemId": "1a05d6aef5366347",
+      "action": "act",
+      "confidence": 0.9,
+      "reasoning": "This is a short-lived login OTP email (valid 5 minutes), so the user would use it right away to complete sign-in rather than reply or archive.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.000602,
+      "latencyMs": 3343,
+      "inputTokens": 304,
+      "outputTokens": 263
+    },
+    {
+      "itemId": "1a05d6a8d18f3265",
+      "action": "act",
+      "confidence": 0.6,
+      "reasoning": "This is a time-limited, actionable notification (submission closing in 3 hours) from a noreply address — the user is likely to open/click through to submit or check status rather than reply or immediately archive.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.00062825,
+      "latencyMs": 3915,
+      "inputTokens": 313,
+      "outputTokens": 275
+    },
+    {
+      "itemId": "1a05d608ba84569a",
+      "action": "archive",
+      "confidence": 0.6,
+      "reasoning": "This is a general promotional/registration announcement from a government support address with no clear personal relevance; the user typically dismisses such bulk notifications rather than reply or act on them immediately.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.00048425,
+      "latencyMs": 3044,
+      "inputTokens": 313,
+      "outputTokens": 203
+    },
+    {
+      "itemId": "1a05d4ee2193bd18",
+      "action": "act",
+      "confidence": 0.72,
+      "reasoning": "This is a monthly investment update from a service address (announcements@stablemoney.in) that the user likely reads or stars to review performance but does not reply to; they would open or mark for follow-up rather than archive or ignore.",
+      "rulesUsed": [],
+      "costUsd": 0.0003495,
+      "latencyMs": 2863,
+      "inputTokens": 286,
+      "outputTokens": 139
+    },
+    {
+      "itemId": "1a05d452bd5a50cc",
+      "action": "act",
+      "confidence": 0.6,
+      "reasoning": "This is an event announcement (non-personal automated message) that the user typically opens or clicks through to view details for local tech meetups but does not reply; they are likely to act on it soon (star/open/click).",
+      "rulesUsed": [
+        "no specific learned rule matched; fall back on general judgment about event announcements"
+      ],
+      "costUsd": 0.000514,
+      "latencyMs": 3068,
+      "inputTokens": 312,
+      "outputTokens": 218
+    },
+    {
+      "itemId": "1a05d323b933f780",
+      "action": "act",
+      "confidence": 0.6,
+      "reasoning": "This is a time-sensitive sign-in (magic) link; if the user initiated sign-in they'd click it quickly, so they would act on it soon rather than archive or ignore.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.00048725,
+      "latencyMs": 3704,
+      "inputTokens": 317,
+      "outputTokens": 204
+    },
+    {
+      "itemId": "1a05cfb3e99307da",
+      "action": "act",
+      "confidence": 0.6,
+      "reasoning": "This is a LinkedIn job-opportunity message about a Data Analyst role; absent any learned rules, the user typically opens or marks job-related opportunities to review or follow up soon rather than dismissing immediately.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment",
+        "Job-opportunity emails are typically opened or acted on to review potential relevance"
+      ],
+      "costUsd": 0.0005165,
+      "latencyMs": 3712,
+      "inputTokens": 290,
+      "outputTokens": 222
+    },
+    {
+      "itemId": "1a05cec602669ad8",
+      "action": "act",
+      "confidence": 0.75,
+      "reasoning": "This is an important application reminder (labelled IMPORTANT) about a saved-but-not-submitted application; the user is likely to open and complete or follow the link soon rather than reply or archive it.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.0004945,
+      "latencyMs": 2761,
+      "inputTokens": 322,
+      "outputTokens": 207
+    },
+    {
+      "itemId": "1a05cea06377fea6",
+      "action": "act",
+      "confidence": 0.4,
+      "reasoning": "This is an informational deadline extension from an events mailing list; the user is unlikely to reply but will probably open or star it to note the new deadline and decide whether to register/submit ideas before Sept 5.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.0006275,
+      "latencyMs": 3388,
+      "inputTokens": 318,
+      "outputTokens": 274
+    },
+    {
+      "itemId": "1a05ce88716377d3",
+      "action": "act",
+      "confidence": 0.7,
+      "reasoning": "This is a failed deployment due to an unauthorized user — the user is likely to investigate or fix access settings (open the notification, check Vercel/GitHub) rather than reply or archive immediately.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.0006225,
+      "latencyMs": 4017,
+      "inputTokens": 314,
+      "outputTokens": 272
+    },
+    {
+      "itemId": "1a05c8a91d71872b",
+      "action": "archive",
+      "confidence": 0.6,
+      "reasoning": "This is a promotional registration email for an external contest; with no signs of prior engagement or immediate relevance, they'd likely dismiss it to keep the inbox clean.",
+      "rulesUsed": [
+        "No specific rule matched; default to general judgment",
+        "Promotional/event registration messages without prior engagement are typically archived."
+      ],
+      "costUsd": 0.00062475,
+      "latencyMs": 3624,
+      "inputTokens": 315,
+      "outputTokens": 273
+    },
+    {
+      "itemId": "1a034fde4ca2d54e",
+      "action": "archive",
+      "confidence": 0.8,
+      "reasoning": "This is an automated confirmation receipt for a submitted prototype and requires no reply or immediate follow-up, so they would dismiss/archive it for records.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment.",
+        "Confirmation/receipt emails that need no reply are archived/dismissed immediately."
+      ],
+      "costUsd": 0.0007565,
+      "latencyMs": 4443,
+      "inputTokens": 322,
+      "outputTokens": 338
+    },
+    {
+      "itemId": "1a034f32a0c219b9",
+      "action": "act",
+      "confidence": 0.7,
+      "reasoning": "This is an automated GitHub review comment on a PR the user is following; they typically open or star such notifications to check CI/feedback rather than reply, so they'll act on it soon (open the PR or review details).",
+      "rulesUsed": [
+        "When no specific rule applies, use general judgment: the user opens important or inbox-marked repository notifications about PR reviews to inspect or follow up rather than reply directly."
+      ],
+      "costUsd": 0.00043025,
+      "latencyMs": 2737,
+      "inputTokens": 345,
+      "outputTokens": 172
+    },
+    {
+      "itemId": "1a034f950b871dcf",
+      "action": "act",
+      "confidence": 0.6,
+      "reasoning": "This is an important GitHub PR comment requesting focused tests; the user will likely open the PR on GitHub and address or follow up there rather than reply to the notification email.",
+      "rulesUsed": [],
+      "costUsd": 0.00046725,
+      "latencyMs": 2649,
+      "inputTokens": 341,
+      "outputTokens": 191
+    },
+    {
+      "itemId": "1a034ec23d638fa4",
+      "action": "act",
+      "confidence": 0.7,
+      "reasoning": "This is an automated CI failure notification for a repo the user watches/maintains; they are likely to open the workflow run and investigate soon rather than reply or archive it.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.000618,
+      "latencyMs": 3598,
+      "inputTokens": 344,
+      "outputTokens": 266
+    },
+    {
+      "itemId": "1a034e97ddef3b5c",
+      "action": "act",
+      "confidence": 0.6,
+      "reasoning": "This is a GitHub PR approval notification for a repo they follow and they're CC'd; they will likely open the PR to review the change soon rather than immediately reply or archive it.",
+      "rulesUsed": [
+        "When CC'd on a repository PR approval, the user typically opens the PR to review changes before deciding on further action."
+      ],
+      "costUsd": 0.0005145,
+      "latencyMs": 3452,
+      "inputTokens": 322,
+      "outputTokens": 217
+    },
+    {
+      "itemId": "1a034d4d888e92ed",
+      "action": "reply",
+      "confidence": 0.7,
+      "reasoning": "A contributor has offered to work on the issue; as a maintainer they'd likely acknowledge, thank them, and possibly assign or ask for a PR/ETA rather than just dismissing it.",
+      "rulesUsed": [
+        "No matching learned rule — fallback: when a contributor volunteers to work on an open issue, the user typically replies to acknowledge and coordinate."
+      ],
+      "costUsd": 0.00066,
+      "latencyMs": 3368,
+      "inputTokens": 360,
+      "outputTokens": 285
+    },
+    {
+      "itemId": "1a0345e9a74e210f",
+      "action": "archive",
+      "confidence": 0.7,
+      "reasoning": "This is a promotional/course announcement from a third-party sender; absent any prior interaction with NamasteDev, the user is likely to dismiss/archive marketing messages rather than reply or act on them.",
+      "rulesUsed": [
+        "no matching rule; fallback: promotional emails are archived/dismissed immediately"
+      ],
+      "costUsd": 0.00062325,
+      "latencyMs": 3469,
+      "inputTokens": 317,
+      "outputTokens": 272
+    },
+    {
+      "itemId": "1a0343fc6f1c72cd",
+      "action": "archive",
+      "confidence": 0.6,
+      "reasoning": "This is an automated, informational congratulatory notification with no required action; the user typically dismisses such emails rather than reply or follow up.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.00085225,
+      "latencyMs": 4433,
+      "inputTokens": 313,
+      "outputTokens": 387
+    },
+    {
+      "itemId": "1a03429ad6950743",
+      "action": "archive",
+      "confidence": 0.72,
+      "reasoning": "This is a generic LinkedIn marketing message with no personal content or actionable request, so the user would dismiss/archive it immediately.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment: promotional/marketing emails are archived."
+      ],
+      "costUsd": 0.0004695,
+      "latencyMs": 3150,
+      "inputTokens": 286,
+      "outputTokens": 199
+    },
+    {
+      "itemId": "1a0341fb40c2e97e",
+      "action": "archive",
+      "confidence": 0.7,
+      "reasoning": "This is a promotional marketing message about gold-coin sales (non-urgent, not personal), so the user would likely dismiss/archive it without engaging.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.0004675,
+      "latencyMs": 3265,
+      "inputTokens": 294,
+      "outputTokens": 197
+    },
+    {
+      "itemId": "1a0340b2653e99e9",
+      "action": "archive",
+      "confidence": 0.6,
+      "reasoning": "This is a generic marketing/update email from HackerRank; not personally addressed beyond a template and unlikely to need a reply, so they would dismiss/archive it.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.00060325,
+      "latencyMs": 3494,
+      "inputTokens": 317,
+      "outputTokens": 262
+    },
+    {
+      "itemId": "1a033f70fcb4114b",
+      "action": "archive",
+      "confidence": 0.6,
+      "reasoning": "This is a promotional noreply reminder about a hackathon with an urgent CTA; absent any prior behavior indicating interest in such events, the user is most likely to dismiss/archive promotional messages rather than reply or act on them.",
+      "rulesUsed": [
+        "If no matching rule, use general judgment: promotional 'noreply' emails with urgent CTAs are usually archived/dismissed.",
+        "Emails from noreply addresses with marketing-style subject lines are rarely replied to and are typically archived."
+      ],
+      "costUsd": 0.0005715,
+      "latencyMs": 3637,
+      "inputTokens": 318,
+      "outputTokens": 246
+    },
+    {
+      "itemId": "1a033abfa1151a2e",
+      "action": "archive",
+      "confidence": 0.6,
+      "reasoning": "This is a promotional event announcement (hackathon/prize) from a no-reply sender; with no prior rule showing persistent interest in such emails, the user is likely to dismiss/archive it rather than reply or act on it immediately.",
+      "rulesUsed": [
+        "no matching specific rule; used general judgment about promotional/no-reply event emails"
+      ],
+      "costUsd": 0.00051625,
+      "latencyMs": 2996,
+      "inputTokens": 321,
+      "outputTokens": 218
+    },
+    {
+      "itemId": "1a0329fd71fb0c64",
+      "action": "act",
+      "confidence": 0.6,
+      "reasoning": "This is a time-sensitive registration reminder (deadline tomorrow) from an events account; the user is likely to open or click through soon to check or secure a spot rather than ignore or archive immediately.",
+      "rulesUsed": [
+        "- No specific rule applies; fallback to general judgment: time-sensitive event reminders (registrations closing) typically prompt the user to act soon (open or click through)."
+      ],
+      "costUsd": 0.00066,
+      "latencyMs": 4437,
+      "inputTokens": 304,
+      "outputTokens": 292
+    },
+    {
+      "itemId": "1a03294faf5c9c24",
+      "action": "archive",
+      "confidence": 0.85,
+      "reasoning": "This is an automated publish notification (no required reply or action); the user typically dismisses routine CI/publish confirmations rather than respond.",
+      "rulesUsed": [
+        "No rule matched; treat routine automated publish notifications as archival."
+      ],
+      "costUsd": 0.0004695,
+      "latencyMs": 3238,
+      "inputTokens": 318,
+      "outputTokens": 195
+    },
+    {
+      "itemId": "1a0329459a68c71f",
+      "action": "act",
+      "confidence": 0.78,
+      "reasoning": "This is an automated GitHub CI failure for their repo; they typically click through to inspect failed job logs and fix the publish workflow rather than reply or archive it, so they'll act on it soon.",
+      "rulesUsed": [
+        "No specific learned rule matched — fall back to general judgment about repository owners inspecting CI failures."
+      ],
+      "costUsd": 0.00051575,
+      "latencyMs": 3329,
+      "inputTokens": 351,
+      "outputTokens": 214
+    },
+    {
+      "itemId": "1a0328cf3c6f25b4",
+      "action": "archive",
+      "confidence": 0.75,
+      "reasoning": "This is a generic promotional/contest message from a mailing list; lacking prior engagement signals, the user is most likely to dismiss/archive marketing emails rather than reply or act on them.",
+      "rulesUsed": [
+        "No matching learned rules — used general judgment to treat promotional/contest emails as discard."
+      ],
+      "costUsd": 0.00074625,
+      "latencyMs": 5103,
+      "inputTokens": 289,
+      "outputTokens": 337
+    },
+    {
+      "itemId": "1a0328a8ddcb4f7a",
+      "action": "archive",
+      "confidence": 0.7,
+      "reasoning": "This is a one-off security confirmation (2FA enabled) that requires no reply or immediate follow-up; the user would likely archive it after glancing.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.00060075,
+      "latencyMs": 4811,
+      "inputTokens": 307,
+      "outputTokens": 262
+    },
+    {
+      "itemId": "1a0328a8520b1302",
+      "action": "act",
+      "confidence": 0.72,
+      "reasoning": "Security-key-added notices are safety-critical; the user will likely open/check the account settings or the npm notification soon to verify it wasn’t unauthorized rather than ignoring or archiving it.",
+      "rulesUsed": [
+        "no matching learned rule; fallback to general security-first judgment about unexpected sensitive account changes"
+      ],
+      "costUsd": 0.00049175,
+      "latencyMs": 4223,
+      "inputTokens": 303,
+      "outputTokens": 208
+    },
+    {
+      "itemId": "1a03277bf52117ad",
+      "action": "act",
+      "confidence": 0.8,
+      "reasoning": "This is a notification that a certificate is ready (no reply required); the user is likely to open the message and download/save the certificate soon rather than reply or archive immediately.",
+      "rulesUsed": [
+        "No specific learned rule matched; fallback: notifications about downloadable certificates are typically opened/clicked and saved rather than replied to or archived."
+      ],
+      "costUsd": 0.0003865,
+      "latencyMs": 3892,
+      "inputTokens": 314,
+      "outputTokens": 154
+    },
+    {
+      "itemId": "1a0325592a2c536c",
+      "action": "act",
+      "confidence": 0.82,
+      "reasoning": "This is a security-related notification about a new access token; the user will likely open and verify it (and revoke if unexpected) rather than ignore or archive immediately.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.000479,
+      "latencyMs": 3971,
+      "inputTokens": 316,
+      "outputTokens": 200
+    },
+    {
+      "itemId": "1a03253ca9403477",
+      "action": "act",
+      "confidence": 0.8,
+      "reasoning": "Security-related notice about 2FA being disabled is high-priority; the user is likely to open the message and check their account or re-enable 2FA rather than ignore or archive it.",
+      "rulesUsed": [
+        "no matching person-specific rules; applied general judgment that the user treats security alerts as actionable and will investigate promptly"
+      ],
+      "costUsd": 0.0005095,
+      "latencyMs": 3116,
+      "inputTokens": 310,
+      "outputTokens": 216
+    },
+    {
+      "itemId": "1a032490ecc35ef9",
+      "action": "act",
+      "confidence": 0.78,
+      "reasoning": "This is a security/permissions notification about Sign in with Google; the user typically checks or manages connected apps soon after receiving such notices rather than ignoring or archiving them.",
+      "rulesUsed": [
+        "When receiving security/permissions notifications about account access, the user opens/manages the connected app soon (fallback general judgment)"
+      ],
+      "costUsd": 0.00037775,
+      "latencyMs": 2721,
+      "inputTokens": 311,
+      "outputTokens": 150
+    },
+    {
+      "itemId": "1a03237a18383abf",
+      "action": "archive",
+      "confidence": 0.8,
+      "reasoning": "This is a promotional/registration reminder from a noreply address; user is unlikely to reply and will dismiss or archive such marketing emails.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment: promotional or noreply emails about registrations are typically archived/dismissed."
+      ],
+      "costUsd": 0.00049525,
+      "latencyMs": 3020,
+      "inputTokens": 317,
+      "outputTokens": 208
+    },
+    {
+      "itemId": "1a0322fd5f83f39f",
+      "action": "act",
+      "confidence": 0.8,
+      "reasoning": "This is a CI failure notification for the user's repository (daily brief workflow); they typically investigate CI failures soon (open the run/logs) rather than reply or archive immediately.",
+      "rulesUsed": [
+        "When a GitHub Actions failure is for the user's repo or important workflow, they will open the run and investigate soon (follow up action).",
+        "Fallback: if no exact memory, treat CI failure notices as actionable and likely to be examined rather than ignored."
+      ],
+      "costUsd": 0.0004405,
+      "latencyMs": 3022,
+      "inputTokens": 338,
+      "outputTokens": 178
+    },
+    {
+      "itemId": "1a031e8ea9948625",
+      "action": "act",
+      "confidence": 0.75,
+      "reasoning": "This is a security/account activity notification about a third-party app (Matiks) using Sign in with Google; the user is likely to open or click through to review permissions soon rather than reply, archive, or ignore.",
+      "rulesUsed": [
+        "fallback: when no rule applies, use general judgment: security or account-related notifications (third-party app access, sign-ins) are acted on or reviewed soon rather than ignored or replied to."
+      ],
+      "costUsd": 0.000553,
+      "latencyMs": 3707,
+      "inputTokens": 308,
+      "outputTokens": 238
+    },
+    {
+      "itemId": "1a031dbe7f4d7c66",
+      "action": "archive",
+      "confidence": 0.78,
+      "reasoning": "This is a generic promotional message from Adobe about Lightroom Mobile Premium; the user typically dismisses marketing emails rather than reply or act on them.",
+      "rulesUsed": [
+        "- Promotional or marketing emails from commercial senders are archived/dismissed immediately"
+      ],
+      "costUsd": 0.00047125,
+      "latencyMs": 3169,
+      "inputTokens": 293,
+      "outputTokens": 199
+    },
+    {
+      "itemId": "1a03187aedeb92e5",
+      "action": "act",
+      "confidence": 0.6,
+      "reasoning": "This is a vendor webinar invitation about a technical topic (EIS-based BMS) likely relevant for future reference — they would open or star it to consider attending or save for later.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.00061175,
+      "latencyMs": 3278,
+      "inputTokens": 303,
+      "outputTokens": 268
+    },
+    {
+      "itemId": "1a0317bebd5c23b4",
+      "action": "archive",
+      "confidence": 0.6,
+      "reasoning": "This is a platform-wide survey request (promotional/administrative) that most users typically dismiss rather than reply to; likely not urgent, so they'll archive it.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment.",
+        "Promotional or survey emails from platforms are usually archived/dismissed immediately."
+      ],
+      "costUsd": 0.00064425,
+      "latencyMs": 3761,
+      "inputTokens": 345,
+      "outputTokens": 279
+    },
+    {
+      "itemId": "1a0313c2f1dd9460",
+      "action": "act",
+      "confidence": 0.72,
+      "reasoning": "This is a GitHub PR approval notification for their repo (important/inbox); they won't reply but will likely open or click through to review the approved change soon.",
+      "rulesUsed": [
+        "No matching rule — fallback to general judgement about treating GitHub PR approvals as items to open/act on rather than reply or immediately archive."
+      ],
+      "costUsd": 0.000518,
+      "latencyMs": 3198,
+      "inputTokens": 336,
+      "outputTokens": 217
+    },
+    {
+      "itemId": "1a034b7886a21c31",
+      "action": "archive",
+      "confidence": 0.8,
+      "reasoning": "This is a routine GitHub merge notification (no requested action or discussion); the user typically dismisses such confirmations rather than reply or follow up.",
+      "rulesUsed": [
+        "fallback: treat routine, informational GitHub notifications about merged PRs as archive (no action)"
+      ],
+      "costUsd": 0.00061475,
+      "latencyMs": 4936,
+      "inputTokens": 315,
+      "outputTokens": 268
+    },
+    {
+      "itemId": "1a03130f17b57a1a",
+      "action": "archive",
+      "confidence": 0.6,
+      "reasoning": "This is a non-urgent automated order expiration notice (no call to immediate action). The user typically dismisses transactional system emails that require no follow-up, so they would archive it.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.00048425,
+      "latencyMs": 3230,
+      "inputTokens": 305,
+      "outputTokens": 204
+    },
+    {
+      "itemId": "1a02fca403882fd7",
+      "action": "archive",
+      "confidence": 0.6,
+      "reasoning": "This is a promotional Product Hunt roundup about a GitHub-related tool (Cursor) from a no-reply-style address; such newsletters are typically dismissed/archived rather than replied to or acted on.",
+      "rulesUsed": [
+        "When no specific rule applies, use general judgment: newsletters and product roundup emails from hello@ or no-reply-style addresses are usually archived/dismissed."
+      ],
+      "costUsd": 0.00053025,
+      "latencyMs": 3307,
+      "inputTokens": 305,
+      "outputTokens": 227
+    },
+    {
+      "itemId": "1a02fc410d2dbdd6",
+      "action": "archive",
+      "confidence": 0.75,
+      "reasoning": "This is an automated submission confirmation for UniHack; the user typically doesn't need to reply and will likely archive or file it for records rather than act on it immediately.",
+      "rulesUsed": [
+        "No specific learned rules apply; fallback to general judgment that automated submission confirmations are archived/dismissed."
+      ],
+      "costUsd": 0.00036675,
+      "latencyMs": 2471,
+      "inputTokens": 307,
+      "outputTokens": 145
+    },
+    {
+      "itemId": "1a02f8bd3e62bda9",
+      "action": "archive",
+      "confidence": 0.6,
+      "reasoning": "This is a promotional/update email about hackathon opportunities; with no prior rule matching, the user typically archives unsolicited event/update messages rather than reply or act on them immediately.",
+      "rulesUsed": [
+        "no matching rule; default to general judgment: promotional/update emails are archived"
+      ],
+      "costUsd": 0.00048725,
+      "latencyMs": 3228,
+      "inputTokens": 317,
+      "outputTokens": 204
+    },
+    {
+      "itemId": "1a02f883da6399b6",
+      "action": "act",
+      "confidence": 0.6,
+      "reasoning": "This is a time-sensitive sign-in link (expires in 10 minutes); if the user requested sign-in they typically follow through quickly, so they would click/open it soon rather than ignore or archive.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.0007505,
+      "latencyMs": 5262,
+      "inputTokens": 322,
+      "outputTokens": 335
+    },
+    {
+      "itemId": "1a02f855ac843c1a",
+      "action": "act",
+      "confidence": 0.6,
+      "reasoning": "This is a time-sensitive, in-progress registration reminder from a noreply address; the user already started registering so they are likely to click through and complete it soon rather than reply or immediately archive.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.00049,
+      "latencyMs": 3852,
+      "inputTokens": 312,
+      "outputTokens": 206
+    },
+    {
+      "itemId": "1a02f3ef25f912ca",
+      "action": "act",
+      "confidence": 0.82,
+      "reasoning": "Time-sensitive hackathon submission reminder; user is likely a participant and will open the message and click through/submit rather than reply or archive immediately.",
+      "rulesUsed": [
+        "no matching learned rule; used general judgment about responding to urgent event-driven emails (deadline reminder)"
+      ],
+      "costUsd": 0.0004895,
+      "latencyMs": 3473,
+      "inputTokens": 326,
+      "outputTokens": 204
+    },
+    {
+      "itemId": "1a02f310df6b8679",
+      "action": "archive",
+      "confidence": 0.62,
+      "reasoning": "This is a generic promotional email about workout clothing; absent any rule indicating interest, the user would likely dismiss/archive it rather than reply or act on it.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.00047125,
+      "latencyMs": 4100,
+      "inputTokens": 301,
+      "outputTokens": 198
+    },
+    {
+      "itemId": "1a02e9a363f9e56a",
+      "action": "act",
+      "confidence": 0.8,
+      "reasoning": "This is a time-sensitive contest submission reminder with only 6 hours left, so the user is likely to open/click through and act on it (submit or check requirements) rather than reply or archive.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment.",
+        "Time-sensitive deadline emails are typically acted on (opened/clicked) rather than replied to or archived."
+      ],
+      "costUsd": 0.00053825,
+      "latencyMs": 4682,
+      "inputTokens": 321,
+      "outputTokens": 229
+    },
+    {
+      "itemId": "1a02e97fa1f879e8",
+      "action": "act",
+      "confidence": 0.75,
+      "reasoning": "This is an automated Binance policy/transaction notice (do_not_reply). The user typically does not reply to system mails but will open or flag important account/regulatory notices to review and act if needed.",
+      "rulesUsed": [
+        "Automated service notifications about account or policy changes -> act (open/read) not reply"
+      ],
+      "costUsd": 0.00050325,
+      "latencyMs": 3289,
+      "inputTokens": 309,
+      "outputTokens": 213
+    },
+    {
+      "itemId": "1a02e93e56d5c36d",
+      "action": "act",
+      "confidence": 0.7,
+      "reasoning": "This is a time-limited sign-in link for Claude.ai; if they requested it they'll open/click it soon rather than reply or archive. It's unlikely they'd respond to the sender or keep it unread.",
+      "rulesUsed": [
+        "If no specific rule applies, act on obvious time-sensitive login links by clicking through if they initiated the sign-in."
+      ],
+      "costUsd": 0.00051925,
+      "latencyMs": 4324,
+      "inputTokens": 317,
+      "outputTokens": 220
+    },
+    {
+      "itemId": "1a02db29913b4e5d",
+      "action": "act",
+      "confidence": 0.7,
+      "reasoning": "This is an important GitHub Actions comment requesting updates to a PR; the user is likely to open the PR and address the requested changes (or follow up) rather than immediately reply or archive the message.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.0007575,
+      "latencyMs": 4425,
+      "inputTokens": 342,
+      "outputTokens": 336
+    },
+    {
+      "itemId": "1a04f32da47c559e",
+      "action": "act",
+      "confidence": 0.72,
+      "reasoning": "This is a maintainer comment asking the PR author to claim the server on Glama before merging; the user is likely to follow the instruction (click the link / complete setup) rather than reply or archive it.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.00089275,
+      "latencyMs": 7090,
+      "inputTokens": 355,
+      "outputTokens": 402
+    },
+    {
+      "itemId": "1a02dafb93f910c2",
+      "action": "archive",
+      "confidence": 0.6,
+      "reasoning": "This is an automated npm publish confirmation (no reply required); the user typically clears notifications like this to keep their inbox tidy, so they'll likely archive it immediately.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.0006045,
+      "latencyMs": 5011,
+      "inputTokens": 314,
+      "outputTokens": 263
+    },
+    {
+      "itemId": "1a02d8f234b71f9a",
+      "action": "archive",
+      "confidence": 0.8,
+      "reasoning": "This is an automated confirmation of 2FA being enabled that requires no reply or immediate action; the user typically dismisses such notifications after verifying them.",
+      "rulesUsed": [
+        "no learned rules applicable; fallback to general judgment that automated security confirmations are archived/dismissed"
+      ],
+      "costUsd": 0.0004855,
+      "latencyMs": 3138,
+      "inputTokens": 310,
+      "outputTokens": 204
+    },
+    {
+      "itemId": "1a02d8daee734101",
+      "action": "act",
+      "confidence": 0.75,
+      "reasoning": "This is a security-relevant notification (granular access token deleted). The user is likely to open the npm account to verify the change and ensure no further action is needed rather than reply or ignore.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.00049275,
+      "latencyMs": 4147,
+      "inputTokens": 315,
+      "outputTokens": 207
+    },
+    {
+      "itemId": "1a02d85e5ff76f88",
+      "action": "act",
+      "confidence": 0.8,
+      "reasoning": "This is a security-sensitive notification about a new npm access token; the user is likely to check their account or revoke the token (open the message and follow links) rather than reply or archive immediately.",
+      "rulesUsed": [
+        "No memory rules matched; applied general judgment: security/authentication notifications trigger prompt investigation (open/click through)"
+      ],
+      "costUsd": 0.00064325,
+      "latencyMs": 4677,
+      "inputTokens": 317,
+      "outputTokens": 282
+    },
+    {
+      "itemId": "1a02d7776196b621",
+      "action": "act",
+      "confidence": 0.8,
+      "reasoning": "This is a security/account notification about a GitHub link to their PyPI account — they would likely open it or check their account settings to verify rather than reply or archive immediately.",
+      "rulesUsed": [
+        "No matching memory rules; fall back on general judgment: security/account link notifications are typically checked or verified, so the user will act (open/check) rather than reply or ignore."
+      ],
+      "costUsd": 0.00053425,
+      "latencyMs": 3598,
+      "inputTokens": 313,
+      "outputTokens": 228
+    },
+    {
+      "itemId": "19ff1ea0561c770e",
+      "action": "archive",
+      "confidence": 0.6,
+      "reasoning": "This is a routine promotional newsletter about monthly missions; absent any learned preference for engaging with Arcade emails, the user is most likely to dismiss/archive it rather than reply or act on it.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.0004835,
+      "latencyMs": 3561,
+      "inputTokens": 302,
+      "outputTokens": 204
+    },
+    {
+      "itemId": "19ff1a09f0d3ef88",
+      "action": "archive",
+      "confidence": 0.6,
+      "reasoning": "This is a promotional course announcement from an external sender; absent a clear prior interest indicator, the typical response is to dismiss/archive marketing mail.",
+      "rulesUsed": [
+        "no matching learned rule; applied general judgment that promotional course announcements are usually archived"
+      ],
+      "costUsd": 0.00047475,
+      "latencyMs": 3436,
+      "inputTokens": 307,
+      "outputTokens": 199
+    },
+    {
+      "itemId": "19ff197c1beb97f3",
+      "action": "act",
+      "confidence": 0.82,
+      "reasoning": "This is a shortlisting/credits giveaway from a hackathon the user participated in — likely relevant and worth opening or clicking through soon rather than replying or archiving immediately.",
+      "rulesUsed": [
+        "fallback: when no learned rule applies, use general judgment about relevance and typical user behavior (open/click on event/award notifications)."
+      ],
+      "costUsd": 0.000513,
+      "latencyMs": 3291,
+      "inputTokens": 316,
+      "outputTokens": 217
+    },
+    {
+      "itemId": "19ff197b76422bc8",
+      "action": "act",
+      "confidence": 0.75,
+      "reasoning": "This is an important-looking hackathon shortlisting/credits email; the user typically opens and follows up on event/result messages (star or click through) rather than replying immediately.",
+      "rulesUsed": [
+        "no matching rule; used general judgment about handling event/result emails"
+      ],
+      "costUsd": 0.0006135,
+      "latencyMs": 4421,
+      "inputTokens": 318,
+      "outputTokens": 267
+    },
+    {
+      "itemId": "19ff1868963f3e69",
+      "action": "act",
+      "confidence": 0.5,
+      "reasoning": "This looks like an onboarding/confirmation from Terac about opportunities — the user is likely to open or star it to read next steps rather than delete or ignore, so they'll act on it soon.",
+      "rulesUsed": [
+        "When no specific rule applies, fall back on general judgment about typical user behavior for confirmation/onboarding emails."
+      ],
+      "costUsd": 0.00050425,
+      "latencyMs": 3729,
+      "inputTokens": 289,
+      "outputTokens": 216
+    },
+    {
+      "itemId": "19ff1866624c40ba",
+      "action": "archive",
+      "confidence": 0.8,
+      "reasoning": "This is an automated welcome/confirmation message with no required action; the user typically dismisses such informational account-creation emails after receipt.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment: archive informational/onboarding emails that require no reply or follow-up."
+      ],
+      "costUsd": 0.00061825,
+      "latencyMs": 5958,
+      "inputTokens": 305,
+      "outputTokens": 271
+    },
+    {
+      "itemId": "19ff17b36c76a88c",
+      "action": "act",
+      "confidence": 0.9,
+      "reasoning": "This is a time-sensitive verification code from a no-reply address; the user will act on it (use or copy the code) soon rather than reply or archive it.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.00060875,
+      "latencyMs": 5045,
+      "inputTokens": 307,
+      "outputTokens": 266
+    },
+    {
+      "itemId": "19ff167d509aa856",
+      "action": "archive",
+      "confidence": 0.6,
+      "reasoning": "Promotional reminder about an event/opportunity (Eureka! 2026) that the user likely won't reply to; they'd dismiss or archive such marketing/event reminders rather than engage immediately.",
+      "rulesUsed": [
+        "When no matching personal rule exists, use general judgment about promotional emails: archive/dismiss marketing/event reminders you won't reply to."
+      ],
+      "costUsd": 0.000388,
+      "latencyMs": 2559,
+      "inputTokens": 320,
+      "outputTokens": 154
+    },
+    {
+      "itemId": "19ff155be5bf39c6",
+      "action": "archive",
+      "confidence": 0.6,
+      "reasoning": "This looks like a routine crypto marketing/newsletter from CoinDCX; without evidence the user engages with such digests, they're likely to dismiss/archive it rather than reply or act on it.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.0004855,
+      "latencyMs": 3671,
+      "inputTokens": 302,
+      "outputTokens": 205
+    },
+    {
+      "itemId": "19ff13202e477f9d",
+      "action": "archive",
+      "confidence": 0.6,
+      "reasoning": "This is a promotional sales email offering lifetime access; with no prior signals of interest and it's unsolicited, the user is likely to dismiss/archive it rather than reply or act.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment"
+      ],
+      "costUsd": 0.00047475,
+      "latencyMs": 3132,
+      "inputTokens": 299,
+      "outputTokens": 200
+    },
+    {
+      "itemId": "19ff130c0d61de5f",
+      "action": "act",
+      "confidence": 0.6,
+      "reasoning": "This is a timely, actionable message about a recent demo and recruiter-facing next steps; it's from a program address and likely contains links or instructions the user will click through soon rather than reply to or delete.",
+      "rulesUsed": [
+        "When no specific rule applies, fall back on general judgment about actionable program emails (open/click through rather than reply or archive)."
+      ],
+      "costUsd": 0.0007775,
+      "latencyMs": 4081,
+      "inputTokens": 302,
+      "outputTokens": 351
+    },
+    {
+      "itemId": "19ff10ebf9ef3f5b",
+      "action": "act",
+      "confidence": 0.6,
+      "reasoning": "This is a timely monthly transparency/reserves update from the user's crypto exchange — matter-of-fact but potentially important for future reference, so they'd open/star it to review or click through soon rather than reply or archive.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.00049525,
+      "latencyMs": 3292,
+      "inputTokens": 301,
+      "outputTokens": 210
+    },
+    {
+      "itemId": "19ff1059917a0c36",
+      "action": "archive",
+      "confidence": 0.7,
+      "reasoning": "This is a promotional/contest announcement from a noreply address; with no prior rules and no immediate personal relevance signaled, the user is likely to dismiss/archive it rather than reply or act on it.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.00049025,
+      "latencyMs": 3069,
+      "inputTokens": 297,
+      "outputTokens": 208
+    },
+    {
+      "itemId": "19ff102d25119c1a",
+      "action": "archive",
+      "confidence": 0.7,
+      "reasoning": "This is a promotional/no-reply message offering prizes — most users archive such marketing emails immediately rather than reply or act on them.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment: promotional/newsletter emails are archived."
+      ],
+      "costUsd": 0.0006,
+      "latencyMs": 4422,
+      "inputTokens": 288,
+      "outputTokens": 264
+    },
+    {
+      "itemId": "19ff0c7c3252dcd2",
+      "action": "archive",
+      "confidence": 0.6,
+      "reasoning": "This is a generic deadline reminder/promo from a college event; typical behavior is to dismiss/archive such mass-mail unless the user is actively applying, which isn't indicated here.",
+      "rulesUsed": [
+        "no matching learned rule; fallback to general judgment: promotional/registration reminder emails are typically archived/dismissed if not immediately actionable"
+      ],
+      "costUsd": 0.000507,
+      "latencyMs": 2973,
+      "inputTokens": 308,
+      "outputTokens": 215
+    },
+    {
+      "itemId": "19ff0c2c981c32ff",
+      "action": "act",
+      "confidence": 0.6,
+      "reasoning": "Removal from a GitHub team is likely relevant to their access/permissions, so they would quickly open the message or click through to GitHub to verify why and what access changed rather than immediately dismissing it.",
+      "rulesUsed": [
+        "When a message affects account access or permissions (e.g., removal from a team/org), check it soon to verify status and next steps."
+      ],
+      "costUsd": 0.00053175,
+      "latencyMs": 3406,
+      "inputTokens": 319,
+      "outputTokens": 226
+    },
+    {
+      "itemId": "19ff09f4c38a2ca9",
+      "action": "act",
+      "confidence": 0.5,
+      "reasoning": "This is a product-release email about a new AI model on a developer/service platform; the user is likely to open or click through to learn details soon rather than reply or immediately delete.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.00048375,
+      "latencyMs": 2757,
+      "inputTokens": 303,
+      "outputTokens": 204
+    },
+    {
+      "itemId": "19ff06253c8ea248",
+      "action": "act",
+      "confidence": 0.6,
+      "reasoning": "This is a short, actionable pre-event reminder about grabbing credits; likely relevant if attending so they would open/star or click through soon rather than reply or archive.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.000598,
+      "latencyMs": 3781,
+      "inputTokens": 288,
+      "outputTokens": 263
+    },
+    {
+      "itemId": "19ff044bc4fc1936",
+      "action": "act",
+      "confidence": 0.55,
+      "reasoning": "This is an automated GitHub review comment on a PR in a project the user watches; they will likely open the notification or the PR soon to inspect the automated review, but not reply immediately because it's auto-generated.",
+      "rulesUsed": [
+        "When no specific rule applies, fall back on general judgment about typical developer behavior for GitHub PR notifications: open/check PRs with automated reviews soon but rarely reply to the automated comment"
+      ],
+      "costUsd": 0.000684,
+      "latencyMs": 4203,
+      "inputTokens": 344,
+      "outputTokens": 299
+    },
+    {
+      "itemId": "19ff0630e0f9f887",
+      "action": "act",
+      "confidence": 0.7,
+      "reasoning": "This is a timely technical comment on a PR in a watched repo (pyright); the user is likely to open the PR to read the context and follow up rather than archive or ignore immediately.",
+      "rulesUsed": [
+        "When no specific rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.0006265,
+      "latencyMs": 3797,
+      "inputTokens": 338,
+      "outputTokens": 271
+    },
+    {
+      "itemId": "19feff455eb87641",
+      "action": "act",
+      "confidence": 0.72,
+      "reasoning": "This is a time-sensitive billing/renewal notice for services that could be deleted; the user is likely to open and handle (renew or check) it soon rather than archive or ignore.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.000613,
+      "latencyMs": 3830,
+      "inputTokens": 300,
+      "outputTokens": 269
+    },
+    {
+      "itemId": "19feff1ef62c70fc",
+      "action": "act",
+      "confidence": 0.6,
+      "reasoning": "This is a follow-up to a recent software download from STMicroelectronics and likely contains useful documentation/links the user will want to check soon, so they would open or star it rather than immediately delete or ignore.",
+      "rulesUsed": [
+        "No specific matching rule found; applied general judgment that follow-up resource emails for recent downloads are usually reviewed soon."
+      ],
+      "costUsd": 0.000517,
+      "latencyMs": 3356,
+      "inputTokens": 300,
+      "outputTokens": 221
+    },
+    {
+      "itemId": "19fefed5b4b00466",
+      "action": "archive",
+      "confidence": 0.6,
+      "reasoning": "This is a product/marketing update from a third-party service (Webshare) about new features; absent any prior relationship or evidence the user acts on such promos, they are most likely to dismiss/archive it.",
+      "rulesUsed": [
+        "When no specific rule applies, assume promotional or third-party product update emails are archived."
+      ],
+      "costUsd": 0.00062975,
+      "latencyMs": 3691,
+      "inputTokens": 287,
+      "outputTokens": 279
+    },
+    {
+      "itemId": "19fefbb77e5e5855",
+      "action": "reply",
+      "confidence": 0.7,
+      "reasoning": "This is a direct GitHub comment pointing out missing test cases on their PR; they are likely to acknowledge and discuss which cases to add or ask for more details, so they would write back.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.000498,
+      "latencyMs": 3875,
+      "inputTokens": 344,
+      "outputTokens": 206
+    },
+    {
+      "itemId": "19ff30cbd0866bb9",
+      "action": "act",
+      "confidence": 0.85,
+      "reasoning": "They're directly mentioned and asked to update the PR description; likely they'll open the PR and edit the description (or otherwise act on it) rather than send an email reply or archive it.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.0006215,
+      "latencyMs": 3671,
+      "inputTokens": 342,
+      "outputTokens": 268
+    },
+    {
+      "itemId": "19fefb3c1d29801f",
+      "action": "act",
+      "confidence": 0.86,
+      "reasoning": "The message is time-sensitive (deadline today) and labeled IMPORTANT; the user is likely to follow through by clicking the invite/join link in Discord rather than reply or archive.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment.",
+        "Prioritize and act on time-sensitive, important messages that require a one-step action (join/click) rather than reply."
+      ],
+      "costUsd": 0.00056875,
+      "latencyMs": 3455,
+      "inputTokens": 323,
+      "outputTokens": 244
+    },
+    {
+      "itemId": "19fef56753694a09",
+      "action": "act",
+      "confidence": 0.6,
+      "reasoning": "This is a weekly Dependabot/GitHub security digest about the user's repositories; such messages typically prompt the user to open and review the alerts or follow up in the repo rather than reply or immediately archive.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.0004965,
+      "latencyMs": 3254,
+      "inputTokens": 322,
+      "outputTokens": 208
+    },
+    {
+      "itemId": "19fef4b64191308e",
+      "action": "act",
+      "confidence": 0.8,
+      "reasoning": "This is a legitimate-looking download/confirmation email for software the user requested; they are likely to click the validation/download link soon rather than reply or archive it.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.000476,
+      "latencyMs": 2909,
+      "inputTokens": 312,
+      "outputTokens": 199
+    },
+    {
+      "itemId": "19feeee4df4904e3",
+      "action": "archive",
+      "confidence": 0.8,
+      "reasoning": "This is a generic marketing announcement to the user's inbox (introducing a product) and not directed or urgent, so the user would likely dismiss/archive it rather than reply or take immediate action.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.00048475,
+      "latencyMs": 3515,
+      "inputTokens": 299,
+      "outputTokens": 205
+    },
+    {
+      "itemId": "19feeed75ecf9120",
+      "action": "archive",
+      "confidence": 0.6,
+      "reasoning": "This is a promotional Google Cloud invite about an F1 Lab; not time-sensitive and likely irrelevant, so they'd dismiss it immediately.",
+      "rulesUsed": [
+        "fallback: when no specific rule applies, use general judgment to treat marketing/promotional emails as archive-worthy"
+      ],
+      "costUsd": 0.000481,
+      "latencyMs": 2884,
+      "inputTokens": 308,
+      "outputTokens": 202
+    },
+    {
+      "itemId": "19feed0705e92b82",
+      "action": "archive",
+      "confidence": 0.6,
+      "reasoning": "Message is a promotional job-matching alert from a noreply address; user would likely dismiss/archive marketing emails rather than reply or act on them immediately.",
+      "rulesUsed": [
+        "No specific matching rule — fall back to general judgment: promotional/noreply job-alert emails are typically archived/dismissed."
+      ],
+      "costUsd": 0.000492,
+      "latencyMs": 2966,
+      "inputTokens": 280,
+      "outputTokens": 211
+    },
+    {
+      "itemId": "19fed86a92ad6c70",
+      "action": "act",
+      "confidence": 0.7,
+      "reasoning": "Security-related account-sharing notices usually prompt a user to check what was shared; they'll likely open or star it to review the Claude permissions soon rather than ignore or archive immediately.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.00047775,
+      "latencyMs": 3576,
+      "inputTokens": 303,
+      "outputTokens": 201
+    },
+    {
+      "itemId": "19fecc69b64d4d01",
+      "action": "act",
+      "confidence": 0.7,
+      "reasoning": "This is an access/permission notification (added to a GitHub team); the user is likely to open or click through soon to check what access and repositories the team grants rather than immediately reply or archive.",
+      "rulesUsed": [
+        "- Fallback: when no specific learned rule applies, use general judgment: the user tends to act on notifications that grant permissions or access (open/click through to inspect)"
+      ],
+      "costUsd": 0.00067325,
+      "latencyMs": 3694,
+      "inputTokens": 325,
+      "outputTokens": 296
+    },
+    {
+      "itemId": "19fecbe97b3cd535",
+      "action": "act",
+      "confidence": 0.9,
+      "reasoning": "This is a time-limited OTP for login; the user will act on it immediately (open/copy/use the code) rather than reply or archive.",
+      "rulesUsed": [
+        "no matching rule — fallback to general judgment: time-sensitive authentication messages are acted on (opened/used) promptly"
+      ],
+      "costUsd": 0.000496,
+      "latencyMs": 3346,
+      "inputTokens": 312,
+      "outputTokens": 209
+    },
+    {
+      "itemId": "19fec4b74e28bc5a",
+      "action": "archive",
+      "confidence": 0.6,
+      "reasoning": "This is a generic recruiter reminder about a questionnaire; lacking any prior rule and given it's likely low priority/spam, the user would dismiss it rather than reply or act on it.",
+      "rulesUsed": [],
+      "costUsd": 0.0004605,
+      "latencyMs": 3076,
+      "inputTokens": 314,
+      "outputTokens": 191
+    },
+    {
+      "itemId": "19fec430095b89c9",
+      "action": "act",
+      "confidence": 0.72,
+      "reasoning": "This is an actionable GitHub organization invitation that typically requires clicking a link to accept; they'll open/click through and handle it rather than reply or archive immediately.",
+      "rulesUsed": [
+        "no specific learned rule applied; general judgment: actionable invitations with acceptance links are opened/clicked (acted on) rather than replied to or archived"
+      ],
+      "costUsd": 0.00051325,
+      "latencyMs": 3750,
+      "inputTokens": 317,
+      "outputTokens": 217
+    },
+    {
+      "itemId": "19fec37652ef8d68",
+      "action": "archive",
+      "confidence": 0.5,
+      "reasoning": "This is a routine crypto marketing/digest message; without a known preference for following daily crypto newsletters, the user is likely to dismiss/archive it rather than reply or act on it immediately.",
+      "rulesUsed": [
+        "no matching rule; falling back to general judgment about routine marketing/newsletter messages"
+      ],
+      "costUsd": 0.00049175,
+      "latencyMs": 3119,
+      "inputTokens": 303,
+      "outputTokens": 208
+    },
+    {
+      "itemId": "19fec324408c019a",
+      "action": "archive",
+      "confidence": 0.8,
+      "reasoning": "Promotional outreach from OneSignal about a feature (Journeys) is not time-sensitive and likely unwanted, so they'd dismiss/archive it rather than reply or act on it.",
+      "rulesUsed": [
+        "No learned rule applies; fall back to general judgment that unsolicited marketing emails are archived/dismissed."
+      ],
+      "costUsd": 0.0004945,
+      "latencyMs": 2924,
+      "inputTokens": 298,
+      "outputTokens": 210
+    },
+    {
+      "itemId": "19febb5b47ded455",
+      "action": "act",
+      "confidence": 0.7,
+      "reasoning": "This is an important GitHub PR approval notification; the user is likely working on the repo and would open the PR or take follow-up (merge or inspect) rather than reply or immediately archive.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment: important GitHub PR approval notifications typically prompt immediate follow-up (open/merge) rather than a reply or deletion."
+      ],
+      "costUsd": 0.000669,
+      "latencyMs": 5592,
+      "inputTokens": 332,
+      "outputTokens": 293
+    },
+    {
+      "itemId": "19feba45ae52c674",
+      "action": "act",
+      "confidence": 0.8,
+      "reasoning": "This is an acceptance/confirmation for a dev sprint — they'll likely open and save/star it to follow up on logistics later rather than write a reply.",
+      "rulesUsed": [
+        "fallback: if no learned rule applies, treat acceptance/confirmation emails as items the user will act on (open/star/save) and follow up later, not reply."
+      ],
+      "costUsd": 0.0007725,
+      "latencyMs": 5772,
+      "inputTokens": 314,
+      "outputTokens": 347
+    },
+    {
+      "itemId": "19feb7846d8a5dbe",
+      "action": "archive",
+      "confidence": 0.7,
+      "reasoning": "Promotional/noreply message about event/apply; user typically dismisses unsolicited marketing without replying or acting on it.",
+      "rulesUsed": [
+        "no matching learned rule — fallback to general judgment about promotional emails"
+      ],
+      "costUsd": 0.00033,
+      "latencyMs": 2802,
+      "inputTokens": 296,
+      "outputTokens": 128
+    },
+    {
+      "itemId": "19fead2781f3d695",
+      "action": "act",
+      "confidence": 0.7,
+      "reasoning": "This is an invitation for a scheduled hands-on workshop the user likely signed up for; they're more likely to open/click through or star to register/check details rather than reply or archive immediately.",
+      "rulesUsed": [
+        "no matching rule — fallback to general judgment"
+      ],
+      "costUsd": 0.0003605,
+      "latencyMs": 2826,
+      "inputTokens": 338,
+      "outputTokens": 138
+    },
+    {
+      "itemId": "19feacda22758d60",
+      "action": "archive",
+      "confidence": 0.75,
+      "reasoning": "This is a generic promotional email about a program from an unfamiliar sender; the user typically dismisses unsolicited promotional messages rather than reply or act on them.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.000473,
+      "latencyMs": 3072,
+      "inputTokens": 316,
+      "outputTokens": 197
+    },
+    {
+      "itemId": "19fea9e6a6308fd8",
+      "action": "archive",
+      "confidence": 0.7,
+      "reasoning": "This is a promotional/survey message from a platform about new AI job categories; it's informational and not urgent, so they'd likely dismiss/archive it rather than reply or act on it soon.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.00049,
+      "latencyMs": 3816,
+      "inputTokens": 328,
+      "outputTokens": 204
+    },
+    {
+      "itemId": "19fea6ed2e53b192",
+      "action": "archive",
+      "confidence": 0.7,
+      "reasoning": "This is a generic marketing/solicitation email about freelancers from an unfamiliar sender; the user typically dismisses promotional messages without responding or acting on them.",
+      "rulesUsed": [],
+      "costUsd": 0.0004465,
+      "latencyMs": 2868,
+      "inputTokens": 298,
+      "outputTokens": 186
+    },
+    {
+      "itemId": "19fea68a6168c738",
+      "action": "archive",
+      "confidence": 0.7,
+      "reasoning": "This is a promotional marketing message from Adobe about a feature; the user is unlikely to reply and would typically dismiss/clean up promotional emails promptly.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment: promotional marketing emails are archived."
+      ],
+      "costUsd": 0.00060575,
+      "latencyMs": 3958,
+      "inputTokens": 295,
+      "outputTokens": 266
+    },
+    {
+      "itemId": "19fe9fa198264123",
+      "action": "act",
+      "confidence": 0.55,
+      "reasoning": "This is a time-sensitive assessment reminder for a hackathon the user likely signed up for; they would probably open or click through soon to attempt the assessment before the window closes.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.0004855,
+      "latencyMs": 3882,
+      "inputTokens": 326,
+      "outputTokens": 202
+    },
+    {
+      "itemId": "19fe9beceabd46a7",
+      "action": "act",
+      "confidence": 0.7,
+      "reasoning": "This is an automated GitHub review comment on a PR in a project they follow; they will likely open the PR to inspect the review but not reply. It's important but doesn't require an immediate reply.",
+      "rulesUsed": [
+        "no matching learned rule — used general judgment about GitHub PR notifications"
+      ],
+      "costUsd": 0.0006325,
+      "latencyMs": 3445,
+      "inputTokens": 346,
+      "outputTokens": 273
+    },
+    {
+      "itemId": "19fe9b33bbd1e2b8",
+      "action": "archive",
+      "confidence": 0.6,
+      "reasoning": "Unsolicited 'you're a great fit' job-match emails from a noreply address are typically promotional; the user is unlikely to reply or follow up and would dismiss it to clear their inbox.",
+      "rulesUsed": [
+        "No learned rule matched; applied general judgment that unsolicited recruitment emails from noreply addresses are usually archived"
+      ],
+      "costUsd": 0.00050025,
+      "latencyMs": 3038,
+      "inputTokens": 281,
+      "outputTokens": 215
+    },
+    {
+      "itemId": "19fe81e7ab3a74f1",
+      "action": "act",
+      "confidence": 0.6,
+      "reasoning": "This is a security/permission notification about a third‑party app using Sign in with Google; the user is likely to check the linked account permissions or recent activity rather than reply or archive it.",
+      "rulesUsed": [
+        "When no rule applies, fall back on general judgment."
+      ],
+      "costUsd": 0.00048925,
+      "latencyMs": 3152,
+      "inputTokens": 309,
+      "outputTokens": 206
+    },
+    {
+      "itemId": "19fe80bbca0c34b3",
+      "action": "act",
+      "confidence": 0.75,
+      "reasoning": "This is a time-sensitive registration reminder (deadline 27 Aug) from an event platform; the user typically completes or follows up on such tasks without replying to the sender—likely will open and finish registration soon.",
+      "rulesUsed": [
+        "If email is a time-sensitive registration reminder from an event platform, user will act soon (open/click through/complete) rather than reply."
+      ],
+      "costUsd": 0.000659,
+      "latencyMs": 4867,
+      "inputTokens": 308,
+      "outputTokens": 291
+    }
+  ]
+}

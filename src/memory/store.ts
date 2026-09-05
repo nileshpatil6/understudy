@@ -10,7 +10,8 @@ import path from "node:path";
  */
 export type MemoryKind = "judgment" | "tools";
 
-export const MEMORY_DIR = path.resolve(process.cwd(), "memory");
+/** MEMORY_DIR=memory/sample keeps sample-set runs from overwriting the real-inbox memory */
+export const MEMORY_DIR = path.resolve(process.cwd(), process.env.MEMORY_DIR ?? "memory");
 
 const HEADER: Record<MemoryKind, string> = {
   judgment: "# Judgment memory\n\nRules the agent has learned about how this user handles items. One rule per line, prefixed with `- `.\n\n",

@@ -1,0 +1,105 @@
+{
+  "run": 6,
+  "source": "gmail",
+  "split": "train",
+  "startedAt": "2026-09-06T18:20:56.906Z",
+  "items": 6,
+  "correct": 2,
+  "accuracy": 0.3333333333333333,
+  "attendAccuracy": 1,
+  "macroF1": 0.25,
+  "balancedAccuracy": 0.25,
+  "perAction": {
+    "reply": {
+      "total": 0,
+      "correct": 0
+    },
+    "act": {
+      "total": 2,
+      "correct": 2
+    },
+    "archive": {
+      "total": 2,
+      "correct": 0
+    },
+    "ignore": {
+      "total": 2,
+      "correct": 0
+    }
+  },
+  "costUsd": 0.0009482,
+  "avgLatencyMs": 3544.8333333333335,
+  "memoryRules": 0,
+  "memory": {
+    "judgment": "# Judgment memory\n\nRules the agent has learned about how this user handles items. One rule per line, prefixed with `- `.\n\n",
+    "tools": "# Tool memory\n\nRules the agent has learned about using the source apps and their APIs. One rule per line, prefixed with `- `.\n\n"
+  },
+  "predictions": [
+    {
+      "itemId": "s10",
+      "action": "act",
+      "confidence": 0.62,
+      "reasoning": "The message appears to contain relevant details about tracks and expectations, so they would likely open and review it without necessarily replying.",
+      "rulesUsed": [],
+      "costUsd": 0.0001896,
+      "latencyMs": 4127,
+      "inputTokens": 282,
+      "outputTokens": 111
+    },
+    {
+      "itemId": "s11",
+      "action": "act",
+      "confidence": 0.68,
+      "reasoning": "This is an event or project onboarding email with concrete setup steps, so they would likely open it and follow the links rather than reply. There are no specific remembered rules for Devpost messages.",
+      "rulesUsed": [],
+      "costUsd": 0.0001854,
+      "latencyMs": 3635,
+      "inputTokens": 285,
+      "outputTokens": 107
+    },
+    {
+      "itemId": "s12",
+      "action": "ignore",
+      "confidence": 0.82,
+      "reasoning": "This is a generic event update with no direct request or clear action needed. The public project gallery may be mildly relevant, but it is unlikely to prompt engagement on its own.",
+      "rulesUsed": [],
+      "costUsd": 0.0001278,
+      "latencyMs": 3316,
+      "inputTokens": 285,
+      "outputTokens": 59
+    },
+    {
+      "itemId": "s13",
+      "action": "ignore",
+      "confidence": 0.95,
+      "reasoning": "This is an automated Spotify login code with no request requiring a response or follow-up. There are no learned rules indicating the user acts on these messages.",
+      "rulesUsed": [],
+      "costUsd": 0.000121,
+      "latencyMs": 3051,
+      "inputTokens": 281,
+      "outputTokens": 54
+    },
+    {
+      "itemId": "s14",
+      "action": "archive",
+      "confidence": 0.94,
+      "reasoning": "This is a promotional email containing a generic coupon, with no indication of a personal request or important account information. It would likely be dismissed immediately.",
+      "rulesUsed": [],
+      "costUsd": 0.00015580000000000002,
+      "latencyMs": 3349,
+      "inputTokens": 281,
+      "outputTokens": 83
+    },
+    {
+      "itemId": "s15",
+      "action": "archive",
+      "confidence": 0.84,
+      "reasoning": "This is an unsolicited promotional offer with urgency-driven marketing language and no clear indication of personal relevance, so it would likely be dismissed immediately.",
+      "rulesUsed": [],
+      "costUsd": 0.0001686,
+      "latencyMs": 3791,
+      "inputTokens": 279,
+      "outputTokens": 94
+    }
+  ]
+}

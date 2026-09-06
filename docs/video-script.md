@@ -1,11 +1,64 @@
 # Understudy: video script
 
-Spoken, not read. Short sentences. Pause where there's a blank line. If you stumble, keep going; cut it later.
-Total about 3 minutes 20 seconds. Anything in [brackets] is what's on screen, don't say it.
+Rules: 3 to 5 minutes, public. This script runs about 3:20.
 
 ---
 
-[AO Kanban board, all six cards visible]
+## BEFORE RECORDING: setup (do all of this first, takes 5 minutes)
+
+### 1. Terminal
+Open a terminal in the repo folder:
+
+```
+cd C:\Users\Nilesh\Downloads\code\syndicatehack
+```
+
+Make the font big (Ctrl and + a few times, aim for 16 or bigger). Clear it:
+
+```
+clear
+```
+
+Then TYPE this but DO NOT press enter yet. You press enter during the video when the script says so:
+
+```
+MEMORY_DIR=memory/live ROUNDS=2 LIMIT=48 TEST=0 npm run loop
+```
+
+What it does: runs 48 sample emails with a fresh empty memory, reflects, runs again. About 90 seconds.
+You'll see: `run 1` line, then a `reflect run 1` line, then `run 2` line. That's it.
+
+### 2. Browser tabs, in this order
+- Tab A: https://github.com/nileshpatil6/understudy/pulls?q=is%3Amerged
+- Tab B: the dashboard. Paste this into the address bar:
+  `C:\Users\Nilesh\Downloads\code\syndicatehack\dashboard\gmail.private.html`
+- Tab C: https://app.neatlogs.com/traces
+
+### 3. VS Code
+Open `memory/judgment.gmail.md`. Zoom in (Ctrl and +) so the text is big.
+
+### 4. AO
+Open Agent Orchestrator. Click "Open Kanban" so all six cards are visible.
+
+### 5. Recording
+Start menu → Clipchamp → Record screen. Full screen, microphone on.
+Close everything else. Phone on silent.
+
+### AFTER RECORDING, run this once to clean up the live run:
+```
+git checkout -- results/ && rm -rf memory/live
+```
+
+---
+
+## THE SCRIPT
+
+Spoken, not read. Short sentences. Pause where there's a blank line. If you stumble, keep going; cut it later.
+Anything in [brackets] is what's on screen, don't say it.
+
+---
+
+[Start on AO, Kanban view, all six cards visible]
 
 Hey. I'm Nilesh, this is Understudy.
 
@@ -25,14 +78,14 @@ all merged, all passing CI. The orchestrator spawned them itself from one prompt
 
 ---
 
-[GitHub, merged PRs list, scroll once slowly]
+[Alt-tab to browser Tab A, GitHub merged PRs. Scroll once slowly]
 
 Slack adapter. GitHub adapter. Sample datasets. Eval tests. Memory pruning. Metrics docs. Each one in its own
 worktree, in parallel. I reviewed and merged. That's it.
 
 ---
 
-[Terminal, command already typed. Hit enter as you say "let me just run it"]
+[Alt-tab to the Terminal. The command is already typed. Press ENTER as you say "let me just run it"]
 
 Okay, let me just run it.
 
@@ -58,7 +111,7 @@ Run two. Six rules. Big jump.
 
 ---
 
-[VS Code, memory/judgment.gmail.md, scroll slowly]
+[Alt-tab to VS Code, memory/judgment.gmail.md. Scroll slowly]
 
 And this is the memory. This is from my actual inbox. Eleven rules. Plain text.
 
@@ -68,7 +121,7 @@ edit it, you can git blame it.
 
 ---
 
-[Dashboard, real inbox, accuracy chart]
+[Browser Tab B, the dashboard. Accuracy chart]
 
 Now, the numbers. And I want to be honest about these.
 
@@ -91,14 +144,14 @@ supposed to be predicting. Caught that too. Both of those failures are in the re
 
 ---
 
-[Dashboard, top tiles: cost]
+[Same tab, scroll up to the top tiles]
 
 Cost. The big model, no memory, thirty macro F1, forty-eight cents for a batch. The cheapest model with these
 eleven rules, forty macro F1, two cents. The rules are worth more than the model. And they move between models.
 
 ---
 
-[Neatlogs traces]
+[Browser Tab C, Neatlogs]
 
 Every prediction and every reflection is traced here in Neatlogs, so I could go find a bad call and look at the
 reflection that fixed it.

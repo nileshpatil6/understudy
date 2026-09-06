@@ -89,6 +89,11 @@ matching `gpt-6-astra` with the same memory at 1/40 the cost.
 
 ## Evaluation
 
+Every reported number, its baseline, and whether it is evidence of learning is documented in
+[docs/metrics.md](metrics.md). Read it before quoting any accuracy figure: the 4-class number on the real
+held-out set matches the always-`ignore` baseline, so it means nothing without the attend/skip and per-action
+breakdown beside it.
+
 `npm run loop` produces the whole chart: train, held-out, per-action, cost, latency, rules, and the reflector's
 decision each round. `npm run dashboard` renders `dashboard/<source>.html` from `results/` and `memory/`
 (inline SVG, no dependencies). Neatlogs traces every prediction and reflection when `NEATLOGS_API_KEY` is set.

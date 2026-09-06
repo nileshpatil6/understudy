@@ -19,8 +19,14 @@ Make the font big (Ctrl and + a few times, aim for 16 or bigger). Clear it:
 clear
 ```
 
-Then TYPE this but DO NOT press enter yet. You press enter during the video when the script says so:
+Then TYPE this but DO NOT press enter yet. You press enter during the video when the script says so.
 
+PowerShell (the default Windows terminal):
+```powershell
+$env:MEMORY_DIR="memory/live"; $env:ROUNDS="2"; $env:LIMIT="48"; $env:TEST="0"; npm run loop
+```
+
+Git Bash / macOS / Linux:
 ```
 MEMORY_DIR=memory/live ROUNDS=2 LIMIT=48 TEST=0 npm run loop
 ```
@@ -44,7 +50,14 @@ Open Agent Orchestrator. Click "Open Kanban" so all six cards are visible.
 Start menu → Clipchamp → Record screen. Full screen, microphone on.
 Close everything else. Phone on silent.
 
-### AFTER RECORDING, run this once to clean up the live run:
+### AFTER RECORDING, run this once to clean up the live run, then close the terminal window:
+
+PowerShell:
+```powershell
+git checkout -- results/; Remove-Item -Recurse -Force memory/live
+```
+
+Git Bash:
 ```
 git checkout -- results/ && rm -rf memory/live
 ```

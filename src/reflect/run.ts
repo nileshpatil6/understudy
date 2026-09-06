@@ -7,6 +7,7 @@ import { loadItems } from "../tools/dataset.js";
 import { resultsDir, runEval, partition } from "../eval/run.js";
 import { readMemory, writeMemory, listRules } from "../memory/store.js";
 import { consolidate, RULE_BUDGET } from "../memory/consolidate.js";
+import { prune, usageFromPredictions } from "../memory/prune.js";
 import { visibleMeta } from "../agent/predict.js";
 import type { Item, RunResult } from "../types.js";
 
@@ -40,6 +41,8 @@ export interface ReflectReport {
   decision: "accepted" | "consolidated" | "rejected";
   rulesBefore: number;
   rulesAfter: number;
+  /** rules dropped by the deterministic pruner (PRUNE=1) */
+  pruned: number;
   costUsd: number;
   notes?: string;
 }
@@ -131,6 +134,19 @@ Respond with only JSON: {"judgmentRules": [...], "toolRules": [...], "notes": "o
     notes = `${out.notes ?? ""}\nconsolidation: ${c.before} -> ${c.after} rules. ${c.notes ?? ""}`.trim();
   }
 
+  // PRUNE=1 drops rules the agent stopped citing, before the memory is written back.
+  // Deterministic and model-free, unlike consolidation; see src/memory/prune.ts.
+  let pruned = 0;
+  if (decision !== "rejected" && process.env.PRUNE === "1") {
+    const history = await recentUsage(files, dir);
+    const result = prune(listRules(final.judgment), history, { cap: RULE_BUDGET });
+    pruned = result.dropped.length;
+    if (pruned > 0) {
+      final = { ...final, judgment: rebuild(final.judgment, result.kept) };
+      for (const d of result.dropped) console.log(`    pruned (${d.reason}): ${d.rule.slice(0, 80)}`);
+    }
+  }
+
   if (decision !== "rejected") {
     await writeMemory("judgment", final.judgment, opts.source);
     await writeMemory("tools", final.tools, opts.source);
@@ -146,9 +162,33 @@ Respond with only JSON: {"judgmentRules": [...], "toolRules": [...], "notes": "o
     decision,
     rulesBefore: listRules(judgment).length,
     rulesAfter: listRules(final.judgment).length,
+    pruned,
     costUsd,
     notes,
   };
+}
+
+/** rule citations from the last two runs, oldest first, for the pruner's staleness window */
+async function recentUsage(files: string[], dir: string): Promise<Record<string, number>[]> {
+  const recent = files.slice(-2);
+  const out: Record<string, number>[] = [];
+  for (const f of recent) {
+    const r: RunResult = JSON.parse(await readFile(path.join(dir, f), "utf8"));
+    out.push(usageFromPredictions(r.predictions));
+  }
+  return out;
+}
+
+/** keep the memory file's header, replace its bullet list */
+function rebuild(current: string, rules: string[]): string {
+  const NL = String.fromCharCode(10);
+  const header = current
+    .split(NL)
+    .filter((l) => !l.startsWith("- "))
+    .join(NL)
+    .trimEnd();
+  const body = rules.map((r) => `- ${r}`).join(NL);
+  return header + NL + NL + body + NL;
 }
 
 function appendText(current: string, rules: string[]): string {
@@ -165,7 +205,8 @@ function num(f: string): number {
 
 export function describe(r: ReflectReport): string {
   const pct = (n: number) => `${(n * 100).toFixed(1)}%`;
-  return `  reflect run ${r.run}: ${r.misses} misses -> ${r.proposed} proposed | validate ${pct(r.validateBefore)} -> ${pct(r.validateAfter)} | ${r.decision} @ ${pct(r.validateFinal)} | rules ${r.rulesBefore} -> ${r.rulesAfter} | $${r.costUsd.toFixed(3)}`;
+  const prunedNote = r.pruned > 0 ? ` (pruned ${r.pruned})` : "";
+  return `  reflect run ${r.run}: ${r.misses} misses -> ${r.proposed} proposed | validate ${pct(r.validateBefore)} -> ${pct(r.validateAfter)} | ${r.decision} @ ${pct(r.validateFinal)} | rules ${r.rulesBefore} -> ${r.rulesAfter}${prunedNote} | $${r.costUsd.toFixed(3)}`;
 }
 
 const isMain = process.argv[1]?.replace(/\\/g, "/").endsWith("src/reflect/run.ts");

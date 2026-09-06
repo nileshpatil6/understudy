@@ -41,7 +41,8 @@ Our first reflector hit 91% on train and 57% on held-out. We caught it, built th
 src/eval      harness: predict, score, write results/<split>/run-N.json (predictions, cost, latency, memory used)
 src/agent     predict(item, memory); renderItem strips label-derived fields (unit tested)
 src/reflect   validation-gated reflection: learn half -> propose -> gate on validate half -> accept / consolidate / reject
-src/memory    two markdown memories per source; consolidate.ts rewrites bloated memory into fewer general rules
+src/memory    two markdown memories per source; consolidate.ts rewrites bloated memory into fewer
+              general rules (model call), prune.ts drops uncited ones (deterministic, PRUNE=1)
 src/tools     source adapters + ground-truth derivation (gmail-labels.ts)
 src/dashboard self-contained HTML: accuracy curves, cost, per-action table, the memory with new rules highlighted
 data/sample   synthetic inbox, committed, for CI and public demos
@@ -61,9 +62,16 @@ MEMORY_DIR=memory/sample npm run loop   # 5 rounds: eval -> gated reflect -> eva
 npm run dashboard               # dashboard/gmail.html
 ```
 
+The same loop runs on the other sources with no code changes:
+
+```
+SOURCE=slack  MEMORY_DIR=memory/sample npm run loop
+SOURCE=github MEMORY_DIR=memory/sample npm run loop
+```
+
 On your own inbox: export to `data/private/gmail.jsonl` (+ `gmail.test.jsonl` for a held-out range) using the rules in `data/README.md`, then `PRIVATE=1 npm run loop` and `PRIVATE=1 npm run dashboard`.
 
-Env: `SOURCE=gmail|slack|github`, `ROUNDS=5`, `LIMIT=50`, `PRIVATE=1`, `TEST=0` (skip held-out), `MEMORY_DIR`, `UNDERSTUDY_MODEL` (gpt-5.6-luna), `UNDERSTUDY_REFLECT_MODEL` (gpt-6-astra), `NO_MEMORY=1` (bare-model baseline), `RESULTS_TAG` (file a one-off run separately).
+Env: `SOURCE=gmail|slack|github`, `ROUNDS=5`, `LIMIT=50`, `PRIVATE=1`, `TEST=0` (skip held-out), `MEMORY_DIR`, `UNDERSTUDY_MODEL` (gpt-5.6-luna), `UNDERSTUDY_REFLECT_MODEL` (gpt-6-astra), `NO_MEMORY=1` (bare-model baseline), `RESULTS_TAG` (file a one-off run separately), `PRUNE=1` (drop rules the agent stopped citing).
 
 `npm test`, `npm run typecheck`, `npm run lint` run in CI on every PR.
 

@@ -31,6 +31,27 @@ Majority-class baseline on held-out: 67.7% (always "ignore"), 67.7% attend/skip.
 
 Eleven learned rules move the cheapest model from 35.5% to 67.7%, matching the flagship with memory at 1/40 the cost.
 
+## Sample set, reproducible without a private inbox (2026-09-06)
+
+`npx tsx scripts/gen-sample.ts && MEMORY_DIR=memory/sample npm run loop`
+
+144 synthetic train items, 60 held-out items generated from the same templates but different instances.
+Same gated loop, same models. The reflector never sees the held-out split.
+
+| run | train 4-class | held-out 4-class | held-out attend/skip | rules | reflect decision |
+|---|---|---|---|---|---|
+| 1 | 56.3% | 61.7% | 91.7% | 0  | accepted (+6), validate 51 -> 94 |
+| 2 | 95.1% | 93.3% | 100.0% | 6  | accepted (+3), validate 92 -> 98 |
+| 3 | 96.5% | 98.3% | 98.3% | 9  | accepted (+3), validate 98 -> 100 |
+| 4 | 100.0% | **100.0%** | **100.0%** | 12 | 0 misses, nothing proposed |
+| 5 | 100.0% | 100.0% | 100.0% | 12 | |
+
+**Read this as a smoke test, not as evidence.** The sample data is synthetic and its patterns are cleanly
+separable by construction, so saturating at 100% is the expected outcome and says nothing about real-world
+difficulty. What it does show is that the loop works end to end on data a judge can regenerate: the memory
+transfers to items the reflector never saw, and the reflector correctly stops proposing once there is
+nothing left to learn. The real-inbox numbers above are the evidence.
+
 ## Ungated reflector (v1, kept for comparison)
 
 Same data, reflector saw all train misses, no validation gate, no consolidation.

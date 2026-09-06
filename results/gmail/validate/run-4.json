@@ -1,0 +1,692 @@
+{
+  "run": 4,
+  "source": "gmail",
+  "split": "validate",
+  "startedAt": "2026-09-06T14:34:11.820Z",
+  "items": 51,
+  "correct": 51,
+  "accuracy": 1,
+  "attendAccuracy": 1,
+  "perAction": {
+    "reply": {
+      "total": 8,
+      "correct": 8
+    },
+    "act": {
+      "total": 11,
+      "correct": 11
+    },
+    "archive": {
+      "total": 10,
+      "correct": 10
+    },
+    "ignore": {
+      "total": 22,
+      "correct": 22
+    }
+  },
+  "costUsd": 0.011218999999999998,
+  "avgLatencyMs": 2156.156862745098,
+  "memoryRules": 12,
+  "memory": {
+    "judgment": "# Judgment memory\n\nRules the agent has learned about how this user handles items. One rule per line, prefixed with `- `.\n\n- Bulk promotions, coupons, re-engagement campaigns, product surveys, newsletters, job digests, and social-profile statistics or recommendations without a direct personal request — ignore\n- Automated job-application acknowledgments or 'under review' updates that provide no decision or requested next step — ignore\n- One-time login codes, routine invoice-availability notices without a payment request or billing problem, and repository release announcements without a requested change — archive\n- Interview invitations requesting availability, confirmation, or selection of a time slot, including invitations delivered through automated recruiting systems — reply\n- Email-confirmation or activation requests needed to join a workspace or enable an account, rather than messages merely supplying a login code — act\n- Event or program organizer messages providing track details or participation expectations, rather than generic event promotion — act\n- Informational organizer updates about an ongoing event or program—such as weekly recaps, countdowns, or gallery availability—with no concrete participant task requested — archive\n- Organizer messages giving actionable track instructions or participation requirements that call for preparation, submission, or another concrete participant step — act\n- Bulk event or program outreach aimed at recruitment, sales, or re-engagement, rather than reporting ongoing-program progress or providing participation instructions — ignore\n- In an ongoing collaborator or client thread, a direct question or request to check, review, or clarify shared work, even if investigation is needed before responding — reply\n- Updates changing a deadline or submission requirement for the user's assignment or pending deliverable, even without an explicit request to take action — act\n- Informational event, program, or course updates limited to recaps, countdowns, or gallery availability, with no concrete participant task or change to the user's obligations — archive\n",
+    "tools": "# Tool memory\n\nRules the agent has learned about using the source apps and their APIs. One rule per line, prefixed with `- `.\n\n"
+  },
+  "predictions": [
+    {
+      "itemId": "s12",
+      "action": "archive",
+      "confidence": 0.98,
+      "reasoning": "This is an informational update about an ongoing program, mentioning the public project gallery without requesting any participant action.",
+      "rulesUsed": [
+        "Informational organizer updates about an ongoing event or program—such as weekly recaps, countdowns, or gallery availability—with no concrete participant task requested — archive"
+      ],
+      "costUsd": 0.000219,
+      "latencyMs": 1765,
+      "inputTokens": 633,
+      "outputTokens": 77
+    },
+    {
+      "itemId": "s14",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a promotional coupon email with no direct personal request, matching the rule to ignore bulk promotions and coupons.",
+      "rulesUsed": [
+        "Bulk promotions, coupons, re-engagement campaigns, product surveys, newsletters, job digests, and social-profile statistics or recommendations without a direct personal request — ignore"
+      ],
+      "costUsd": 0.00022060000000000002,
+      "latencyMs": 3105,
+      "inputTokens": 629,
+      "outputTokens": 79
+    },
+    {
+      "itemId": "s15",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a bulk promotional discount urging the recipient to claim an event pass, with no direct personal request.",
+      "rulesUsed": [
+        "Bulk promotions, coupons, re-engagement campaigns, product surveys, newsletters, job digests, and social-profile statistics or recommendations without a direct personal request — ignore"
+      ],
+      "costUsd": 0.000219,
+      "latencyMs": 2375,
+      "inputTokens": 627,
+      "outputTokens": 78
+    },
+    {
+      "itemId": "s18",
+      "action": "reply",
+      "confidence": 0.99,
+      "reasoning": "This is an ongoing collaborator thread with a direct request to check and clarify shared work, so they would write back after reviewing the JSON.",
+      "rulesUsed": [
+        "In an ongoing collaborator or client thread, a direct question or request to check, review, or clarify shared work, even if investigation is needed before responding — reply"
+      ],
+      "costUsd": 0.00022860000000000003,
+      "latencyMs": 2813,
+      "inputTokens": 639,
+      "outputTokens": 84
+    },
+    {
+      "itemId": "s20",
+      "action": "act",
+      "confidence": 0.98,
+      "reasoning": "This changes the deadline for the user's assignment, so they would take note of it and act on the updated requirement.",
+      "rulesUsed": [
+        "Updates changing a deadline or submission requirement for the user's assignment or pending deliverable, even without an explicit request to take action — act"
+      ],
+      "costUsd": 0.00021380000000000002,
+      "latencyMs": 2418,
+      "inputTokens": 625,
+      "outputTokens": 74
+    },
+    {
+      "itemId": "s21",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a recurring curated developer newsletter with general builder news and no direct request or required action.",
+      "rulesUsed": [
+        "Bulk promotions, coupons, re-engagement campaigns, product surveys, newsletters, job digests, and social-profile statistics or recommendations without a direct personal request — ignore"
+      ],
+      "costUsd": 0.0002174,
+      "latencyMs": 2540,
+      "inputTokens": 631,
+      "outputTokens": 76
+    },
+    {
+      "itemId": "s29",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is an automated job-application acknowledgment stating only that the application is under review, with no decision or requested next step.",
+      "rulesUsed": [
+        "Automated job-application acknowledgments or 'under review' updates that provide no decision or requested next step — ignore"
+      ],
+      "costUsd": 0.00021419999999999998,
+      "latencyMs": 2082,
+      "inputTokens": 633,
+      "outputTokens": 73
+    },
+    {
+      "itemId": "s30",
+      "action": "reply",
+      "confidence": 0.99,
+      "reasoning": "This is an interview invitation requesting the recipient to pick an available time slot, so they would respond to schedule it.",
+      "rulesUsed": [
+        "Interview invitations requesting availability, confirmation, or selection of a time slot, including invitations delivered through automated recruiting systems — reply"
+      ],
+      "costUsd": 0.00021219999999999998,
+      "latencyMs": 1948,
+      "inputTokens": 635,
+      "outputTokens": 71
+    },
+    {
+      "itemId": "s31",
+      "action": "reply",
+      "confidence": 0.99,
+      "reasoning": "This is an interview invitation requesting the candidate to schedule a 30-minute call, so they would respond with availability or select a time.",
+      "rulesUsed": [
+        "Interview invitations requesting availability, confirmation, or selection of a time slot, including invitations delivered through automated recruiting systems — reply"
+      ],
+      "costUsd": 0.000216,
+      "latencyMs": 1953,
+      "inputTokens": 630,
+      "outputTokens": 75
+    },
+    {
+      "itemId": "s32",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a social-profile recommendation from LinkedIn without a direct personal request, so it should be left untouched.",
+      "rulesUsed": [
+        "Bulk promotions, coupons, re-engagement campaigns, product surveys, newsletters, job digests, and social-profile statistics or recommendations without a direct personal request — ignore"
+      ],
+      "costUsd": 0.00022040000000000002,
+      "latencyMs": 2270,
+      "inputTokens": 628,
+      "outputTokens": 79
+    },
+    {
+      "itemId": "s38",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a bulk promotional coupon with no direct personal request, so it would be left untouched.",
+      "rulesUsed": [
+        "Bulk promotions, coupons, re-engagement campaigns, product surveys, newsletters, job digests, and social-profile statistics or recommendations without a direct personal request — ignore"
+      ],
+      "costUsd": 0.000217,
+      "latencyMs": 1795,
+      "inputTokens": 629,
+      "outputTokens": 76
+    },
+    {
+      "itemId": "s44",
+      "action": "act",
+      "confidence": 0.98,
+      "reasoning": "This changes the deadline for the user's assignment, which is an actionable update even without an explicit request.",
+      "rulesUsed": [
+        "Updates changing a deadline or submission requirement for the user's assignment or pending deliverable, even without an explicit request to take action — act"
+      ],
+      "costUsd": 0.0002102,
+      "latencyMs": 1745,
+      "inputTokens": 625,
+      "outputTokens": 71
+    },
+    {
+      "itemId": "s45",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a recurring developer-news newsletter with curated updates and no direct request or required action.",
+      "rulesUsed": [
+        "Bulk promotions, coupons, re-engagement campaigns, product surveys, newsletters, job digests, and social-profile statistics or recommendations without a direct personal request — ignore"
+      ],
+      "costUsd": 0.0002162,
+      "latencyMs": 2019,
+      "inputTokens": 631,
+      "outputTokens": 75
+    },
+    {
+      "itemId": "s47",
+      "action": "archive",
+      "confidence": 0.97,
+      "reasoning": "This is a routine invoice-availability notice with no payment request or billing problem, so it should be archived immediately.",
+      "rulesUsed": [
+        "One-time login codes, routine invoice-availability notices without a payment request or billing problem, and repository release announcements without a requested change — archive"
+      ],
+      "costUsd": 0.000217,
+      "latencyMs": 1819,
+      "inputTokens": 629,
+      "outputTokens": 76
+    },
+    {
+      "itemId": "s52",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a job digest containing a bulk list of internships, with no direct request or personalized action required.",
+      "rulesUsed": [
+        "Bulk promotions, coupons, re-engagement campaigns, product surveys, newsletters, job digests, and social-profile statistics or recommendations without a direct personal request — ignore"
+      ],
+      "costUsd": 0.0002192,
+      "latencyMs": 1781,
+      "inputTokens": 628,
+      "outputTokens": 78
+    },
+    {
+      "itemId": "s61",
+      "action": "archive",
+      "confidence": 0.99,
+      "reasoning": "This is a one-time Spotify login code with no other action requested beyond entering it.",
+      "rulesUsed": [
+        "One-time login codes, routine invoice-availability notices without a payment request or billing problem, and repository release announcements without a requested change — archive"
+      ],
+      "costUsd": 0.0002098,
+      "latencyMs": 2062,
+      "inputTokens": 629,
+      "outputTokens": 70
+    },
+    {
+      "itemId": "s62",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a promotional coupon message, which the user consistently leaves untouched.",
+      "rulesUsed": [
+        "Bulk promotions, coupons, re-engagement campaigns, product surveys, newsletters, job digests, and social-profile statistics or recommendations without a direct personal request — ignore"
+      ],
+      "costUsd": 0.000211,
+      "latencyMs": 1825,
+      "inputTokens": 629,
+      "outputTokens": 71
+    },
+    {
+      "itemId": "s63",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a bulk promotional offer with a discount and urgency, matching the user's pattern of ignoring promotions and re-engagement campaigns.",
+      "rulesUsed": [
+        "Bulk promotions, coupons, re-engagement campaigns, product surveys, newsletters, job digests, and social-profile statistics or recommendations without a direct personal request — ignore"
+      ],
+      "costUsd": 0.00022380000000000002,
+      "latencyMs": 1868,
+      "inputTokens": 627,
+      "outputTokens": 82
+    },
+    {
+      "itemId": "s68",
+      "action": "act",
+      "confidence": 0.98,
+      "reasoning": "This changes the deadline for the user's assignment, so they would take note of it and adjust their plans.",
+      "rulesUsed": [
+        "Updates changing a deadline or submission requirement for the user's assignment or pending deliverable, even without an explicit request to take action — act"
+      ],
+      "costUsd": 0.0002114,
+      "latencyMs": 2283,
+      "inputTokens": 625,
+      "outputTokens": 72
+    },
+    {
+      "itemId": "s69",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a recurring newsletter with curated builder news and no direct request or required action.",
+      "rulesUsed": [
+        "Bulk promotions, coupons, re-engagement campaigns, product surveys, newsletters, job digests, and social-profile statistics or recommendations without a direct personal request — ignore"
+      ],
+      "costUsd": 0.000215,
+      "latencyMs": 2285,
+      "inputTokens": 631,
+      "outputTokens": 74
+    },
+    {
+      "itemId": "s70",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a bulk product survey aimed at creators, with no direct personal request requiring a response.",
+      "rulesUsed": [
+        "Bulk promotions, coupons, re-engagement campaigns, product surveys, newsletters, job digests, and social-profile statistics or recommendations without a direct personal request — ignore"
+      ],
+      "costUsd": 0.000217,
+      "latencyMs": 2241,
+      "inputTokens": 629,
+      "outputTokens": 76
+    },
+    {
+      "itemId": "s78",
+      "action": "reply",
+      "confidence": 0.99,
+      "reasoning": "This is an interview invitation requesting the recipient to pick an available time slot, so they would respond to schedule it.",
+      "rulesUsed": [
+        "Interview invitations requesting availability, confirmation, or selection of a time slot, including invitations delivered through automated recruiting systems — reply"
+      ],
+      "costUsd": 0.00021219999999999998,
+      "latencyMs": 2367,
+      "inputTokens": 635,
+      "outputTokens": 71
+    },
+    {
+      "itemId": "s79",
+      "action": "reply",
+      "confidence": 0.99,
+      "reasoning": "This is an interview invitation requesting scheduling for a 30-minute call, so the user would write back with availability.",
+      "rulesUsed": [
+        "Interview invitations requesting availability, confirmation, or selection of a time slot, including invitations delivered through automated recruiting systems — reply"
+      ],
+      "costUsd": 0.00021119999999999998,
+      "latencyMs": 2107,
+      "inputTokens": 630,
+      "outputTokens": 71
+    },
+    {
+      "itemId": "s84",
+      "action": "archive",
+      "confidence": 0.98,
+      "reasoning": "This is an informational update about an ongoing program, mentioning the public project gallery without any participant task or changed obligation.",
+      "rulesUsed": [
+        "Informational organizer updates about an ongoing event or program—such as weekly recaps, countdowns, or gallery availability—with no concrete participant task requested — archive"
+      ],
+      "costUsd": 0.00022140000000000001,
+      "latencyMs": 2218,
+      "inputTokens": 633,
+      "outputTokens": 79
+    },
+    {
+      "itemId": "s85",
+      "action": "archive",
+      "confidence": 0.99,
+      "reasoning": "This is a one-time Spotify login code with no additional request or billing issue, so it should be archived immediately.",
+      "rulesUsed": [
+        "One-time login codes, routine invoice-availability notices without a payment request or billing problem, and repository release announcements without a requested change — archive"
+      ],
+      "costUsd": 0.000217,
+      "latencyMs": 2076,
+      "inputTokens": 629,
+      "outputTokens": 76
+    },
+    {
+      "itemId": "s87",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a bulk promotional discount with an urgent sales call to action, which the user typically leaves untouched.",
+      "rulesUsed": [
+        "Bulk promotions, coupons, re-engagement campaigns, product surveys, newsletters, job digests, and social-profile statistics or recommendations without a direct personal request — ignore"
+      ],
+      "costUsd": 0.000219,
+      "latencyMs": 2258,
+      "inputTokens": 627,
+      "outputTokens": 78
+    },
+    {
+      "itemId": "s96",
+      "action": "act",
+      "confidence": 0.98,
+      "reasoning": "This is an actionable billing failure requiring payment details to be updated to avoid service suspension, so they would address it promptly.",
+      "rulesUsed": [],
+      "costUsd": 0.0002308,
+      "latencyMs": 2269,
+      "inputTokens": 632,
+      "outputTokens": 87
+    },
+    {
+      "itemId": "s98",
+      "action": "act",
+      "confidence": 0.87,
+      "reasoning": "A failed CI run is an actionable repository notification that likely warrants opening to inspect the failing jobs, unlike a routine release announcement.",
+      "rulesUsed": [],
+      "costUsd": 0.00024119999999999998,
+      "latencyMs": 2326,
+      "inputTokens": 648,
+      "outputTokens": 93
+    },
+    {
+      "itemId": "s99",
+      "action": "archive",
+      "confidence": 0.99,
+      "reasoning": "This is a repository release announcement with no requested change or action.",
+      "rulesUsed": [
+        "One-time login codes, routine invoice-availability notices without a payment request or billing problem, and repository release announcements without a requested change — archive"
+      ],
+      "costUsd": 0.000207,
+      "latencyMs": 1667,
+      "inputTokens": 639,
+      "outputTokens": 66
+    },
+    {
+      "itemId": "s100",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a bulk job digest containing new internship listings, with no direct personal request or action required.",
+      "rulesUsed": [
+        "Bulk promotions, coupons, re-engagement campaigns, product surveys, newsletters, job digests, and social-profile statistics or recommendations without a direct personal request — ignore"
+      ],
+      "costUsd": 0.000218,
+      "latencyMs": 1862,
+      "inputTokens": 628,
+      "outputTokens": 77
+    },
+    {
+      "itemId": "s106",
+      "action": "act",
+      "confidence": 0.96,
+      "reasoning": "This provides track information and likely participation expectations for an ongoing program, so the user would review it for relevant requirements.",
+      "rulesUsed": [
+        "Event or program organizer messages providing track details or participation expectations, rather than generic event promotion — act"
+      ],
+      "costUsd": 0.0002508,
+      "latencyMs": 2797,
+      "inputTokens": 630,
+      "outputTokens": 104
+    },
+    {
+      "itemId": "s107",
+      "action": "act",
+      "confidence": 0.98,
+      "reasoning": "This message provides concrete participation steps required before building, so the user would likely open it and follow up by joining Discord, installing AO, and generating a pass.",
+      "rulesUsed": [
+        "Organizer messages giving actionable track instructions or participation requirements that call for preparation, submission, or another concrete participant step — act"
+      ],
+      "costUsd": 0.00025739999999999997,
+      "latencyMs": 1966,
+      "inputTokens": 633,
+      "outputTokens": 109
+    },
+    {
+      "itemId": "s108",
+      "action": "archive",
+      "confidence": 0.99,
+      "reasoning": "This is an informational update about an ongoing program, announcing gallery availability without asking for any participant action.",
+      "rulesUsed": [
+        "Informational organizer updates about an ongoing event or program—such as weekly recaps, countdowns, or gallery availability—with no concrete participant task requested — archive"
+      ],
+      "costUsd": 0.0002178,
+      "latencyMs": 1610,
+      "inputTokens": 633,
+      "outputTokens": 76
+    },
+    {
+      "itemId": "s109",
+      "action": "archive",
+      "confidence": 0.99,
+      "reasoning": "This is a one-time Spotify login code with no additional request or billing issue, so it should be archived after noting the code if needed.",
+      "rulesUsed": [
+        "One-time login codes, routine invoice-availability notices without a payment request or billing problem, and repository release announcements without a requested change — archive"
+      ],
+      "costUsd": 0.000223,
+      "latencyMs": 1853,
+      "inputTokens": 629,
+      "outputTokens": 81
+    },
+    {
+      "itemId": "s1",
+      "action": "act",
+      "confidence": 0.88,
+      "reasoning": "A failed workflow run in the user's repository is an actionable technical issue, so they would likely open it to investigate rather than ignore it.",
+      "rulesUsed": [],
+      "costUsd": 0.00024280000000000002,
+      "latencyMs": 2096,
+      "inputTokens": 656,
+      "outputTokens": 93
+    },
+    {
+      "itemId": "s6",
+      "action": "reply",
+      "confidence": 0.99,
+      "reasoning": "This is an interview invitation asking the user to pick an interview slot, which requires responding with availability or selecting a time.",
+      "rulesUsed": [
+        "Interview invitations requesting availability, confirmation, or selection of a time slot, including invitations delivered through automated recruiting systems — reply"
+      ],
+      "costUsd": 0.00021339999999999998,
+      "latencyMs": 2028,
+      "inputTokens": 635,
+      "outputTokens": 72
+    },
+    {
+      "itemId": "s7",
+      "action": "reply",
+      "confidence": 0.99,
+      "reasoning": "This is an interview invitation requesting the candidate to schedule a 30-minute call, so they would respond with availability or select a time.",
+      "rulesUsed": [
+        "Interview invitations requesting availability, confirmation, or selection of a time slot, including invitations delivered through automated recruiting systems — reply"
+      ],
+      "costUsd": 0.000216,
+      "latencyMs": 1954,
+      "inputTokens": 630,
+      "outputTokens": 75
+    },
+    {
+      "itemId": "s111",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a bulk promotional offer with a discount and urgent call to action, not a direct personal request.",
+      "rulesUsed": [
+        "Bulk promotions, coupons, re-engagement campaigns, product surveys, newsletters, job digests, and social-profile statistics or recommendations without a direct personal request — ignore"
+      ],
+      "costUsd": 0.000219,
+      "latencyMs": 2109,
+      "inputTokens": 627,
+      "outputTokens": 78
+    },
+    {
+      "itemId": "s112",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a generic re-engagement marketing message with no direct personal request or actionable task.",
+      "rulesUsed": [
+        "Bulk promotions, coupons, re-engagement campaigns, product surveys, newsletters, job digests, and social-profile statistics or recommendations without a direct personal request — ignore"
+      ],
+      "costUsd": 0.00021480000000000002,
+      "latencyMs": 2166,
+      "inputTokens": 624,
+      "outputTokens": 75
+    },
+    {
+      "itemId": "s113",
+      "action": "act",
+      "confidence": 0.99,
+      "reasoning": "This is an email-confirmation request needed to join a Slack workspace, so the user would click through and confirm it.",
+      "rulesUsed": [
+        "Email-confirmation or activation requests needed to join a workspace or enable an account, rather than messages merely supplying a login code — act"
+      ],
+      "costUsd": 0.0002168,
+      "latencyMs": 1924,
+      "inputTokens": 634,
+      "outputTokens": 75
+    },
+    {
+      "itemId": "s118",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a bulk product survey with no direct personal request, which the user consistently leaves untouched.",
+      "rulesUsed": [
+        "Bulk promotions, coupons, re-engagement campaigns, product surveys, newsletters, job digests, and social-profile statistics or recommendations without a direct personal request — ignore"
+      ],
+      "costUsd": 0.000217,
+      "latencyMs": 2208,
+      "inputTokens": 629,
+      "outputTokens": 76
+    },
+    {
+      "itemId": "s119",
+      "action": "archive",
+      "confidence": 0.98,
+      "reasoning": "This is a routine invoice-availability notice with no payment request, billing problem, or other action required.",
+      "rulesUsed": [
+        "One-time login codes, routine invoice-availability notices without a payment request or billing problem, and repository release announcements without a requested change — archive"
+      ],
+      "costUsd": 0.000247,
+      "latencyMs": 2442,
+      "inputTokens": 629,
+      "outputTokens": 101
+    },
+    {
+      "itemId": "s126",
+      "action": "reply",
+      "confidence": 0.99,
+      "reasoning": "This is an interview invitation requesting the recipient to pick an available time slot, so they would respond to schedule it.",
+      "rulesUsed": [
+        "Interview invitations requesting availability, confirmation, or selection of a time slot, including invitations delivered through automated recruiting systems — reply"
+      ],
+      "costUsd": 0.00021219999999999998,
+      "latencyMs": 2599,
+      "inputTokens": 635,
+      "outputTokens": 71
+    },
+    {
+      "itemId": "s128",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a LinkedIn social-profile recommendation without a direct personal request, which the user routinely leaves untouched.",
+      "rulesUsed": [
+        "Bulk promotions, coupons, re-engagement campaigns, product surveys, newsletters, job digests, and social-profile statistics or recommendations without a direct personal request — ignore"
+      ],
+      "costUsd": 0.0002192,
+      "latencyMs": 2366,
+      "inputTokens": 628,
+      "outputTokens": 78
+    },
+    {
+      "itemId": "s129",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a social-profile statistic/notification with no direct personal request, which the user consistently leaves untouched.",
+      "rulesUsed": [
+        "Bulk promotions, coupons, re-engagement campaigns, product surveys, newsletters, job digests, and social-profile statistics or recommendations without a direct personal request — ignore"
+      ],
+      "costUsd": 0.0002184,
+      "latencyMs": 2238,
+      "inputTokens": 624,
+      "outputTokens": 78
+    },
+    {
+      "itemId": "s134",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a promotional coupon message with no direct personal request, which the user consistently leaves untouched.",
+      "rulesUsed": [
+        "Bulk promotions, coupons, re-engagement campaigns, product surveys, newsletters, job digests, and social-profile statistics or recommendations without a direct personal request — ignore"
+      ],
+      "costUsd": 0.000217,
+      "latencyMs": 2067,
+      "inputTokens": 629,
+      "outputTokens": 76
+    },
+    {
+      "itemId": "s135",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a bulk promotional offer with a discount and urgency, not a direct personal request.",
+      "rulesUsed": [
+        "Bulk promotions, coupons, re-engagement campaigns, product surveys, newsletters, job digests, and social-profile statistics or recommendations without a direct personal request — ignore"
+      ],
+      "costUsd": 0.0002154,
+      "latencyMs": 1935,
+      "inputTokens": 627,
+      "outputTokens": 75
+    },
+    {
+      "itemId": "s137",
+      "action": "act",
+      "confidence": 0.99,
+      "reasoning": "This is an email-confirmation request needed to join a workspace, so the user would click through and confirm it.",
+      "rulesUsed": [
+        "Email-confirmation or activation requests needed to join a workspace or enable an account, rather than messages merely supplying a login code — act"
+      ],
+      "costUsd": 0.0002156,
+      "latencyMs": 3474,
+      "inputTokens": 634,
+      "outputTokens": 74
+    },
+    {
+      "itemId": "s142",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a bulk product survey with no direct personal request, which the user consistently leaves untouched.",
+      "rulesUsed": [
+        "Bulk promotions, coupons, re-engagement campaigns, product surveys, newsletters, job digests, and social-profile statistics or recommendations without a direct personal request — ignore"
+      ],
+      "costUsd": 0.000217,
+      "latencyMs": 1984,
+      "inputTokens": 629,
+      "outputTokens": 76
+    },
+    {
+      "itemId": "s143",
+      "action": "archive",
+      "confidence": 0.98,
+      "reasoning": "This is a routine invoice-availability notice with no payment request or billing problem, so it should be archived immediately.",
+      "rulesUsed": [
+        "One-time login codes, routine invoice-availability notices without a payment request or billing problem, and repository release announcements without a requested change — archive"
+      ],
+      "costUsd": 0.000217,
+      "latencyMs": 1622,
+      "inputTokens": 629,
+      "outputTokens": 76
+    },
+    {
+      "itemId": "s144",
+      "action": "act",
+      "confidence": 0.98,
+      "reasoning": "This is an actionable billing failure requiring payment updates to avoid service suspension, not a routine invoice-availability notice.",
+      "rulesUsed": [],
+      "costUsd": 0.00022480000000000002,
+      "latencyMs": 2384,
+      "inputTokens": 632,
+      "outputTokens": 82
+    }
+  ]
+}

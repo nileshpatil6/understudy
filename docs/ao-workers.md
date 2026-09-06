@@ -68,3 +68,38 @@ Write `docs/metrics.md` explaining every number the project reports: 4-class acc
 the majority-class baseline and why it matters here, per-action accuracy, cost accounting (cached vs uncached
 input tokens), latency, and rule count. State plainly which numbers are evidence of learning and which are not.
 Cross-link from `docs/architecture.md`. Do not edit `README.md` or `results/README.md`.
+
+
+# Round two
+
+Two holes found in final review. Same file-ownership rules as above.
+
+## 7. gmail-exporter
+Owns: `scripts/export-gmail.ts`, `scripts/export-gmail.test.ts`
+
+`src/tools/gmail-labels.ts#deriveAction` is the function the whole project's ground-truth story rests on, and
+today nothing calls it except its tests; the real dataset was derived by hand. Close that gap.
+
+Write `scripts/export-gmail.ts` that reads a JSON file of Gmail API thread objects (the shape returned by
+`users.threads.get` with `format=metadata`: `{ id, messages: [{ id, labelIds, internalDate, payload: { headers: [{name, value}] }, snippet }] }`)
+and writes `data/private/gmail.jsonl` in the `Item` schema. For each thread: the first message not sent by the
+user is the item; `userReplied` is true if any later message in the thread is from the user's address (pass it as
+`--user you@example.com`); truth comes from `deriveAction`. Skip threads the user started that got no reply.
+Put `labelIds` under `meta.labels` so `HIDDEN_META` strips it. Support `--test-before YYYY-MM-DD` to route older
+threads to `gmail.test.jsonl` for a held-out split.
+
+Unit test the conversion on a fixture of 4 threads covering reply / act / archive / ignore and the skip case.
+The script must not touch the network; fetching is the caller's job and is documented in `data/README.md`
+(update that file's export section to point at the script).
+
+## 8. bootstrap-ci
+Owns: `scripts/bootstrap-ci.ts`, `scripts/bootstrap-ci.test.ts`
+
+Productize the confidence interval quoted in `results/README.md`. `scripts/bootstrap-ci.ts` takes two run
+files (`--a results/.../run-1.json --b results/.../run-6.json`), pairs predictions by `itemId`, and reports the
+delta in macro-F1 and balanced accuracy with a paired bootstrap 95% interval (default 5000 resamples, seedable).
+Reuse `macroScores` from `src/eval/run.ts`; do not reimplement it. Truth comes from the dataset via `loadItems`
+with the same `--private` / `SOURCE` conventions as the other scripts.
+
+Test with a synthetic pair where b is strictly better than a (interval must exclude zero) and a pair where
+b equals a (interval must contain zero). Deterministic under a fixed seed.

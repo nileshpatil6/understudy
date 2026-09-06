@@ -33,6 +33,10 @@ Those two columns also climb monotonically across all six runs (17.4 â†’ 30.8 â†
 which the raw accuracy column does not. That monotonic climb, on data the reflector never saw, is the actual
 claim this project makes.
 
+**Is it noise?** 93 held-out items is small, so we checked. Paired bootstrap over items, 5000 resamples,
+run 1 vs run 6 held-out macro-F1: delta **+22.6 points, 95% CI [+11.0, +33.2]**. The interval excludes zero
+by a wide margin. `scripts/bootstrap-ci.ts` reproduces it from the stored predictions, no model calls.
+
 ## Baselines on the same held-out set
 
 | model | memory | acc | macro-F1 | balanced acc | attend/skip | cost / 93 | latency |

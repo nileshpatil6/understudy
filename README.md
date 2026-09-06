@@ -77,8 +77,8 @@ Env: `SOURCE=gmail|slack|github`, `ROUNDS=5`, `LIMIT=50`, `PRIVATE=1`, `TEST=0` 
 
 ## Built with AO
 
-The core loop was built with Claude Code driven from this project's session. The six feature PRs (Slack and
-GitHub adapters, sample datasets with a held-out split, eval tests, memory pruner, metrics doc) and the round-two
-PRs (Gmail exporter, bootstrap confidence intervals) were built by Agent Orchestrator workers, each in its own
-worktree with its own PR and green CI, spawned by the AO orchestrator from the prompts in `docs/ao-workers.md`.
-`git log` shows which is which: AO work lands as squash-merged PRs (`#N`), core work as direct commits.
+The core loop was built with Claude Code driven from this project's session. Every feature PR was built by an
+Agent Orchestrator worker in its own worktree with its own PR and green CI, spawned by the AO orchestrator from
+the prompts in `docs/ao-workers.md`: Slack and GitHub adapters, sample datasets with a held-out split, eval
+harness tests, the memory pruner, the metrics doc. `git log` shows which is which: AO work lands as
+squash-merged PRs (`#N`), core work as direct commits.

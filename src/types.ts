@@ -46,6 +46,10 @@ export interface RunResult {
   accuracy: number;
   /** collapsed to attend (reply|act) vs skip (archive|ignore): the distinction a user actually feels */
   attendAccuracy: number;
+  /** mean per-class F1. Immune to the class imbalance that makes raw accuracy misleading here. */
+  macroF1: number;
+  /** mean per-class recall. A constant predictor scores 1/numClasses by construction. */
+  balancedAccuracy: number;
   perAction: Record<Action, { total: number; correct: number }>;
   costUsd: number;
   avgLatencyMs: number;

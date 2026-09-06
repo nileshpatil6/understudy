@@ -47,6 +47,7 @@ export async function runEval(opts: {
     }
     if (attends(predictions[i].action) === attends(it.truth)) attendCorrect++;
   });
+  const { macroF1, balancedAccuracy } = macroScores(items.map((it, i) => ({ predicted: predictions[i].action, truth: it.truth })));
   const result: RunResult = {
     run,
     source: opts.source,
@@ -56,6 +57,8 @@ export async function runEval(opts: {
     correct,
     accuracy: items.length ? correct / items.length : 0,
     attendAccuracy: items.length ? attendCorrect / items.length : 0,
+    macroF1,
+    balancedAccuracy,
     perAction,
     costUsd: predictions.reduce((s, p) => s + p.costUsd, 0),
     avgLatencyMs: predictions.reduce((s, p) => s + p.latencyMs, 0) / Math.max(1, predictions.length),
@@ -73,6 +76,30 @@ export async function runEval(opts: {
  */
 export function resultsDir(source: Item["source"], privateData?: boolean, split: Split = "train"): string {
   return path.resolve("results", ...(privateData ? ["private"] : []), source, split);
+}
+
+/**
+ * Per-class F1 and recall, averaged over the four classes.
+ *
+ * Raw accuracy is close to useless on this data: the real held-out set is 68% "ignore",
+ * so a predictor that always answers "ignore" scores 67.7% while getting three of the
+ * four classes completely wrong. Macro-F1 and balanced accuracy do not reward that;
+ * a constant predictor scores 1/4 balanced accuracy by construction. See docs/metrics.md.
+ */
+export function macroScores(pairs: { predicted: Action; truth: Action }[]): { macroF1: number; balancedAccuracy: number } {
+  let f1Sum = 0;
+  let recallSum = 0;
+  for (const a of Action.options) {
+    const tp = pairs.filter((p) => p.predicted === a && p.truth === a).length;
+    const fp = pairs.filter((p) => p.predicted === a && p.truth !== a).length;
+    const fn = pairs.filter((p) => p.predicted !== a && p.truth === a).length;
+    const precision = tp + fp > 0 ? tp / (tp + fp) : 0;
+    const recall = tp + fn > 0 ? tp / (tp + fn) : 0;
+    f1Sum += precision + recall > 0 ? (2 * precision * recall) / (precision + recall) : 0;
+    recallSum += recall;
+  }
+  const n = Action.options.length;
+  return { macroF1: f1Sum / n, balancedAccuracy: recallSum / n };
 }
 
 export function attends(a: Action): boolean {
@@ -111,7 +138,7 @@ export function summarize(r: RunResult): string {
   const pa = Object.entries(r.perAction)
     .map(([a, v]) => `${a} ${v.correct}/${v.total}`)
     .join("  ");
-  return `run ${r.run} [${r.source}/${r.split}]  acc ${(r.accuracy * 100).toFixed(1)}%  attend/skip ${(r.attendAccuracy * 100).toFixed(1)}%  cost $${r.costUsd.toFixed(4)}  avg ${r.avgLatencyMs.toFixed(0)}ms  rules ${r.memoryRules}\n  ${pa}`;
+  return `run ${r.run} [${r.source}/${r.split}]  acc ${(r.accuracy * 100).toFixed(1)}%  attend/skip ${(r.attendAccuracy * 100).toFixed(1)}%  macroF1 ${(r.macroF1 * 100).toFixed(1)}%  cost $${r.costUsd.toFixed(4)}  avg ${r.avgLatencyMs.toFixed(0)}ms  rules ${r.memoryRules}\n  ${pa}`;
 }
 
 const isMain = process.argv[1]?.replace(/\\/g, "/").endsWith("src/eval/run.ts");

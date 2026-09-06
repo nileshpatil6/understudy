@@ -1,0 +1,461 @@
+{
+  "run": 1,
+  "source": "slack",
+  "split": "validate",
+  "startedAt": "2026-09-06T15:21:33.081Z",
+  "items": 34,
+  "correct": 30,
+  "accuracy": 0.8823529411764706,
+  "attendAccuracy": 1,
+  "perAction": {
+    "reply": {
+      "total": 8,
+      "correct": 7
+    },
+    "act": {
+      "total": 9,
+      "correct": 9
+    },
+    "archive": {
+      "total": 8,
+      "correct": 8
+    },
+    "ignore": {
+      "total": 9,
+      "correct": 6
+    }
+  },
+  "costUsd": 0.006252000000000001,
+  "avgLatencyMs": 2116.6176470588234,
+  "memoryRules": 4,
+  "memory": {
+    "judgment": "# Judgment memory\n\nRules the agent has learned about how this user handles items. One rule per line, prefixed with `- `.\n\n- An urgent production alert reporting sustained service degradation with no acknowledged owner requires incident response rather than just a Slack acknowledgment — act\n- A direct request from a person for the user's review or feedback on a plan or document, especially before a deadline, calls for a response to the requester — reply\n- An informational broadcast announcing a completed business milestone, with no outstanding request or follow-up, should be cleared rather than left untouched — archive\n- An automated reminder explicitly stating that the user's required contribution is still missing remains actionable; a stated closing time alone does not establish that the task is obsolete — act\n",
+    "tools": "# Tool memory\n\nRules the agent has learned about using the source apps and their APIs. One rule per line, prefixed with `- `.\n\n"
+  },
+  "predictions": [
+    {
+      "itemId": "k100",
+      "action": "act",
+      "confidence": 0.99,
+      "reasoning": "This is a critical production security alert for a service the user owns, with a patch available now, so it requires prompt incident response rather than passive acknowledgment.",
+      "rulesUsed": [
+        "An urgent production alert reporting sustained service degradation with no acknowledged owner requires incident response rather than just a Slack acknowledgment — act"
+      ],
+      "costUsd": 0.0001782,
+      "latencyMs": 1746,
+      "inputTokens": 417,
+      "outputTokens": 79
+    },
+    {
+      "itemId": "k1",
+      "action": "act",
+      "confidence": 0.97,
+      "reasoning": "This is an urgent production alert for checkout-api with a direct request to investigate before escalation, requiring immediate incident response rather than only acknowledging in Slack.",
+      "rulesUsed": [
+        "An urgent production alert reporting sustained service degradation with no acknowledged owner requires incident response rather than just a Slack acknowledgment — act"
+      ],
+      "costUsd": 0.000274,
+      "latencyMs": 2846,
+      "inputTokens": 416,
+      "outputTokens": 159
+    },
+    {
+      "itemId": "k6",
+      "action": "reply",
+      "confidence": 0.98,
+      "reasoning": "Zoya is directly asking for the user's decision on design comments before shipping, so the user would respond with their call.",
+      "rulesUsed": [
+        "A direct request from a person for the user's review or feedback on a plan or document, especially before a deadline, calls for a response to the requester — reply"
+      ],
+      "costUsd": 0.0002136,
+      "latencyMs": 2952,
+      "inputTokens": 414,
+      "outputTokens": 109
+    },
+    {
+      "itemId": "k7",
+      "action": "act",
+      "confidence": 0.98,
+      "reasoning": "This automated reminder says the user's required standup contribution is still missing. The thread closing time does not make the task obsolete, so it remains actionable.",
+      "rulesUsed": [
+        "An automated reminder explicitly stating that the user's required contribution is still missing remains actionable; a stated closing time alone does not establish that the task is obsolete — act"
+      ],
+      "costUsd": 0.00022079999999999997,
+      "latencyMs": 2474,
+      "inputTokens": 420,
+      "outputTokens": 114
+    },
+    {
+      "itemId": "k8",
+      "action": "archive",
+      "confidence": 0.97,
+      "reasoning": "This is a broadcast announcement with no required action for the user unless they want to change their benefits plan. It should be cleared rather than left unread.",
+      "rulesUsed": [
+        "An informational broadcast announcing a completed business milestone, with no outstanding request or follow-up, should be cleared rather than left untouched — archive"
+      ],
+      "costUsd": 0.0002272,
+      "latencyMs": 2851,
+      "inputTokens": 416,
+      "outputTokens": 120
+    },
+    {
+      "itemId": "k9",
+      "action": "ignore",
+      "confidence": 0.97,
+      "reasoning": "This is a casual informational message in a random Slack channel with no request or clear action for the user.",
+      "rulesUsed": [],
+      "costUsd": 0.0001338,
+      "latencyMs": 1916,
+      "inputTokens": 399,
+      "outputTokens": 45
+    },
+    {
+      "itemId": "k10",
+      "action": "ignore",
+      "confidence": 0.97,
+      "reasoning": "This is an automated Giphy post in a casual #random channel with no request or actionable follow-up.",
+      "rulesUsed": [],
+      "costUsd": 0.000134,
+      "latencyMs": 1967,
+      "inputTokens": 400,
+      "outputTokens": 45
+    },
+    {
+      "itemId": "k11",
+      "action": "archive",
+      "confidence": 0.99,
+      "reasoning": "This is an informational broadcast announcing a completed business milestone with no request or follow-up needed.",
+      "rulesUsed": [
+        "An informational broadcast announcing a completed business milestone, with no outstanding request or follow-up, should be cleared rather than left untouched — archive"
+      ],
+      "costUsd": 0.00016480000000000002,
+      "latencyMs": 1610,
+      "inputTokens": 410,
+      "outputTokens": 69
+    },
+    {
+      "itemId": "k18",
+      "action": "ignore",
+      "confidence": 0.98,
+      "reasoning": "This is a casual, non-actionable poll in a random channel with no direct request requiring the user's response.",
+      "rulesUsed": [],
+      "costUsd": 0.00013659999999999999,
+      "latencyMs": 2360,
+      "inputTokens": 407,
+      "outputTokens": 46
+    },
+    {
+      "itemId": "k27",
+      "action": "act",
+      "confidence": 0.98,
+      "reasoning": "This automated reminder explicitly says the user's required standup contribution is still missing, so it remains actionable despite the stated thread closing time.",
+      "rulesUsed": [
+        "An automated reminder explicitly stating that the user's required contribution is still missing remains actionable; a stated closing time alone does not establish that the task is obsolete — act"
+      ],
+      "costUsd": 0.0001824,
+      "latencyMs": 1997,
+      "inputTokens": 420,
+      "outputTokens": 82
+    },
+    {
+      "itemId": "k32",
+      "action": "reply",
+      "confidence": 0.98,
+      "reasoning": "Arjun directly asks the user to review the migration plan before a deadline, so the user would respond to the requester.",
+      "rulesUsed": [
+        "A direct request from a person for the user's review or feedback on a plan or document, especially before a deadline, calls for a response to the requester — reply"
+      ],
+      "costUsd": 0.00017960000000000003,
+      "latencyMs": 2381,
+      "inputTokens": 412,
+      "outputTokens": 81
+    },
+    {
+      "itemId": "k33",
+      "action": "archive",
+      "confidence": 0.95,
+      "reasoning": "The production incident is resolved, all services are healthy, and a postmortem owner is already assigned, so no action or response is needed.",
+      "rulesUsed": [],
+      "costUsd": 0.0002178,
+      "latencyMs": 2170,
+      "inputTokens": 411,
+      "outputTokens": 113
+    },
+    {
+      "itemId": "k45",
+      "action": "act",
+      "confidence": 0.98,
+      "reasoning": "A failed production deploy with an incomplete rollback and explicit need for manual intervention requires immediate operational follow-up.",
+      "rulesUsed": [
+        "An urgent production alert reporting sustained service degradation with no acknowledged owner requires incident response rather than just a Slack acknowledgment — act"
+      ],
+      "costUsd": 0.000215,
+      "latencyMs": 2091,
+      "inputTokens": 409,
+      "outputTokens": 111
+    },
+    {
+      "itemId": "k50",
+      "action": "archive",
+      "confidence": 0.98,
+      "reasoning": "This is an automated, low-information GIF posted in the random channel with no request or actionable follow-up.",
+      "rulesUsed": [],
+      "costUsd": 0.000134,
+      "latencyMs": 1833,
+      "inputTokens": 400,
+      "outputTokens": 45
+    },
+    {
+      "itemId": "k52",
+      "action": "reply",
+      "confidence": 0.98,
+      "reasoning": "Arjun directly asks the user to review the migration plan before the freeze, so the user should respond to the requester, likely acknowledging or providing feedback.",
+      "rulesUsed": [
+        "A direct request from a person for the user's review or feedback on a plan or document, especially before a deadline, calls for a response to the requester — reply"
+      ],
+      "costUsd": 0.00018680000000000001,
+      "latencyMs": 1979,
+      "inputTokens": 412,
+      "outputTokens": 87
+    },
+    {
+      "itemId": "k53",
+      "action": "archive",
+      "confidence": 0.98,
+      "reasoning": "This is an informational broadcast that a production incident is resolved, with services healthy and a postmortem owner already assigned. No outstanding request or follow-up is directed to the user.",
+      "rulesUsed": [
+        "An informational broadcast announcing a completed business milestone, with no outstanding request or follow-up, should be cleared rather than left untouched — archive"
+      ],
+      "costUsd": 0.00018659999999999998,
+      "latencyMs": 2109,
+      "inputTokens": 411,
+      "outputTokens": 87
+    },
+    {
+      "itemId": "k58",
+      "action": "ignore",
+      "confidence": 0.97,
+      "reasoning": "This is a casual, non-actionable poll in a random channel with no request directed specifically to the user.",
+      "rulesUsed": [],
+      "costUsd": 0.00013659999999999999,
+      "latencyMs": 1958,
+      "inputTokens": 407,
+      "outputTokens": 46
+    },
+    {
+      "itemId": "k59",
+      "action": "archive",
+      "confidence": 0.98,
+      "reasoning": "This is an informational automated notice that the invoice was recorded and paid, with nothing outstanding or requiring follow-up.",
+      "rulesUsed": [
+        "An informational broadcast announcing a completed business milestone, with no outstanding request or follow-up, should be cleared rather than left untouched — archive"
+      ],
+      "costUsd": 0.0001688,
+      "latencyMs": 1860,
+      "inputTokens": 406,
+      "outputTokens": 73
+    },
+    {
+      "itemId": "k65",
+      "action": "act",
+      "confidence": 0.99,
+      "reasoning": "This is a production deployment failure with rollback incomplete and explicit need for manual intervention, so it requires prompt incident response.",
+      "rulesUsed": [
+        "An urgent production alert reporting sustained service degradation with no acknowledged owner requires incident response rather than just a Slack acknowledgment — act"
+      ],
+      "costUsd": 0.000167,
+      "latencyMs": 1702,
+      "inputTokens": 409,
+      "outputTokens": 71
+    },
+    {
+      "itemId": "k66",
+      "action": "reply",
+      "confidence": 0.98,
+      "reasoning": "Zoya is directly asking for the user's decision on design comments before shipping, so the user would respond with their call.",
+      "rulesUsed": [
+        "A direct request from a person for the user's review or feedback on a plan or document, especially before a deadline, calls for a response to the requester — reply"
+      ],
+      "costUsd": 0.00022559999999999998,
+      "latencyMs": 2229,
+      "inputTokens": 414,
+      "outputTokens": 119
+    },
+    {
+      "itemId": "k67",
+      "action": "act",
+      "confidence": 0.98,
+      "reasoning": "This automated reminder says the user's required standup contribution is still missing, so it remains actionable before the thread closes.",
+      "rulesUsed": [
+        "An automated reminder explicitly stating that the user's required contribution is still missing remains actionable; a stated closing time alone does not establish that the task is obsolete — act"
+      ],
+      "costUsd": 0.0002124,
+      "latencyMs": 2269,
+      "inputTokens": 420,
+      "outputTokens": 107
+    },
+    {
+      "itemId": "k68",
+      "action": "archive",
+      "confidence": 0.93,
+      "reasoning": "This is a broad automated announcement with no action required for the user unless they want to change plans. It can be cleared rather than left unread.",
+      "rulesUsed": [],
+      "costUsd": 0.0002308,
+      "latencyMs": 2609,
+      "inputTokens": 416,
+      "outputTokens": 123
+    },
+    {
+      "itemId": "k69",
+      "action": "archive",
+      "confidence": 0.93,
+      "reasoning": "This is a casual informational Slack message with no request or action needed, so it would be cleared rather than acted on.",
+      "rulesUsed": [
+        "An informational broadcast announcing a completed business milestone, with no outstanding request or follow-up, should be cleared rather than left untouched — archive"
+      ],
+      "costUsd": 0.0001698,
+      "latencyMs": 1679,
+      "inputTokens": 399,
+      "outputTokens": 75
+    },
+    {
+      "itemId": "k72",
+      "action": "reply",
+      "confidence": 0.99,
+      "reasoning": "Arjun directly asks the user to review the migration plan before a freeze, which is a time-sensitive request for feedback and calls for replying to the requester.",
+      "rulesUsed": [
+        "A direct request from a person for the user's review or feedback on a plan or document, especially before a deadline, calls for a response to the requester"
+      ],
+      "costUsd": 0.0001856,
+      "latencyMs": 1966,
+      "inputTokens": 412,
+      "outputTokens": 86
+    },
+    {
+      "itemId": "k73",
+      "action": "archive",
+      "confidence": 0.98,
+      "reasoning": "This is a resolved informational production incident with all services healthy and a postmortem owner already assigned, so no action is needed.",
+      "rulesUsed": [],
+      "costUsd": 0.0001422,
+      "latencyMs": 1898,
+      "inputTokens": 411,
+      "outputTokens": 50
+    },
+    {
+      "itemId": "k74",
+      "action": "act",
+      "confidence": 0.99,
+      "reasoning": "This automated reminder says the user's required interview scorecard contribution is still missing and is already overdue, so it remains actionable and should be handled promptly.",
+      "rulesUsed": [
+        "An automated reminder explicitly stating that the user's required contribution is still missing remains actionable; a stated closing time alone does not establish that the task is obsolete — act"
+      ],
+      "costUsd": 0.000184,
+      "latencyMs": 2166,
+      "inputTokens": 410,
+      "outputTokens": 85
+    },
+    {
+      "itemId": "k78",
+      "action": "ignore",
+      "confidence": 0.93,
+      "reasoning": "This is a casual, non-actionable poll in a random channel with no request directed specifically to the user. They would likely leave it unread rather than respond or take action.",
+      "rulesUsed": [],
+      "costUsd": 0.00015219999999999999,
+      "latencyMs": 1877,
+      "inputTokens": 407,
+      "outputTokens": 59
+    },
+    {
+      "itemId": "k79",
+      "action": "archive",
+      "confidence": 0.98,
+      "reasoning": "This is an informational automated notice that the invoice was recorded and paid, with nothing outstanding or requiring follow-up.",
+      "rulesUsed": [
+        "An informational broadcast announcing a completed business milestone, with no outstanding request or follow-up, should be cleared rather than left untouched — archive"
+      ],
+      "costUsd": 0.0001688,
+      "latencyMs": 1851,
+      "inputTokens": 406,
+      "outputTokens": 73
+    },
+    {
+      "itemId": "k86",
+      "action": "reply",
+      "confidence": 0.98,
+      "reasoning": "Zoya is directly asking for the user's decision on a design change before shipping, so the user would respond with their call.",
+      "rulesUsed": [
+        "A direct request from a person for the user's review or feedback on a plan or document, especially before a deadline, calls for a response to the requester — reply"
+      ],
+      "costUsd": 0.00021720000000000002,
+      "latencyMs": 2548,
+      "inputTokens": 414,
+      "outputTokens": 112
+    },
+    {
+      "itemId": "k87",
+      "action": "act",
+      "confidence": 0.98,
+      "reasoning": "This automated reminder says the user's required standup contribution is still missing and provides a closing time, so it remains actionable and should be handled soon.",
+      "rulesUsed": [
+        "An automated reminder explicitly stating that the user's required contribution is still missing remains actionable; a stated closing time alone does not establish that the task is obsolete — act"
+      ],
+      "costUsd": 0.0002172,
+      "latencyMs": 2038,
+      "inputTokens": 420,
+      "outputTokens": 111
+    },
+    {
+      "itemId": "k92",
+      "action": "reply",
+      "confidence": 0.99,
+      "reasoning": "Arjun directly asks the user to review the migration plan before a deadline, so the user would respond to acknowledge or provide feedback.",
+      "rulesUsed": [
+        "A direct request from a person for the user's review or feedback on a plan or document, especially before a deadline, calls for a response to the requester — reply"
+      ],
+      "costUsd": 0.000182,
+      "latencyMs": 2323,
+      "inputTokens": 412,
+      "outputTokens": 83
+    },
+    {
+      "itemId": "k94",
+      "action": "act",
+      "confidence": 0.98,
+      "reasoning": "This is an automated reminder that the user's required interview scorecard contribution is overdue, so it remains actionable and should be completed promptly.",
+      "rulesUsed": [
+        "An automated reminder explicitly stating that the user's required contribution is still missing remains actionable; a stated closing time alone does not establish that the task is obsolete — act"
+      ],
+      "costUsd": 0.00018039999999999997,
+      "latencyMs": 2500,
+      "inputTokens": 410,
+      "outputTokens": 82
+    },
+    {
+      "itemId": "k95",
+      "action": "archive",
+      "confidence": 0.98,
+      "reasoning": "This is an informational broadcast announcing that a newsletter draft is available, with no request or required follow-up. It should be cleared rather than left untouched.",
+      "rulesUsed": [
+        "An informational broadcast announcing a completed business milestone, with no outstanding request or follow-up, should be cleared rather than left untouched — archive"
+      ],
+      "costUsd": 0.0001788,
+      "latencyMs": 1621,
+      "inputTokens": 408,
+      "outputTokens": 81
+    },
+    {
+      "itemId": "k98",
+      "action": "ignore",
+      "confidence": 0.96,
+      "reasoning": "This is a casual, non-urgent poll in a random channel with no direct request for the user's response or action. They would likely leave it untouched.",
+      "rulesUsed": [],
+      "costUsd": 0.0001474,
+      "latencyMs": 1589,
+      "inputTokens": 407,
+      "outputTokens": 55
+    }
+  ],
+  "macroF1": 0.880701754385965,
+  "balancedAccuracy": 0.8854166666666666
+}

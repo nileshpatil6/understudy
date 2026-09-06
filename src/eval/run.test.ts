@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import path from "node:path";
-import { attends, partition, resultsDir, summarize } from "./run.js";
+import { attends, macroScores, partition, resultsDir, summarize } from "./run.js";
 import { Action, type Item, type RunResult, type Split } from "../types.js";
 
 function item(id: string, truth: Item["truth"] = "ignore"): Item {
@@ -121,6 +121,8 @@ function result(over: Partial<RunResult> = {}): RunResult {
     correct: 68,
     accuracy: 0.68,
     attendAccuracy: 0.815,
+    macroF1: 0.4,
+    balancedAccuracy: 0.431,
     perAction: {
       reply: { total: 20, correct: 14 },
       act: { total: 20, correct: 10 },
@@ -178,5 +180,37 @@ describe("summarize", () => {
 
   it("reflects the split it is given", () => {
     expect(summarize(result({ split: "test", source: "github", run: 12 }))).toContain("run 12 [github/test]");
+  });
+});
+
+describe("macroScores", () => {
+  const P = (predicted: Action, truth: Action) => ({ predicted, truth });
+
+  it("scores a constant predictor at chance on balanced accuracy, whatever the imbalance", () => {
+    // 60 ignore, 20 archive, 15 act, 5 reply: always answering "ignore" gets 60% raw accuracy
+    const pairs = [
+      ...Array.from({ length: 60 }, () => P("ignore", "ignore")),
+      ...Array.from({ length: 20 }, () => P("ignore", "archive")),
+      ...Array.from({ length: 15 }, () => P("ignore", "act")),
+      ...Array.from({ length: 5 }, () => P("ignore", "reply")),
+    ];
+    const { balancedAccuracy, macroF1 } = macroScores(pairs);
+    expect(balancedAccuracy).toBeCloseTo(0.25, 10);
+    expect(macroF1).toBeLessThan(0.2);
+  });
+
+  it("is 1 for a perfect predictor and 0 when nothing is right", () => {
+    const perfect = Action.options.map((a) => P(a, a));
+    expect(macroScores(perfect).macroF1).toBeCloseTo(1, 10);
+    expect(macroScores(perfect).balancedAccuracy).toBeCloseTo(1, 10);
+    const wrong = [P("reply", "ignore"), P("ignore", "reply")];
+    expect(macroScores(wrong).macroF1).toBe(0);
+  });
+
+  it("does not reward ignoring a rare class the way accuracy does", () => {
+    const base = Array.from({ length: 90 }, () => P("ignore", "ignore"));
+    const missesRare = [...base, ...Array.from({ length: 10 }, () => P("ignore", "reply"))];
+    const catchesRare = [...base, ...Array.from({ length: 10 }, () => P("reply", "reply"))];
+    expect(macroScores(catchesRare).macroF1).toBeGreaterThan(macroScores(missesRare).macroF1 * 2);
   });
 });

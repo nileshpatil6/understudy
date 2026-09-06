@@ -1871,5 +1871,7 @@
       "inputTokens": 632,
       "outputTokens": 48
     }
-  ]
+  ],
+  "macroF1": 1,
+  "balancedAccuracy": 1
 }

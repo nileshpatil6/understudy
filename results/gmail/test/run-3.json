@@ -786,5 +786,7 @@
       "inputTokens": 532,
       "outputTokens": 74
     }
-  ]
+  ],
+  "macroF1": 0.980952380952381,
+  "balancedAccuracy": 0.9861111111111112
 }

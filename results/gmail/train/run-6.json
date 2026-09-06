@@ -1,0 +1,567 @@
+{
+  "run": 6,
+  "source": "gmail",
+  "split": "train",
+  "startedAt": "2026-09-06T18:24:16.655Z",
+  "items": 48,
+  "correct": 31,
+  "accuracy": 0.6458333333333334,
+  "attendAccuracy": 0.9166666666666666,
+  "macroF1": 0.6383116883116883,
+  "balancedAccuracy": 0.6423611111111112,
+  "perAction": {
+    "reply": {
+      "total": 8,
+      "correct": 7
+    },
+    "act": {
+      "total": 14,
+      "correct": 14
+    },
+    "archive": {
+      "total": 8,
+      "correct": 2
+    },
+    "ignore": {
+      "total": 18,
+      "correct": 8
+    }
+  },
+  "costUsd": 0.007429,
+  "avgLatencyMs": 2355.6041666666665,
+  "memoryRules": 0,
+  "memory": {
+    "judgment": "# Judgment memory\n\nRules the agent has learned about how this user handles items. One rule per line, prefixed with `- `.\n\n",
+    "tools": "# Tool memory\n\nRules the agent has learned about using the source apps and their APIs. One rule per line, prefixed with `- `.\n\n"
+  },
+  "predictions": [
+    {
+      "itemId": "s10",
+      "action": "act",
+      "confidence": 0.72,
+      "reasoning": "This appears to contain potentially relevant information about tracks and requirements, so they would likely open and review it without necessarily replying.",
+      "rulesUsed": [],
+      "costUsd": 0.0001704,
+      "latencyMs": 3183,
+      "inputTokens": 282,
+      "outputTokens": 95
+    },
+    {
+      "itemId": "s11",
+      "action": "act",
+      "confidence": 0.7,
+      "reasoning": "This is an actionable onboarding email for a building event, with concrete setup steps the user would likely complete rather than reply to.",
+      "rulesUsed": [],
+      "costUsd": 0.0001962,
+      "latencyMs": 3359,
+      "inputTokens": 285,
+      "outputTokens": 116
+    },
+    {
+      "itemId": "s12",
+      "action": "archive",
+      "confidence": 0.72,
+      "reasoning": "This is a routine event newsletter/update with no direct request or personalized action needed. It is likely to be dismissed rather than opened or replied to.",
+      "rulesUsed": [],
+      "costUsd": 0.0002034,
+      "latencyMs": 3275,
+      "inputTokens": 285,
+      "outputTokens": 122
+    },
+    {
+      "itemId": "s13",
+      "action": "ignore",
+      "confidence": 0.88,
+      "reasoning": "This is an automated Spotify login-code email with no indication that the user requested it; such messages are typically left untouched unless the user is actively logging in.",
+      "rulesUsed": [],
+      "costUsd": 0.00012220000000000002,
+      "latencyMs": 2261,
+      "inputTokens": 281,
+      "outputTokens": 55
+    },
+    {
+      "itemId": "s14",
+      "action": "ignore",
+      "confidence": 0.84,
+      "reasoning": "This is a promotional coupon email rather than a direct personal or work message, so it is unlikely to receive attention. No specific handling rule applies.",
+      "rulesUsed": [],
+      "costUsd": 0.0001198,
+      "latencyMs": 2254,
+      "inputTokens": 281,
+      "outputTokens": 53
+    },
+    {
+      "itemId": "s15",
+      "action": "archive",
+      "confidence": 0.9,
+      "reasoning": "This is a promotional discount email with a generic urgency-based subject and no apparent personal relevance, so they would likely dismiss it immediately.",
+      "rulesUsed": [],
+      "costUsd": 0.0001674,
+      "latencyMs": 3010,
+      "inputTokens": 279,
+      "outputTokens": 93
+    },
+    {
+      "itemId": "s16",
+      "action": "archive",
+      "confidence": 0.98,
+      "reasoning": "This is generic marketing/promotional email with no apparent personal relevance or actionable request, so it would be dismissed immediately.",
+      "rulesUsed": [],
+      "costUsd": 0.00011159999999999999,
+      "latencyMs": 1827,
+      "inputTokens": 276,
+      "outputTokens": 47
+    },
+    {
+      "itemId": "s17",
+      "action": "act",
+      "confidence": 0.78,
+      "reasoning": "This is an account-confirmation email requiring the user to click through to join a Slack workspace, so they would likely open it and confirm rather than reply.",
+      "rulesUsed": [],
+      "costUsd": 0.00020960000000000003,
+      "latencyMs": 3025,
+      "inputTokens": 286,
+      "outputTokens": 127
+    },
+    {
+      "itemId": "s18",
+      "action": "reply",
+      "confidence": 0.68,
+      "reasoning": "This is a direct, actionable request about a client scraper output, so they would likely respond to Ravi while checking or confirming the date-field issue.",
+      "rulesUsed": [],
+      "costUsd": 0.000219,
+      "latencyMs": 3049,
+      "inputTokens": 291,
+      "outputTokens": 134
+    },
+    {
+      "itemId": "s19",
+      "action": "reply",
+      "confidence": 0.98,
+      "reasoning": "This is a direct request from a client to confirm next week's delivery schedule, so they would likely respond with the relevant schedule or clarification.",
+      "rulesUsed": [],
+      "costUsd": 0.00015340000000000002,
+      "latencyMs": 2261,
+      "inputTokens": 293,
+      "outputTokens": 79
+    },
+    {
+      "itemId": "s20",
+      "action": "act",
+      "confidence": 0.95,
+      "reasoning": "This is a direct update from a professor about an assignment deadline, so the user would likely open it and note the new Friday deadline rather than reply.",
+      "rulesUsed": [],
+      "costUsd": 0.00012020000000000001,
+      "latencyMs": 2008,
+      "inputTokens": 277,
+      "outputTokens": 54
+    },
+    {
+      "itemId": "s21",
+      "action": "ignore",
+      "confidence": 0.72,
+      "reasoning": "This is a recurring informational newsletter with no direct request or urgent action, so they would likely leave it unread rather than engage immediately.",
+      "rulesUsed": [],
+      "costUsd": 0.0001802,
+      "latencyMs": 2336,
+      "inputTokens": 283,
+      "outputTokens": 103
+    },
+    {
+      "itemId": "s22",
+      "action": "ignore",
+      "confidence": 0.97,
+      "reasoning": "This is an unsolicited marketing survey with no direct request relevant to an active task, so they would leave it unread and not engage.",
+      "rulesUsed": [],
+      "costUsd": 0.0001162,
+      "latencyMs": 2076,
+      "inputTokens": 281,
+      "outputTokens": 50
+    },
+    {
+      "itemId": "s23",
+      "action": "act",
+      "confidence": 0.62,
+      "reasoning": "A billing invoice is a transactional item they would likely open or review, especially to verify the $20 charge, but it does not require a reply.",
+      "rulesUsed": [],
+      "costUsd": 0.0002014,
+      "latencyMs": 3157,
+      "inputTokens": 281,
+      "outputTokens": 121
+    },
+    {
+      "itemId": "s24",
+      "action": "act",
+      "confidence": 0.98,
+      "reasoning": "A payment failure warning with potential service suspension is urgent, so they would open it and update the payment method promptly without necessarily replying.",
+      "rulesUsed": [],
+      "costUsd": 0.00015519999999999998,
+      "latencyMs": 2440,
+      "inputTokens": 284,
+      "outputTokens": 82
+    },
+    {
+      "itemId": "s25",
+      "action": "act",
+      "confidence": 0.9,
+      "reasoning": "This is a GitHub Actions failure notification for the user's repository, indicating that all jobs in the daily brief workflow failed. They would likely open the workflow run to investigate and fix the issue rather than reply by email.",
+      "rulesUsed": [],
+      "costUsd": 0.000174,
+      "latencyMs": 2480,
+      "inputTokens": 306,
+      "outputTokens": 94
+    },
+    {
+      "itemId": "s26",
+      "action": "act",
+      "confidence": 0.84,
+      "reasoning": "A failed CI run on a repository associated with the user is likely something they would open and investigate, even without replying.",
+      "rulesUsed": [],
+      "costUsd": 0.000174,
+      "latencyMs": 2526,
+      "inputTokens": 300,
+      "outputTokens": 95
+    },
+    {
+      "itemId": "s27",
+      "action": "act",
+      "confidence": 0.62,
+      "reasoning": "A new major Next.js release is likely worth opening to review changelog and upgrade implications, even though it does not require a reply.",
+      "rulesUsed": [],
+      "costUsd": 0.0002118,
+      "latencyMs": 3212,
+      "inputTokens": 291,
+      "outputTokens": 128
+    },
+    {
+      "itemId": "s28",
+      "action": "ignore",
+      "confidence": 0.93,
+      "reasoning": "This is a generic daily internship digest from a no-reply sender, which is unlikely to require a response or immediate action.",
+      "rulesUsed": [],
+      "costUsd": 0.0001148,
+      "latencyMs": 1711,
+      "inputTokens": 280,
+      "outputTokens": 49
+    },
+    {
+      "itemId": "s29",
+      "action": "archive",
+      "confidence": 0.78,
+      "reasoning": "This is an automated application-status update with no requested action; they would likely dismiss or archive it after noting that the application is under review.",
+      "rulesUsed": [],
+      "costUsd": 0.000261,
+      "latencyMs": 3636,
+      "inputTokens": 285,
+      "outputTokens": 170
+    },
+    {
+      "itemId": "s30",
+      "action": "act",
+      "confidence": 0.99,
+      "reasoning": "This is a direct interview invitation for an AI Engineer internship requiring the recipient to pick a slot, so they would promptly open it and schedule the interview.",
+      "rulesUsed": [],
+      "costUsd": 0.00012220000000000002,
+      "latencyMs": 1831,
+      "inputTokens": 287,
+      "outputTokens": 54
+    },
+    {
+      "itemId": "s31",
+      "action": "reply",
+      "confidence": 0.99,
+      "reasoning": "This is a recruiting email requesting scheduling for a software engineering internship, which warrants a prompt response to arrange the call.",
+      "rulesUsed": [],
+      "costUsd": 0.00011280000000000002,
+      "latencyMs": 1854,
+      "inputTokens": 282,
+      "outputTokens": 47
+    },
+    {
+      "itemId": "s32",
+      "action": "archive",
+      "confidence": 0.98,
+      "reasoning": "This is a generic LinkedIn people-you-may-know recommendation email, which is typically not actionable and can be dismissed immediately.",
+      "rulesUsed": [],
+      "costUsd": 0.000116,
+      "latencyMs": 1733,
+      "inputTokens": 280,
+      "outputTokens": 50
+    },
+    {
+      "itemId": "s33",
+      "action": "archive",
+      "confidence": 0.88,
+      "reasoning": "This is an automated LinkedIn activity notification with no direct message or actionable request, so it would likely be dismissed rather than opened or replied to.",
+      "rulesUsed": [],
+      "costUsd": 0.00019319999999999998,
+      "latencyMs": 2655,
+      "inputTokens": 276,
+      "outputTokens": 115
+    },
+    {
+      "itemId": "s34",
+      "action": "act",
+      "confidence": 0.55,
+      "reasoning": "The email appears to contain additional information about tracks and requested criteria, so they would likely open and review it without necessarily replying immediately.",
+      "rulesUsed": [],
+      "costUsd": 0.0002136,
+      "latencyMs": 2629,
+      "inputTokens": 282,
+      "outputTokens": 131
+    },
+    {
+      "itemId": "s35",
+      "action": "act",
+      "confidence": 0.72,
+      "reasoning": "This is a task-oriented onboarding email for a likely hackathon or developer project, with concrete steps the user may need to complete before building. They would likely open it and follow the links rather than reply.",
+      "rulesUsed": [],
+      "costUsd": 0.0002166,
+      "latencyMs": 2861,
+      "inputTokens": 285,
+      "outputTokens": 133
+    },
+    {
+      "itemId": "s36",
+      "action": "archive",
+      "confidence": 0.82,
+      "reasoning": "This is a routine event-update email with no direct request or required action, so it would likely be dismissed after a quick glance.",
+      "rulesUsed": [],
+      "costUsd": 0.0001782,
+      "latencyMs": 2790,
+      "inputTokens": 285,
+      "outputTokens": 101
+    },
+    {
+      "itemId": "s37",
+      "action": "ignore",
+      "confidence": 0.93,
+      "reasoning": "This is an automated Spotify login-code email with no indication that a response or follow-up is needed. The user would likely leave it untouched unless they initiated the login.",
+      "rulesUsed": [],
+      "costUsd": 0.0001246,
+      "latencyMs": 1950,
+      "inputTokens": 281,
+      "outputTokens": 57
+    },
+    {
+      "itemId": "s38",
+      "action": "archive",
+      "confidence": 0.94,
+      "reasoning": "This is a promotional coupon email with no apparent personal or time-sensitive request, so they would likely dismiss it immediately.",
+      "rulesUsed": [],
+      "costUsd": 0.0001402,
+      "latencyMs": 2104,
+      "inputTokens": 281,
+      "outputTokens": 70
+    },
+    {
+      "itemId": "s39",
+      "action": "archive",
+      "confidence": 0.98,
+      "reasoning": "This is a promotional sales email offering a limited-time discount, with no apparent personal or work-related relevance.",
+      "rulesUsed": [],
+      "costUsd": 0.0001374,
+      "latencyMs": 2030,
+      "inputTokens": 279,
+      "outputTokens": 68
+    },
+    {
+      "itemId": "s40",
+      "action": "archive",
+      "confidence": 0.98,
+      "reasoning": "This is unsolicited marketing content with a generic promotional subject and no actionable personal information, so it would be dismissed immediately.",
+      "rulesUsed": [],
+      "costUsd": 0.00011159999999999999,
+      "latencyMs": 1678,
+      "inputTokens": 276,
+      "outputTokens": 47
+    },
+    {
+      "itemId": "s41",
+      "action": "act",
+      "confidence": 0.86,
+      "reasoning": "This is an account-joining confirmation email, and confirming the address is necessary to become a member of the Enduent Slack workspace.",
+      "rulesUsed": [],
+      "costUsd": 0.0001592,
+      "latencyMs": 2215,
+      "inputTokens": 286,
+      "outputTokens": 85
+    },
+    {
+      "itemId": "s42",
+      "action": "reply",
+      "confidence": 0.82,
+      "reasoning": "This is a direct request to inspect and verify a client scraper output, so they would likely check it and write back with the result or an update.",
+      "rulesUsed": [],
+      "costUsd": 0.0002118,
+      "latencyMs": 2804,
+      "inputTokens": 291,
+      "outputTokens": 128
+    },
+    {
+      "itemId": "s43",
+      "action": "reply",
+      "confidence": 0.96,
+      "reasoning": "This is a client asking for confirmation of next week's delivery schedule, which requires a timely written response.",
+      "rulesUsed": [],
+      "costUsd": 0.0001486,
+      "latencyMs": 2011,
+      "inputTokens": 293,
+      "outputTokens": 75
+    },
+    {
+      "itemId": "s44",
+      "action": "act",
+      "confidence": 0.86,
+      "reasoning": "This is a course-related deadline update from a professor, so the user would likely open it and note the revised due date even without needing to reply.",
+      "rulesUsed": [],
+      "costUsd": 0.00012020000000000001,
+      "latencyMs": 1682,
+      "inputTokens": 277,
+      "outputTokens": 54
+    },
+    {
+      "itemId": "s45",
+      "action": "archive",
+      "confidence": 0.97,
+      "reasoning": "This is a recurring promotional developer newsletter with no indication of a direct request or actionable item, so it would likely be dismissed immediately.",
+      "rulesUsed": [],
+      "costUsd": 0.00011659999999999999,
+      "latencyMs": 1830,
+      "inputTokens": 283,
+      "outputTokens": 50
+    },
+    {
+      "itemId": "s46",
+      "action": "ignore",
+      "confidence": 0.97,
+      "reasoning": "This is an unsolicited product survey from a no-reply address and does not require a response or action.",
+      "rulesUsed": [],
+      "costUsd": 0.00011020000000000001,
+      "latencyMs": 1664,
+      "inputTokens": 281,
+      "outputTokens": 45
+    },
+    {
+      "itemId": "s47",
+      "action": "act",
+      "confidence": 0.78,
+      "reasoning": "This is a billing invoice with a specific charge, so they would likely open it to review or handle the payment rather than ignore it.",
+      "rulesUsed": [],
+      "costUsd": 0.00011740000000000001,
+      "latencyMs": 2198,
+      "inputTokens": 281,
+      "outputTokens": 51
+    },
+    {
+      "itemId": "s48",
+      "action": "act",
+      "confidence": 0.98,
+      "reasoning": "This is an urgent payment failure that could suspend the Vercel team, so they would likely open it and update the payment method promptly.",
+      "rulesUsed": [],
+      "costUsd": 0.0001456,
+      "latencyMs": 2101,
+      "inputTokens": 284,
+      "outputTokens": 74
+    },
+    {
+      "itemId": "s49",
+      "action": "act",
+      "confidence": 0.86,
+      "reasoning": "This is an automated GitHub notification reporting that all jobs in a workflow failed, which likely warrants opening the run to investigate rather than replying.",
+      "rulesUsed": [],
+      "costUsd": 0.0001754,
+      "latencyMs": 3095,
+      "inputTokens": 307,
+      "outputTokens": 95
+    },
+    {
+      "itemId": "s50",
+      "action": "act",
+      "confidence": 0.78,
+      "reasoning": "A failed CI run on the user's GitHub repository is actionable and likely warrants opening the run to inspect the unsuccessful jobs and follow up.",
+      "rulesUsed": [],
+      "costUsd": 0.0001744,
+      "latencyMs": 2086,
+      "inputTokens": 302,
+      "outputTokens": 95
+    },
+    {
+      "itemId": "s51",
+      "action": "act",
+      "confidence": 0.62,
+      "reasoning": "A new Next.js release is potentially relevant to a developer and warrants opening to review the changes, though it does not require a reply.",
+      "rulesUsed": [],
+      "costUsd": 0.000189,
+      "latencyMs": 2886,
+      "inputTokens": 291,
+      "outputTokens": 109
+    },
+    {
+      "itemId": "s52",
+      "action": "ignore",
+      "confidence": 0.93,
+      "reasoning": "This is an automated daily digest of internship listings with no indication that the user needs to respond or act on it immediately.",
+      "rulesUsed": [],
+      "costUsd": 0.0001136,
+      "latencyMs": 2311,
+      "inputTokens": 280,
+      "outputTokens": 48
+    },
+    {
+      "itemId": "s53",
+      "action": "ignore",
+      "confidence": 0.9,
+      "reasoning": "This is an automated application-status acknowledgment saying the application is under review, with no action requested. It is likely to be left unread or untouched unless a later update arrives.",
+      "rulesUsed": [],
+      "costUsd": 0.0001266,
+      "latencyMs": 2001,
+      "inputTokens": 285,
+      "outputTokens": 58
+    },
+    {
+      "itemId": "s54",
+      "action": "reply",
+      "confidence": 0.98,
+      "reasoning": "This is an interview invitation for an AI Engineer internship requiring the recipient to pick a time slot, so they would respond promptly to schedule it.",
+      "rulesUsed": [],
+      "costUsd": 0.00011980000000000001,
+      "latencyMs": 1861,
+      "inputTokens": 287,
+      "outputTokens": 52
+    },
+    {
+      "itemId": "s55",
+      "action": "reply",
+      "confidence": 0.99,
+      "reasoning": "This is a recruiting email from Stripe requesting a 30-minute scheduling call, which clearly requires a prompt response to coordinate next steps.",
+      "rulesUsed": [],
+      "costUsd": 0.00011640000000000001,
+      "latencyMs": 1654,
+      "inputTokens": 282,
+      "outputTokens": 50
+    },
+    {
+      "itemId": "s56",
+      "action": "archive",
+      "confidence": 0.98,
+      "reasoning": "This is a generic LinkedIn recommendation email with no direct request or urgent information, so it would be dismissed immediately.",
+      "rulesUsed": [],
+      "costUsd": 0.00011240000000000001,
+      "latencyMs": 1655,
+      "inputTokens": 280,
+      "outputTokens": 47
+    },
+    {
+      "itemId": "s57",
+      "action": "ignore",
+      "confidence": 0.97,
+      "reasoning": "This is an automated LinkedIn notification about profile visibility, with no direct request or actionable message. It is likely to be left unread rather than opened or replied to.",
+      "rulesUsed": [],
+      "costUsd": 0.0001236,
+      "latencyMs": 1814,
+      "inputTokens": 276,
+      "outputTokens": 57
+    }
+  ]
+}

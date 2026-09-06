@@ -1,0 +1,617 @@
+{
+  "run": 7,
+  "source": "gmail",
+  "split": "train",
+  "startedAt": "2026-09-06T18:25:06.144Z",
+  "items": 48,
+  "correct": 41,
+  "accuracy": 0.8541666666666666,
+  "attendAccuracy": 0.9375,
+  "macroF1": 0.8544650641424835,
+  "balancedAccuracy": 0.8293650793650794,
+  "perAction": {
+    "reply": {
+      "total": 8,
+      "correct": 6
+    },
+    "act": {
+      "total": 14,
+      "correct": 13
+    },
+    "archive": {
+      "total": 8,
+      "correct": 6
+    },
+    "ignore": {
+      "total": 18,
+      "correct": 16
+    }
+  },
+  "costUsd": 0.008145399999999997,
+  "avgLatencyMs": 1880.9375,
+  "memoryRules": 4,
+  "memory": {
+    "judgment": "# Judgment memory\n\nRules the agent has learned about how this user handles items. One rule per line, prefixed with `- `.\n\n- Generic marketing, discount offers, win-back campaigns, and social-network engagement or recommendation notices without a direct personal request: ignore\n- One-time login-code emails, even when the surrounding login session is not visible: archive\n- Routine invoice-ready, receipt, or charge-confirmation emails that do not explicitly require payment or flag a billing problem: archive\n- Third-party software or repository release announcements without a requested task on the user's own work, regardless of version significance: archive\n",
+    "tools": "# Tool memory\n\nRules the agent has learned about using the source apps and their APIs. One rule per line, prefixed with `- `.\n\n"
+  },
+  "predictions": [
+    {
+      "itemId": "s10",
+      "action": "act",
+      "confidence": 0.72,
+      "reasoning": "This appears to be a potentially relevant follow-up containing information about tracks and expectations, so they would likely open and review it without necessarily replying immediately.",
+      "rulesUsed": [],
+      "costUsd": 0.000228,
+      "latencyMs": 2337,
+      "inputTokens": 378,
+      "outputTokens": 127
+    },
+    {
+      "itemId": "s11",
+      "action": "act",
+      "confidence": 0.82,
+      "reasoning": "This is a direct set of onboarding steps for a project or event, so they would likely open it and follow up by joining Discord, installing AO, and generating a pass rather than replying.",
+      "rulesUsed": [],
+      "costUsd": 0.00021660000000000003,
+      "latencyMs": 2123,
+      "inputTokens": 381,
+      "outputTokens": 117
+    },
+    {
+      "itemId": "s12",
+      "action": "ignore",
+      "confidence": 0.96,
+      "reasoning": "This is a generic event/newsletter update announcing a public project gallery and countdown, with no direct personal request or required action. It matches the user's pattern of ignoring generic marketing or engagement notices.",
+      "rulesUsed": [
+        "Generic marketing, discount offers, win-back campaigns, and social-network engagement or recommendation notices without a direct personal request: ignore"
+      ],
+      "costUsd": 0.0001806,
+      "latencyMs": 1723,
+      "inputTokens": 381,
+      "outputTokens": 87
+    },
+    {
+      "itemId": "s13",
+      "action": "archive",
+      "confidence": 0.99,
+      "reasoning": "This is a one-time Spotify login-code email, which the user archives even when the surrounding login session is not visible.",
+      "rulesUsed": [
+        "One-time login-code emails, even when the surrounding login session is not visible: archive"
+      ],
+      "costUsd": 0.00015460000000000002,
+      "latencyMs": 1438,
+      "inputTokens": 377,
+      "outputTokens": 66
+    },
+    {
+      "itemId": "s14",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a generic promotional coupon with no direct personal request, so the user would leave it untouched.",
+      "rulesUsed": [
+        "Generic marketing, discount offers, win-back campaigns, and social-network engagement or recommendation notices without a direct personal request: ignore"
+      ],
+      "costUsd": 0.0001582,
+      "latencyMs": 1577,
+      "inputTokens": 377,
+      "outputTokens": 69
+    },
+    {
+      "itemId": "s15",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a generic discount offer with no direct personal request, matching the user's pattern of ignoring marketing and win-back campaigns.",
+      "rulesUsed": [
+        "Generic marketing, discount offers, win-back campaigns, and social-network engagement or recommendation notices without a direct personal request: ignore"
+      ],
+      "costUsd": 0.0001626,
+      "latencyMs": 1558,
+      "inputTokens": 375,
+      "outputTokens": 73
+    },
+    {
+      "itemId": "s16",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a generic win-back marketing message with no direct personal request, so the user would leave it unread.",
+      "rulesUsed": [
+        "Generic marketing, discount offers, win-back campaigns, and social-network engagement or recommendation notices without a direct personal request: ignore"
+      ],
+      "costUsd": 0.00015960000000000003,
+      "latencyMs": 1643,
+      "inputTokens": 372,
+      "outputTokens": 71
+    },
+    {
+      "itemId": "s17",
+      "action": "ignore",
+      "confidence": 0.93,
+      "reasoning": "This is an automated invitation/confirmation email to join a Slack workspace, not a direct personal request or clearly necessary account action. Based on the user's pattern of ignoring generic automated notices, they would likely leave it untouched.",
+      "rulesUsed": [
+        "Generic marketing, discount offers, win-back campaigns, and social-network engagement or recommendation notices without a direct personal request: ignore"
+      ],
+      "costUsd": 0.00018680000000000001,
+      "latencyMs": 1844,
+      "inputTokens": 382,
+      "outputTokens": 92
+    },
+    {
+      "itemId": "s18",
+      "action": "reply",
+      "confidence": 0.98,
+      "reasoning": "This is a direct request from a person about checking a scraper output, so the user would write back after reviewing or addressing the date-field issue.",
+      "rulesUsed": [],
+      "costUsd": 0.000141,
+      "latencyMs": 1391,
+      "inputTokens": 387,
+      "outputTokens": 53
+    },
+    {
+      "itemId": "s19",
+      "action": "reply",
+      "confidence": 0.98,
+      "reasoning": "取引先から来週の納品スケジュール確認を求める直接的な依頼であり、返信して対応する内容です。",
+      "rulesUsed": [],
+      "costUsd": 0.0001834,
+      "latencyMs": 1971,
+      "inputTokens": 389,
+      "outputTokens": 88
+    },
+    {
+      "itemId": "s20",
+      "action": "act",
+      "confidence": 0.9,
+      "reasoning": "This is a direct academic deadline update that is relevant and likely warrants opening or noting, but it does not ask for a reply.",
+      "rulesUsed": [],
+      "costUsd": 0.00013460000000000002,
+      "latencyMs": 1582,
+      "inputTokens": 373,
+      "outputTokens": 50
+    },
+    {
+      "itemId": "s21",
+      "action": "ignore",
+      "confidence": 0.97,
+      "reasoning": "This is a recurring curated developer-news newsletter with no direct personal request or required action, matching the user's pattern of ignoring generic engagement or marketing-style notices.",
+      "rulesUsed": [
+        "Generic marketing, discount offers, win-back campaigns, and social-network engagement or recommendation notices without a direct personal request: ignore"
+      ],
+      "costUsd": 0.0001706,
+      "latencyMs": 1708,
+      "inputTokens": 379,
+      "outputTokens": 79
+    },
+    {
+      "itemId": "s22",
+      "action": "ignore",
+      "confidence": 0.98,
+      "reasoning": "This is a generic survey request from a service, with no direct personal request or required action. The user typically ignores generic marketing and engagement notices.",
+      "rulesUsed": [
+        "Generic marketing, discount offers, win-back campaigns, and social-network engagement or recommendation notices without a direct personal request: ignore"
+      ],
+      "costUsd": 0.000169,
+      "latencyMs": 1885,
+      "inputTokens": 377,
+      "outputTokens": 78
+    },
+    {
+      "itemId": "s23",
+      "action": "archive",
+      "confidence": 0.99,
+      "reasoning": "This is a routine invoice-ready notification with a stated amount but no payment request or billing problem, so it would be archived immediately.",
+      "rulesUsed": [
+        "Routine invoice-ready, receipt, or charge-confirmation emails that do not explicitly require payment or flag a billing problem: archive"
+      ],
+      "costUsd": 0.0001654,
+      "latencyMs": 1873,
+      "inputTokens": 377,
+      "outputTokens": 75
+    },
+    {
+      "itemId": "s24",
+      "action": "act",
+      "confidence": 0.99,
+      "reasoning": "This is a billing failure that explicitly requires payment action and warns of suspension, so it should be addressed promptly rather than archived as a routine receipt or invoice.",
+      "rulesUsed": [],
+      "costUsd": 0.000142,
+      "latencyMs": 1639,
+      "inputTokens": 380,
+      "outputTokens": 55
+    },
+    {
+      "itemId": "s25",
+      "action": "act",
+      "confidence": 0.96,
+      "reasoning": "This is a CI failure notification for the user's own repository, indicating all jobs failed and requiring investigation. They would likely open the workflow run and follow up rather than reply by email.",
+      "rulesUsed": [],
+      "costUsd": 0.0001992,
+      "latencyMs": 1961,
+      "inputTokens": 402,
+      "outputTokens": 99
+    },
+    {
+      "itemId": "s26",
+      "action": "act",
+      "confidence": 0.88,
+      "reasoning": "A failed CI run on the user's repository is an actionable development issue, so they would likely open it and investigate soon rather than ignore or archive it.",
+      "rulesUsed": [],
+      "costUsd": 0.0001896,
+      "latencyMs": 2068,
+      "inputTokens": 396,
+      "outputTokens": 92
+    },
+    {
+      "itemId": "s27",
+      "action": "archive",
+      "confidence": 0.99,
+      "reasoning": "This is a third-party software repository release announcement and does not request any task on the user's own work.",
+      "rulesUsed": [
+        "Third-party software or repository release announcements without a requested task on the user's own work, regardless of version significance: archive"
+      ],
+      "costUsd": 0.0001602,
+      "latencyMs": 1603,
+      "inputTokens": 387,
+      "outputTokens": 69
+    },
+    {
+      "itemId": "s28",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a routine daily update/marketing-style recommendation email with no direct personal request or required action.",
+      "rulesUsed": [
+        "Generic marketing, discount offers, win-back campaigns, and social-network engagement or recommendation notices without a direct personal request: ignore"
+      ],
+      "costUsd": 0.000158,
+      "latencyMs": 1746,
+      "inputTokens": 376,
+      "outputTokens": 69
+    },
+    {
+      "itemId": "s29",
+      "action": "act",
+      "confidence": 0.78,
+      "reasoning": "This is a personal application-status update for a role the user applied to, so it is relevant and likely to be opened or monitored rather than ignored or immediately archived.",
+      "rulesUsed": [],
+      "costUsd": 0.0002262,
+      "latencyMs": 2203,
+      "inputTokens": 381,
+      "outputTokens": 125
+    },
+    {
+      "itemId": "s30",
+      "action": "act",
+      "confidence": 0.98,
+      "reasoning": "This is a direct interview invitation requiring the recipient to pick a slot, so they would promptly open it and schedule rather than archive or ignore it.",
+      "rulesUsed": [],
+      "costUsd": 0.0001402,
+      "latencyMs": 1629,
+      "inputTokens": 383,
+      "outputTokens": 53
+    },
+    {
+      "itemId": "s31",
+      "action": "reply",
+      "confidence": 0.98,
+      "reasoning": "This is a direct recruiting request requiring the user to schedule a call, so they would write back to coordinate availability.",
+      "rulesUsed": [],
+      "costUsd": 0.000132,
+      "latencyMs": 1601,
+      "inputTokens": 378,
+      "outputTokens": 47
+    },
+    {
+      "itemId": "s32",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a generic LinkedIn social-network recommendation notice with no direct personal request, so it would be left unread and untouched.",
+      "rulesUsed": [
+        "Generic marketing, discount offers, win-back campaigns, and social-network engagement or recommendation notices without a direct personal request: ignore"
+      ],
+      "costUsd": 0.000164,
+      "latencyMs": 1520,
+      "inputTokens": 376,
+      "outputTokens": 74
+    },
+    {
+      "itemId": "s33",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a generic LinkedIn engagement/notification email with no direct personal request, so the user would leave it unread and never act on it.",
+      "rulesUsed": [
+        "Generic marketing, discount offers, win-back campaigns, and social-network engagement or recommendation notices without a direct personal request: ignore"
+      ],
+      "costUsd": 0.000168,
+      "latencyMs": 1825,
+      "inputTokens": 372,
+      "outputTokens": 78
+    },
+    {
+      "itemId": "s34",
+      "action": "act",
+      "confidence": 0.67,
+      "reasoning": "This appears to contain relevant project or collaboration information rather than a generic notification, so they would likely open and review it. There is not enough evidence of a direct question requiring a reply.",
+      "rulesUsed": [],
+      "costUsd": 0.0002604,
+      "latencyMs": 2774,
+      "inputTokens": 378,
+      "outputTokens": 154
+    },
+    {
+      "itemId": "s35",
+      "action": "act",
+      "confidence": 0.87,
+      "reasoning": "This is a task-oriented Devpost message with concrete setup steps required before participating, so it warrants opening and following up rather than being ignored or archived.",
+      "rulesUsed": [],
+      "costUsd": 0.0002298,
+      "latencyMs": 2547,
+      "inputTokens": 381,
+      "outputTokens": 128
+    },
+    {
+      "itemId": "s36",
+      "action": "ignore",
+      "confidence": 0.96,
+      "reasoning": "This is a generic event update/newsletter with no direct personal request or required action, so they would leave it unread.",
+      "rulesUsed": [
+        "Generic marketing, discount offers, win-back campaigns, and social-network engagement or recommendation notices without a direct personal request: ignore"
+      ],
+      "costUsd": 0.00016380000000000002,
+      "latencyMs": 1720,
+      "inputTokens": 381,
+      "outputTokens": 73
+    },
+    {
+      "itemId": "s37",
+      "action": "archive",
+      "confidence": 0.99,
+      "reasoning": "This is a one-time Spotify login-code email, which the user archives rather than acting on.",
+      "rulesUsed": [
+        "One-time login-code emails, even when the surrounding login session is not visible: archive"
+      ],
+      "costUsd": 0.00014860000000000003,
+      "latencyMs": 1730,
+      "inputTokens": 377,
+      "outputTokens": 61
+    },
+    {
+      "itemId": "s38",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a generic promotional coupon/discount email with no direct personal request, so the user would leave it untouched.",
+      "rulesUsed": [
+        "Generic marketing, discount offers, win-back campaigns, and social-network engagement or recommendation notices without a direct personal request: ignore"
+      ],
+      "costUsd": 0.0001618,
+      "latencyMs": 1502,
+      "inputTokens": 377,
+      "outputTokens": 72
+    },
+    {
+      "itemId": "s39",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a generic promotional discount offer with no direct personal request, matching the user's pattern of leaving such marketing emails untouched.",
+      "rulesUsed": [
+        "Generic marketing, discount offers, win-back campaigns, and social-network engagement or recommendation notices without a direct personal request: ignore"
+      ],
+      "costUsd": 0.0001626,
+      "latencyMs": 1623,
+      "inputTokens": 375,
+      "outputTokens": 73
+    },
+    {
+      "itemId": "s40",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a generic win-back marketing message with no direct personal request or actionable task.",
+      "rulesUsed": [
+        "Generic marketing, discount offers, win-back campaigns, and social-network engagement or recommendation notices without a direct personal request: ignore"
+      ],
+      "costUsd": 0.00015360000000000002,
+      "latencyMs": 1433,
+      "inputTokens": 372,
+      "outputTokens": 66
+    },
+    {
+      "itemId": "s41",
+      "action": "act",
+      "confidence": 0.93,
+      "reasoning": "This is an email-confirmation request to join a Slack workspace, requiring the user to click through and confirm rather than merely serving as a notification.",
+      "rulesUsed": [],
+      "costUsd": 0.00014,
+      "latencyMs": 1511,
+      "inputTokens": 382,
+      "outputTokens": 53
+    },
+    {
+      "itemId": "s42",
+      "action": "reply",
+      "confidence": 0.95,
+      "reasoning": "This is a direct request from a person about an active work thread, asking the user to inspect and respond about a likely data issue.",
+      "rulesUsed": [],
+      "costUsd": 0.000189,
+      "latencyMs": 2305,
+      "inputTokens": 387,
+      "outputTokens": 93
+    },
+    {
+      "itemId": "s43",
+      "action": "reply",
+      "confidence": 0.98,
+      "reasoning": "This is a direct request from a client to confirm next week's delivery schedule, so the user would respond with the relevant schedule or clarification.",
+      "rulesUsed": [],
+      "costUsd": 0.000169,
+      "latencyMs": 2156,
+      "inputTokens": 389,
+      "outputTokens": 76
+    },
+    {
+      "itemId": "s44",
+      "action": "act",
+      "confidence": 0.94,
+      "reasoning": "This is a direct academic deadline update that likely requires the user to notice and adjust their plans, though it does not call for a reply.",
+      "rulesUsed": [],
+      "costUsd": 0.000137,
+      "latencyMs": 1617,
+      "inputTokens": 373,
+      "outputTokens": 52
+    },
+    {
+      "itemId": "s45",
+      "action": "ignore",
+      "confidence": 0.97,
+      "reasoning": "This is a recurring curated developer-news newsletter with no direct personal request or required action, fitting the user's pattern of ignoring generic engagement and marketing-style notices.",
+      "rulesUsed": [
+        "Generic marketing, discount offers, win-back campaigns, and social-network engagement or recommendation notices without a direct personal request: ignore"
+      ],
+      "costUsd": 0.0001706,
+      "latencyMs": 1634,
+      "inputTokens": 379,
+      "outputTokens": 79
+    },
+    {
+      "itemId": "s46",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a generic survey request to creators with no direct personal request or required action, so it matches the user's pattern of ignoring generic engagement/marketing messages.",
+      "rulesUsed": [
+        "Generic marketing, discount offers, win-back campaigns, and social-network engagement or recommendation notices without a direct personal request: ignore"
+      ],
+      "costUsd": 0.00017140000000000002,
+      "latencyMs": 2001,
+      "inputTokens": 377,
+      "outputTokens": 80
+    },
+    {
+      "itemId": "s47",
+      "action": "archive",
+      "confidence": 0.99,
+      "reasoning": "This is a routine invoice-ready email with an amount stated but no explicit payment requirement or billing problem.",
+      "rulesUsed": [
+        "Routine invoice-ready, receipt, or charge-confirmation emails that do not explicitly require payment or flag a billing problem: archive"
+      ],
+      "costUsd": 0.0001582,
+      "latencyMs": 1464,
+      "inputTokens": 377,
+      "outputTokens": 69
+    },
+    {
+      "itemId": "s48",
+      "action": "act",
+      "confidence": 0.98,
+      "reasoning": "This is a billing failure that explicitly requires payment action to avoid suspension, unlike routine invoice or charge-confirmation emails that are archived.",
+      "rulesUsed": [],
+      "costUsd": 0.000136,
+      "latencyMs": 1589,
+      "inputTokens": 380,
+      "outputTokens": 50
+    },
+    {
+      "itemId": "s49",
+      "action": "act",
+      "confidence": 0.94,
+      "reasoning": "This is an actionable failure notification for the user's own GitHub repository, so they would likely inspect the workflow run and follow up rather than archive it.",
+      "rulesUsed": [],
+      "costUsd": 0.00019460000000000001,
+      "latencyMs": 2051,
+      "inputTokens": 403,
+      "outputTokens": 95
+    },
+    {
+      "itemId": "s50",
+      "action": "act",
+      "confidence": 0.95,
+      "reasoning": "This is a CI failure notification for the user's own GitHub repository, indicating a potentially actionable problem that they would inspect or follow up on.",
+      "rulesUsed": [],
+      "costUsd": 0.0002008,
+      "latencyMs": 2150,
+      "inputTokens": 398,
+      "outputTokens": 101
+    },
+    {
+      "itemId": "s51",
+      "action": "archive",
+      "confidence": 0.99,
+      "reasoning": "This is a third-party repository release announcement and contains no requested task on the user's own work.",
+      "rulesUsed": [
+        "Third-party software or repository release announcements without a requested task on the user's own work, regardless of version significance: archive"
+      ],
+      "costUsd": 0.00015780000000000001,
+      "latencyMs": 1820,
+      "inputTokens": 387,
+      "outputTokens": 67
+    },
+    {
+      "itemId": "s52",
+      "action": "ignore",
+      "confidence": 0.98,
+      "reasoning": "This is a generic automated digest of internship listings with no direct personal request or required action.",
+      "rulesUsed": [
+        "Generic marketing, discount offers, win-back campaigns, and social-network engagement or recommendation notices without a direct personal request: ignore"
+      ],
+      "costUsd": 0.0001556,
+      "latencyMs": 1612,
+      "inputTokens": 376,
+      "outputTokens": 67
+    },
+    {
+      "itemId": "s53",
+      "action": "act",
+      "confidence": 0.78,
+      "reasoning": "This is a personal job-application status update for a role the user applied to, so they would likely open it and track the application even though no reply is requested.",
+      "rulesUsed": [],
+      "costUsd": 0.0002082,
+      "latencyMs": 3738,
+      "inputTokens": 381,
+      "outputTokens": 110
+    },
+    {
+      "itemId": "s54",
+      "action": "act",
+      "confidence": 0.98,
+      "reasoning": "This is a direct interview invitation requiring the recipient to pick an interview slot, so they would take action promptly.",
+      "rulesUsed": [],
+      "costUsd": 0.0001318,
+      "latencyMs": 3352,
+      "inputTokens": 383,
+      "outputTokens": 46
+    },
+    {
+      "itemId": "s55",
+      "action": "reply",
+      "confidence": 0.98,
+      "reasoning": "This is a direct recruiting message requesting the user schedule a call, so they would respond to coordinate a time.",
+      "rulesUsed": [],
+      "costUsd": 0.0001308,
+      "latencyMs": 1978,
+      "inputTokens": 378,
+      "outputTokens": 46
+    },
+    {
+      "itemId": "s56",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a generic LinkedIn social-network recommendation notice with no direct personal request, so the user would leave it untouched.",
+      "rulesUsed": [
+        "Generic marketing, discount offers, win-back campaigns, and social-network engagement or recommendation notices without a direct personal request: ignore"
+      ],
+      "costUsd": 0.0001628,
+      "latencyMs": 1886,
+      "inputTokens": 376,
+      "outputTokens": 73
+    },
+    {
+      "itemId": "s57",
+      "action": "ignore",
+      "confidence": 0.99,
+      "reasoning": "This is a generic LinkedIn engagement/visibility notification without a direct personal request, which the user consistently leaves untouched.",
+      "rulesUsed": [
+        "Generic marketing, discount offers, win-back campaigns, and social-network engagement or recommendation notices without a direct personal request: ignore"
+      ],
+      "costUsd": 0.0001608,
+      "latencyMs": 1644,
+      "inputTokens": 372,
+      "outputTokens": 72
+    }
+  ]
+}

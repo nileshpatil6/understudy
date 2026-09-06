@@ -106,21 +106,40 @@ What's happening: it goes through a batch of emails and for each one predicts wh
 or ignore. It only sees what exists when the email arrives. Sender, subject, snippet, time. Never the read status,
 never the labels. I'll come back to why that matters.
 
-[run 1 prints]
+[the first "run" line prints. Say "first run", don't read the run number, it's just a counter]
 
-Run one. No memory. Pretty bad.
+First run. Memory's empty, zero rules. Sixty-five percent right. Less than a cent, two seconds an email.
 
-Now it looks at every miss and writes rules for itself.
+[point at the second line: reply 7/8  act 14/14  archive 2/8  ignore 8/18]
 
-[reflect line prints]
+And here's where it's wrong. Replies, fine. Act, perfect. But archive, two out of eight. Ignore, eight out of
+eighteen. It doesn't know yet what I just leave alone. It thinks every email deserves attention. Which is what
+you'd expect from something that's never seen my inbox.
 
-But here's the important bit. It's only allowed to learn from seventy percent of the data. Every rule it writes
-gets tested on the other thirty percent, and if the score drops, the rule is thrown out. See that validate number
-going up? That's the gate. It has to prove itself before anything gets saved.
+Now it's looking at every miss and writing rules for itself. Takes about thirty seconds, it's the big model
+doing the thinking.
 
-[run 2 prints]
+[the "reflect" line prints. Point at it. This is the whole product in one line, go slow here]
 
-Run two. Six rules. Big jump.
+Okay, so. Ten mistakes, four rules.
+
+But it doesn't get to just save them. It was only allowed to learn from seventy percent of the emails. Those
+four rules got tested on the other thirty percent, which it never saw. Before the rules, that thirty percent
+scored fifty-three. With the rules, eighty-six. So they're accepted.
+
+If that number had gone down, the rules would've been thrown out. That's the gate. It has to prove itself
+before anything gets saved. Five cents for the reflection.
+
+[the second "run" line prints]
+
+Second run, same emails, now with four rules. Sixty-five to eighty-five.
+
+[point at: ignore 16/18, archive 6/8]
+
+Look at ignore. Eight out of eighteen went to sixteen out of eighteen. Archive, two of eight to six of eight.
+It learned what to leave alone. Same cost. Actually a bit faster.
+
+That's it. That's the loop. Everything else is making sure it isn't lying to me.
 
 ---
 

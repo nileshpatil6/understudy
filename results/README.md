@@ -76,6 +76,29 @@ difficulty. What it does show is that the loop works end to end on data a judge 
 transfers to items the reflector never saw, and the reflector correctly stops proposing once there is nothing
 left to learn. The real-inbox numbers above are the evidence.
 
+## Second source: Slack, no code changes (2026-09-06)
+
+```
+SOURCE=slack MEMORY_DIR=memory/slack-demo npm run loop
+```
+
+The same engine, pointed at a different app. One env var. No new prompt, no new adapter code beyond
+`deriveSlackAction`, no tuning.
+
+| run | acc | attend/skip | rules | reflect decision |
+|---|---|---|---|---|
+| 1 | 88.0% | 98.0% | 0 | accepted (+4), validate 79 -> 88 |
+| 2 | 87.0% | 100.0% | 4 | accepted (+3), validate 94 -> 100 |
+| 3 | **100.0%** | **100.0%** | 7 | 0 misses, nothing proposed |
+| 4 | 100.0% | 100.0% | 7 | |
+
+Two things worth noticing. The rules it learned are about Slack, not email: who is a bot, which channels are
+social, whether a message is addressed to the user. And at run 3 the reflector proposed nothing, because there
+was nothing left to learn. A loop that cannot stop is not learning, it is just churning.
+
+Same caveat as the gmail sample set: synthetic data, cleanly separable, so 100% is expected. The point here is
+portability of the mechanism, not the score.
+
 ## Ungated reflector (v1, kept for comparison)
 
 Same data, reflector saw all train misses, no validation gate, no consolidation.
